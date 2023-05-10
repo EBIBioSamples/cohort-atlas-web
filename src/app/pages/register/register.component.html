@@ -1,0 +1,131 @@
+<div class="register-body">
+
+  <div class="vf-section-header">
+    <h2 class="vf-section-header__heading section-header">Register New Cohort</h2>
+    <p class="vf-section-header__text">Registration contains 3 steps. First step is mandatory which will register the cohort and generate an accession.
+      Optional second and third steps will improve the FAIRness of the cohort. </p>
+  </div>
+
+
+  <mat-stepper [linear]="isLinear" #stepper>
+    <mat-step [stepControl]="firstFormGroup">
+      <form [formGroup]="firstFormGroup">
+        <ng-template matStepLabel>Register cohort with `Admin Metadata`</ng-template>
+
+        <mat-card class="info-card">
+          <mat-card-content>Mandatory Fields (from CINECA, BMMRI Admin data sheet)</mat-card-content>
+        </mat-card>
+
+        <br>
+
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Cohort Name</mat-label>
+            <input matInput placeholder="Cohort name" formControlName="nameCtrl" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Acronym</mat-label>
+            <input matInput placeholder="Acronym" required>
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline">
+            <mat-label>Description</mat-label>
+            <input matInput placeholder="Description" required>
+            <mat-hint>Hint</mat-hint>
+          </mat-form-field>
+        </p>
+
+
+        <mat-form-field appearance="outline">
+          <mat-label>website</mat-label>
+          <input matInput placeholder="website">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>provider</mat-label>
+          <input matInput placeholder="provider">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>license</mat-label>
+          <input matInput placeholder="license">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>contacts</mat-label>
+          <input matInput placeholder="contacts">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>startDate</mat-label>
+          <input matInput placeholder="startDate">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>endDate</mat-label>
+          <input matInput placeholder="endDate">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>targetEnrollment</mat-label>
+          <input matInput placeholder="targetEnrollment">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>totalEnrollment</mat-label>
+          <input matInput placeholder="totalEnrollment">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>territories</mat-label>
+          <input matInput placeholder="territories">
+        </mat-form-field>
+
+        <br>
+        <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Register</button>
+
+      </form>
+    </mat-step>
+
+    <mat-step [stepControl]="secondFormGroup" label="Fill in additional data">
+
+      <mat-card class="info-card">
+        <mat-card-content>
+          Optional. Survey type questions. Helps to discover what data types cohort contains. Eg. Medication, Treatment.
+          If this is not filled we will try to guess them using data dictionary. (taken from IHCC survey)
+        </mat-card-content>
+      </mat-card>
+
+      <form [formGroup]="secondFormGroup">
+        <mat-form-field appearance="fill">
+          <mat-label>Address</mat-label>
+          <input matInput placeholder="Ex. 1 Main St, New York, NY" required>
+        </mat-form-field>
+        <div>
+          <br>
+          <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
+          <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
+        </div>
+      </form>
+    </mat-step>
+
+    <mat-step>
+      <ng-template matStepLabel>Upload `Data Dictionary`</ng-template>
+
+      <mat-card class="info-card">
+        <mat-card-content>
+          Optional. Upload data dictionary in CSV/spreadsheet format. We will harmonise this data dictionary to standard
+          terms.
+          Send the suggested mapping to take action.
+          This is an asynchronous process, send an email to user with a link?
+        </mat-card-content>
+      </mat-card>
+
+      <p>You are now done.</p>
+      <div>
+        <br>
+        <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
+        <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
+
+        <button class="vf-button vf-button--tertiary vf-button--sm" (click)="stepper.reset()">Reset</button>
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+
+</div>

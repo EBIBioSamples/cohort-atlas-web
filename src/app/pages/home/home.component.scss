@@ -1,0 +1,52 @@
+
+.home-body {
+  min-height: 500px;
+}
+
+.banner {
+  margin-left: 5px;
+}
+
+.filters {
+  width: calc(15% - 5px);
+  float: left;
+  margin-left: 5px;
+}
+
+.cohort-table-wrapper {
+  width: 85%;
+  float: right;
+}
+
+.cohort-table {
+  width: 100%;
+}
+
+.table-row-compact {
+  line-height: 1;
+  margin: 0;
+}
+
+.table-heading-compact {
+  line-height: 1;
+  padding: 4px;
+}
+
+.table-cell-compact {
+  padding: 4px;
+  text-align: center;
+}
+
+.icon-center {
+  display: inline-block;
+  width: 100%;
+  text-align: center;
+}
+
+.icon-xs {
+  font-size: 12px;
+}
+
+.text-center {
+  text-align: center;
+}
