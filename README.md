@@ -1,4 +1,22 @@
-# CohortAtlasWeb
+# cohort-atlas-web
+Web component of the cohort-atlas. This is an Angular project which fetch data from cohort-atlas server API.
+
+## Requirements
+- Node and npm
+- Yarn
+- Angular CLI
+
+## Setup
+- [Install Node and npm](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm)
+- [Install Yarn](https://classic.yarnpkg.com/lang/en/docs/install/#debian-stable)
+- [Install Angular CLI](https://angular.io/cli)
+
+```shell
+# Start server component to get data from API
+yarn install
+ng serve --watch --open
+```
+
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.2.6.
 
