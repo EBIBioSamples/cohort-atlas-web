@@ -11,7 +11,7 @@ export class CohortService {
   }
 
   public getCohorts() {
-    const cohortUrl = "http://localhost:8080/api/cohorts";
+    const cohortUrl = "http://localhost:8081/api/cohorts";
     return this.http.get<any>(cohortUrl);
   }
 }

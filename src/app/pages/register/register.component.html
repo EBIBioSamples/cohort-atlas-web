@@ -9,7 +9,7 @@
 
   <mat-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup">
+      <form [formGroup]="firstFormGroup" (ngSubmit)="submitForm()">
         <ng-template matStepLabel>Register cohort with `Admin Metadata`</ng-template>
 
         <mat-card class="info-card">
@@ -27,13 +27,13 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Acronym</mat-label>
-            <input matInput placeholder="Acronym" required>
+            <input matInput placeholder="Acronym" formControlName="acronymCtrl" required>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <input matInput placeholder="Description" required>
+            <input matInput placeholder="Description" formControlName="descriptionCtrl" required>
             <mat-hint>Hint</mat-hint>
           </mat-form-field>
         </p>
