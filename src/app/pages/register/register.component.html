@@ -8,8 +8,8 @@
 
 
   <mat-stepper [linear]="isLinear" #stepper>
-    <mat-step [stepControl]="firstFormGroup">
-      <form [formGroup]="firstFormGroup" (ngSubmit)="submitForm()">
+    <mat-step [stepControl]="registerFormGroup">
+      <form [formGroup]="registerFormGroup" (ngSubmit)="submitForm()">
         <ng-template matStepLabel>Register cohort with `Admin Metadata`</ng-template>
 
         <mat-card class="info-card">
@@ -21,19 +21,19 @@
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Cohort Name</mat-label>
-            <input matInput placeholder="Cohort name" formControlName="nameCtrl" required>
+            <input matInput placeholder="Cohort name" formControlName="cohortName" required>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Acronym</mat-label>
-            <input matInput placeholder="Acronym" formControlName="acronymCtrl" required>
+            <input matInput placeholder="Acronym" formControlName="acronym" required>
           </mat-form-field>
         </p>
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Description</mat-label>
-            <input matInput placeholder="Description" formControlName="descriptionCtrl" required>
+            <input matInput placeholder="Description" formControlName="description" required>
             <mat-hint>Hint</mat-hint>
           </mat-form-field>
         </p>
@@ -41,43 +41,43 @@
 
         <mat-form-field appearance="outline">
           <mat-label>website</mat-label>
-          <input matInput placeholder="website">
+          <input matInput placeholder="website" formControlName="website">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>provider</mat-label>
-          <input matInput placeholder="provider">
+          <input matInput placeholder="provider" formControlName="provider">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>license</mat-label>
-          <input matInput placeholder="license">
+          <input matInput placeholder="license" formControlName="license">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>contacts</mat-label>
-          <input matInput placeholder="contacts">
+          <input matInput placeholder="contacts" formControlName="contacts">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>startDate</mat-label>
-          <input matInput placeholder="startDate">
+          <input matInput placeholder="startDate" formControlName="startDate">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>endDate</mat-label>
-          <input matInput placeholder="endDate">
+          <input matInput placeholder="endDate" formControlName="endDate">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>targetEnrollment</mat-label>
-          <input matInput placeholder="targetEnrollment">
+          <input matInput placeholder="targetEnrollment" formControlName="targetEnrollment">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>totalEnrollment</mat-label>
-          <input matInput placeholder="totalEnrollment">
+          <input matInput placeholder="totalEnrollment" formControlName="totalEnrollment">
         </mat-form-field>
         <mat-form-field appearance="outline">
           <mat-label>territories</mat-label>
-          <input matInput placeholder="territories">
+          <input matInput placeholder="territories" formControlName="territories">
         </mat-form-field>
 
         <br>
-        <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Register</button>
+        <button type="submit" class="vf-button vf-button--primary vf-button--sm" matStepperNext>Register</button>
 
       </form>
     </mat-step>

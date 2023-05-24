@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {CohortService} from "../../service/cohort.service";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -8,8 +8,20 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  firstFormGroup: FormGroup;
-
+  registerFormGroup = this._formBuilder.group({
+    cohortName: ['', Validators.required],
+    description: ['', Validators.required],
+    acronym: ['', Validators.required],
+    website: [''],
+    provider: [''],
+    license: [''],
+    contacts: [''],
+    startDate: [''],
+    endDate: [''],
+    targetEnrollment: [''],
+    totalEnrollment: [''],
+    territories: ['']
+  });
 
   secondFormGroup = this._formBuilder.group({
     // secondCtrl: ['', Validators.required],
@@ -17,34 +29,14 @@ export class RegisterComponent implements OnInit {
 
   isLinear = true;
 
-  constructor(private _formBuilder: FormBuilder, private httpClient: HttpClient) {
-    this.firstFormGroup = this._formBuilder.group({
-      nameCtrl: ['', Validators.required],
-      descriptionCtrl: ['', Validators.required],
-      acronymCtrl: ['', Validators.required],
-    });
+  constructor(private _formBuilder: FormBuilder, private cohortService: CohortService) {
   }
 
   ngOnInit(): void {
   }
-   httpOptions = {
-    headers: new HttpHeaders({
-      'Content-Type':  'application/json',
-    })
-  };
-  submitForm() {
-    const formData = new FormData();
-    // @ts-ignore
-    formData.append('cohortName', this.firstFormGroup.get('nameCtrl').value);
-    // @ts-ignore
-    formData.append('description', this.firstFormGroup.get('descriptionCtrl').value);
-    // @ts-ignore
-    formData.append('acronym', this.firstFormGroup.get('acronymCtrl').value);
 
-    this.httpClient.post<any>("http://localhost:8081/api/cohorts",
-      JSON.stringify(formData), this.httpOptions).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
-    );
+  submitForm() {
+    console.warn('Your order has been submitted', this.registerFormGroup.value);
+    this.cohortService.registerCohort(this.registerFormGroup);
   }
 }
