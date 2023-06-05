@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
+import {CohortService} from "../../service/cohort.service";
+import {FormBuilder, Validators} from "@angular/forms";
 
 @Component({
   selector: 'app-register',
@@ -7,10 +8,19 @@ import {FormBuilder, Validators} from '@angular/forms';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-
-  firstFormGroup = this._formBuilder.group({
-    nameCtrl: ['', Validators.required],
-    // descriptionCtrl: ['', Validators.required],
+  registerFormGroup = this._formBuilder.group({
+    cohortName: ['', Validators.required],
+    description: ['', Validators.required],
+    acronym: ['', Validators.required],
+    website: [''],
+    provider: [''],
+    license: [''],
+    contacts: [''],
+    startDate: [''],
+    endDate: [''],
+    targetEnrollment: [''],
+    totalEnrollment: [''],
+    territories: ['']
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -19,10 +29,14 @@ export class RegisterComponent implements OnInit {
 
   isLinear = true;
 
-  constructor(private _formBuilder: FormBuilder) {
+  constructor(private _formBuilder: FormBuilder, private cohortService: CohortService) {
   }
 
   ngOnInit(): void {
   }
 
+  submitForm() {
+    console.warn('Your order has been submitted', this.registerFormGroup.value);
+    this.cohortService.registerCohort(this.registerFormGroup);
+  }
 }
