@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import {ActivatedRoute} from "@angular/router";
+import {CohortService} from "../../service/cohort.service";
+
+import { MatChipList } from '@angular/material/chips';
 
 @Component({
   selector: 'app-cohort',
@@ -7,9 +11,26 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CohortComponent implements OnInit {
 
-  constructor() { }
+  cohortAccession: string;
+  cohort: any;
+
+  constructor(private route: ActivatedRoute, private cohortService: CohortService) {
+  }
 
   ngOnInit(): void {
+    this.route.queryParamMap
+      .subscribe((params) => {
+          this.cohortAccession = params["params"]["accession"];
+          this.cohortAccession = "BSC0000001";
+          this.getCohort(this.cohortAccession);
+        }
+      );
+  }
+
+  getCohort(accession: string) {
+    this.cohortService.getCohort(accession).subscribe(cohort => {
+      this.cohort = cohort;
+    })
   }
 
 }

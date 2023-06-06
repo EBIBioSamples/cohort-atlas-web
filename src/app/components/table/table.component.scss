@@ -1,6 +1,6 @@
 .table-header {
   height: 28px;
-  background-color: #d6e5f9;
+  background-color: #f8f8f8;
 }
 
 .example-container {
@@ -32,4 +32,32 @@ th.mat-column-position, td.mat-column-position {
 
 .mat-mdc-table-sticky-border-elem-left {
   border-right: 1px solid #e0e0e0;
+}
+
+.th-parent {
+  text-align: center;
+}
+
+.th-first {
+  padding-left: 0;
+}
+
+.th-last {
+  padding-right: 0;
+}
+
+.icon-center {
+  display: inline-block;
+  text-align: center;
+}
+
+.icon-xs {
+  color: #7c7c7c;
+  font-size: 12px;
+  padding: 0 1px;
+}
+
+.table-link {
+  cursor: pointer;
+  color: #4747ff;
 }

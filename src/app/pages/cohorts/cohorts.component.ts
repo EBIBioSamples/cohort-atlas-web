@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import {CohortService} from "../../service/cohort.service";
 
 @Component({
-  selector: 'app-home',
-  templateUrl: './home.component.html',
-  styleUrls: ['./home.component.scss']
+  selector: 'app-cohorts',
+  templateUrl: './cohorts.component.html',
+  styleUrls: ['./cohorts.component.scss']
 })
-export class HomeComponent implements OnInit {
+export class CohortsComponent implements OnInit {
 
   cohorts: any;
 

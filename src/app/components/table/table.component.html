@@ -3,7 +3,10 @@
 
     <ng-container matColumnDef="Acronym" sticky>
       <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Acronym </th>
-      <td mat-cell *matCellDef="let element"> {{element["acronym"]}} </td>
+      <td mat-cell *matCellDef="let element" class="table-link"
+          [routerLink]="['/cohort']" [queryParams]="{ accession: element['acronym']}">
+        {{element["acronym"]}}
+      </td>
     </ng-container>
 
     <ng-container matColumnDef="Title">
@@ -21,12 +24,17 @@
       <td mat-cell *matCellDef="let element"> {{element["startDate"]}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="Data Types">
-      <th mat-header-cell *matHeaderCellDef [attr.colspan]="5"> Data Types </th>
+    <ng-container matColumnDef="License">
+      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> License </th>
+      <td mat-cell *matCellDef="let element"> {{element["license"]}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="Data Types" sticky>
+      <th mat-header-cell *matHeaderCellDef [attr.colspan]="5" class="th-parent th-last"> Data Types </th>
     </ng-container>
 
     <ng-container matColumnDef="data1">
-      <th mat-header-cell *matHeaderCellDef> <i title="biospecimens" class="icon icon-common icon-flask icon-padder icon-center"></i> </th>
+      <th mat-header-cell *matHeaderCellDef class="th-first" style="padding-left: 0"> <i title="biospecimens" class="icon icon-common icon-flask icon-padder icon-center"></i> </th>
       <td mat-cell *matCellDef="let element">
         <i title="Availability" class="icon icon-common icon-center icon-xs" [ngClass]="element['dataTypes']['biospecimens'] ? 'icon-check' : 'icon-minus'"></i>
       </td>
@@ -53,20 +61,17 @@
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="data5">
-      <th mat-header-cell *matHeaderCellDef> <i title="more" class="icon icon-common icon-plus icon-padder icon-center"></i>  </th>
-      <td mat-cell *matCellDef="let element">
+    <ng-container matColumnDef="data5" style="padding-right: 2px">
+      <th mat-header-cell *matHeaderCellDef style="padding-right: 0">
+        <i title="more" class="icon icon-common icon-plus icon-padder icon-center"></i>
+      </th>
+      <td mat-cell *matCellDef="let element" style="padding-right: 0">
         <i title="Availability" class="icon icon-common icon-minus icon-center icon-xs"></i>
       </td>
     </ng-container>
 
-    <ng-container matColumnDef="License">
-      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> License </th>
-      <td mat-cell *matCellDef="let element"> {{element["license"]}} </td>
-    </ng-container>
-
     <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header"></tr>
     <tr mat-header-row *matHeaderRowDef="['data1', 'data2', 'data3', 'data4', 'data5']" class="table-header"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['Acronym',	'Title',	'Participants',	'Enrollment Period',	'data1', 'data2', 'data3', 'data4', 'data5',	'License'];"></tr>
+    <tr mat-row *matRowDef="let row; columns: ['Acronym',	'Title',	'Participants',	'Enrollment Period', 'License',	'data1', 'data2', 'data3', 'data4', 'data5'];"></tr>
   </table>
 </section>

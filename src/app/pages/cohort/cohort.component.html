@@ -1,1 +1,65 @@
-<p>cohort works!</p>
+<div class="cohort-body">
+
+  <div class="cohort-header">
+    <h1 class="cohort-header-title">{{cohort['cohortName']}}</h1>
+    <div class="cohort-header-description">{{cohort['description']}}</div>
+  </div>
+
+
+  <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
+    <mat-tab label="Metadata" style="width: 100%; height: 100%">
+      <div class="cohort-content">
+
+        <div class="cohort-metadata">
+          <h2 class="cohort-subheader">Cohort Descriptors</h2>
+          <div class="cohort-descriptor">Acronym: {{cohort['acronym']}}</div>
+          <div class="cohort-descriptor">Website: {{cohort['website']}}</div>
+          <div class="cohort-descriptor">License: {{cohort['license']}}</div>
+          <div class="cohort-descriptor">Data Sharing: {{cohort['dataSharing']}}</div>
+          <div class="cohort-descriptor">Start Date: {{cohort['startDate']}}</div>
+          <div class="cohort-descriptor">End Date: {{cohort['endDate']}}</div>
+          <div class="cohort-descriptor">Target Enrollment: {{cohort['targetEnrollment']}}</div>
+          <div class="cohort-descriptor">Total Enrollment: {{cohort['totalEnrollment']}}</div>
+          <div class="cohort-descriptor">Territories: {{cohort['territories'][0]["label"]}}</div>
+        </div>
+
+        <div class="cohort-stats">
+          <h2 class="cohort-subheader">Cohort Stats</h2>
+
+          <div class="cohort-descriptor">Available data types</div>
+          <div class="cohort-descriptor" *ngFor="let dataType of cohort['dataTypes'] | keyvalue">
+            {{dataType.key}}: {{dataType.value}}
+          </div>
+        </div>
+
+        <div class="cohort-external-ref">
+          <h2 class="cohort-subheader">Relationships</h2>
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip color="primary" selected>SAMEA12345667</mat-chip>
+            <mat-chip color="primary" selected>SAMEA12345667</mat-chip>
+          </mat-chip-list>
+        </div>
+
+      </div>
+    </mat-tab>
+    <mat-tab label="Dictionary">
+      <h2 class="cohort-subheader">Cohort Dictionary</h2>
+      <table class="mat-table" >
+        <tr class="mat-header-row">
+          <th class="mat-header-cell">Name</th>
+          <th class="mat-header-cell">Description</th>
+          <th class="mat-header-cell">Mapping</th>
+        </tr>
+        <tr class="mat-row" *ngFor="let field of cohort['dictionary']">
+          <td class="mat-cell">{{field.name}}</td>
+          <td class="mat-cell">{{field.description}}</td>
+          <td class="mat-cell">{{field.mappedTerm}}</td>
+        </tr>
+      </table>
+    </mat-tab>
+  </mat-tab-group>
+
+
+
+
+</div>

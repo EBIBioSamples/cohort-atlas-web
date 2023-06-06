@@ -1,8 +1,10 @@
-
-
-.filter-facet {
-  width: 90%;
-  border: 1px solid gray;
+.filter-header {
+  color: #7c7c7c;
+  margin: 10px 0;
+  font-size: 18px;
+  font-weight: 500;
+  float: left;
+  width: 100px;
 }
 
 .filter-facet-label {
@@ -11,4 +13,16 @@
 
 .filter-facet-item {
   width: 100%;
+}
+
+.filter-facet {
+  border-radius: 2px;
+  box-shadow: none;
+  margin-top: 5px;
+  border: 1px solid #f0f0f0;
+  background-color: #fafafa;
+}
+
+.filter-facet-header {
+  height: 42px;
 }

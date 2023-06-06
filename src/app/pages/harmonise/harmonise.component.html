@@ -22,8 +22,8 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="eg. smoking" #input>
   </mat-form-field>
 
-  <button class="vf-button vf-button--primary vf-button--sm button-save">Save</button>
-  <button class="vf-button vf-button--primary vf-button--sm button-save">Save and Finish Mapping</button>
+  <button class="vf-button vf-button--primary vf-button--sm button-save" (click)="saveDictionary()">Save</button>
+  <button class="vf-button vf-button--primary vf-button--sm button-save" (click)="saveDictionary()">Save and Finish Mapping</button>
 
   <div>
     <table mat-table [dataSource]="dataSource" matSort>
@@ -59,10 +59,15 @@
       <ng-container matColumnDef="annotations">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Suggestions </th>
         <td mat-cell *matCellDef="let row">
+
           <mat-form-field appearance="fill">
-            <mat-select>
-              <mat-option value="option1">{{row.annotations[0]}} </mat-option>
-              <mat-option value="option3">{{row.annotations[1]}} </mat-option>
+            <mat-select value="{{ row.annotations[0] }}">
+              <mat-option *ngFor="let option of row.annotations" [value]="option">
+                {{option}}
+              </mat-option>
+              <mat-option *ngFor="let option of options" [value]="option">
+                {{option}}
+              </mat-option>
             </mat-select>
           </mat-form-field>
         </td>

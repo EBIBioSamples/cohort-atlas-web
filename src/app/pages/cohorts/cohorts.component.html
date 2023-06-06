@@ -1,0 +1,42 @@
+<div class="home-body">
+
+  <div class="header">
+    <div class="header-title">
+      Cohort Atlas: Data Browser
+    </div>
+
+    <div class="cohort-search">
+      <input matInput placeholder="eg. UKB" class="cohort-search-input">
+      <button mat-button color="primary" class="cohort-search-btn">
+        <mat-icon>search</mat-icon>
+      </button>
+    </div>
+
+    <div class="header-summary">
+      <div class="header-summary-tile">5 Cohorts</div>
+      <div class="header-summary-tile">345 Fields</div>
+      <div class="header-summary-tile">45 Mapped Fields</div>
+      <div class="header-summary-tile">32 Archive Links</div>
+      <button mat-flat-button color="primary" class="header-summary-export">Export</button>
+    </div>
+  </div>
+
+  <div class="filters">
+    <div>
+      <app-facet-panel></app-facet-panel>
+    </div>
+  </div>
+
+
+  <div class="cohort-content">
+
+    <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
+      <mat-tab label="Table">
+        <app-table [cohorts]="cohorts"></app-table>
+      </mat-tab>
+      <mat-tab label="Graphs">Graphs</mat-tab>
+    </mat-tab-group>
+
+  </div>
+
+</div>

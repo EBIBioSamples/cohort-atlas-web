@@ -10,7 +10,7 @@ export class TableComponent implements OnInit {
   @Input() cohorts: any;
 
   displayedColumns = [
-    'Acronym',	'Title',	'Participants',	'Enrollment Period',	'Data Types',	'License'
+    'Acronym',	'Title',	'Participants',	'Enrollment Period',	'License',	'Data Types'
   ];
   dataSource = ELEMENT_DATA;
 

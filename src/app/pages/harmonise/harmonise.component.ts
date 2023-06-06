@@ -1,7 +1,10 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, Input, OnInit, ViewChild} from '@angular/core';
 import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
+import {CohortService} from "../../service/cohort.service";
+import {FormControl} from "@angular/forms";
+import {map, Observable, startWith} from "rxjs";
 
 export interface DictionaryField {
   id: string;
@@ -20,16 +23,25 @@ export interface DictionaryField {
   templateUrl: './harmonise.component.html',
   styleUrls: ['./harmonise.component.scss']
 })
-export class HarmoniseComponent implements AfterViewInit {
+export class HarmoniseComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['id', 'name', 'label', 'description', 'type', 'values', 'parent', 'annotations', 'tags'];
   dataSource: MatTableDataSource<DictionaryField>;
+
+  @Input() dictionaryFields: DictionaryField[];
+  cohortAccession: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  constructor() {
-    const dictionaryFields = getTestDictionaryFields();
-    this.dataSource = new MatTableDataSource(dictionaryFields);
+  options: string[] = ['Gender', 'Age/Birthdate', 'occupation', 'dietary history', 'heart rate', 'sleep history', 'prescription'];
+
+  constructor(private cohortService: CohortService) {
+    // const fields = getTestDictionaryFields();
+    const fields = this.cohortService.dataDictionary;
+    this.dataSource = new MatTableDataSource(fields);
+  }
+
+  ngOnInit(): void {
   }
 
   ngAfterViewInit() {
@@ -44,6 +56,22 @@ export class HarmoniseComponent implements AfterViewInit {
     if (this.dataSource.paginator) {
       this.dataSource.paginator.firstPage();
     }
+  }
+
+  saveDictionary() {
+    let fields = [];
+    for (let field of this.cohortService.dataDictionary) {
+      fields.push({
+        "name": field.name,
+        "description": field.description,
+        "mappedTerm": field.annotations[0],
+      })
+    }
+
+    console.log("saving dictionary");
+    this.cohortService.saveDictionary(this.cohortAccession, fields).subscribe(data => {
+      console.log("Dictionary saved")
+    });
   }
 }
 

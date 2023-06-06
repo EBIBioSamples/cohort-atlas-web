@@ -12,9 +12,13 @@
 }
 
 .header-nav {
-  width: calc(60% - 300px);
-  float: left;
+  //width: calc(60% - 300px);
+  float: right;
   margin-top: 14px;
+}
+
+.main-menu-item {
+  color: #696969;
 }
 
 .header-search {

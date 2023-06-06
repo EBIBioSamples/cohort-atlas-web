@@ -1,8 +1,13 @@
+<div style="overflow: hidden; width: 100%; float: left; margin-bottom: 10px">
+  <div class="filter-header">Filters</div>
+  <button mat-button color="warn" class="" style="float: right; width: 75px; padding: 0; margin-top: 2px;">clear filters</button>
+<!--  <a class="" style="float: right; width: calc(100% - 100px);">clear filters</a>-->
+</div>
 
 <mat-accordion>
   <!--      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">-->
-  <mat-expansion-panel style="border-radius: 0; box-shadow: none; border: 2px solid #3b6fb6; border-bottom: 4px solid green">
-    <mat-expansion-panel-header style="height: 35px; background-color: #3b6fb6">
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>Data Types</mat-panel-title>
       <mat-panel-description>
         <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
@@ -15,8 +20,8 @@
     <mat-checkbox class="filter-facet-item">Other</mat-checkbox>
   </mat-expansion-panel>
 
-  <mat-expansion-panel style="border-radius: 0; box-shadow: none; border: 2px solid #3b6fb6; border-bottom: 4px solid green; margin-top: 3px">
-    <mat-expansion-panel-header style="height: 35px; border-bottom: 2px solid #3b6fb6">
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>Territory</mat-panel-title>
       <mat-panel-description>
       </mat-panel-description>
@@ -26,8 +31,8 @@
     <mat-checkbox class="filter-facet-item">Canada</mat-checkbox>
   </mat-expansion-panel>
 
-  <mat-expansion-panel style="border-radius: 0; box-shadow: none; border: 2px solid #3b6fb6; border-bottom: 4px solid green; margin-top: 3px">
-    <mat-expansion-panel-header style="height: 35px; border-bottom: 2px solid #3b6fb6">
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>License</mat-panel-title>
       <mat-panel-description>
       </mat-panel-description>
@@ -37,8 +42,30 @@
     <mat-checkbox class="filter-facet-item">BSD</mat-checkbox>
   </mat-expansion-panel>
 
-  <mat-expansion-panel style="border-radius: 0; box-shadow: none; border: 2px solid #3b6fb6; border-bottom: 4px solid green; margin-top: 3px">
-    <mat-expansion-panel-header style="height: 35px; border-bottom: 2px solid #3b6fb6">
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
+      <mat-panel-title>Treatment</mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-checkbox class="filter-facet-item">Antibiotic</mat-checkbox>
+    <mat-checkbox class="filter-facet-item">Any Oxygen therapy</mat-checkbox>
+    <mat-checkbox class="filter-facet-item">Chloroquine/hydroxychloroquine</mat-checkbox>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
+      <mat-panel-title>Treatment</mat-panel-title>
+      <mat-panel-description>
+      </mat-panel-description>
+    </mat-expansion-panel-header>
+    <mat-checkbox class="filter-facet-item">Antibiotic</mat-checkbox>
+    <mat-checkbox class="filter-facet-item">Any Oxygen therapy</mat-checkbox>
+    <mat-checkbox class="filter-facet-item">Chloroquine/hydroxychloroquine</mat-checkbox>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>Treatment</mat-panel-title>
       <mat-panel-description>
       </mat-panel-description>

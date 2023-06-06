@@ -18,6 +18,11 @@
 
         <br>
 
+
+        <input type = "file" name = "file" (change)="handleFileInput($event)" />
+        <button class="vf-button vf-button--primary vf-button--sm" (click)="uploadFileToActivity()">Upload</button>
+
+
         <p>
           <mat-form-field appearance="outline">
             <mat-label>Cohort Name</mat-label>
@@ -121,7 +126,6 @@
         <br>
         <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
         <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
-
         <button class="vf-button vf-button--tertiary vf-button--sm" (click)="stepper.reset()">Reset</button>
       </div>
     </mat-step>
