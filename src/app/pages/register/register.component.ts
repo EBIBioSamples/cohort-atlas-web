@@ -12,9 +12,19 @@ export class RegisterComponent implements OnInit {
 
   fileToUpload: File | null = null;
 
-  firstFormGroup = this._formBuilder.group({
-    nameCtrl: ['', Validators.required],
-    // descriptionCtrl: ['', Validators.required],
+  registerFormGroup = this._formBuilder.group({
+    cohortName: ['', Validators.required],
+    description: ['', Validators.required],
+    acronym: ['', Validators.required],
+    website: [''],
+    provider: [''],
+    license: [''],
+    contacts: [''],
+    startDate: [''],
+    endDate: [''],
+    targetEnrollment: [''],
+    totalEnrollment: [''],
+    territories: ['']
   });
 
   secondFormGroup = this._formBuilder.group({
@@ -27,6 +37,11 @@ export class RegisterComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  submitForm() {
+    console.warn('Your order has been submitted', this.registerFormGroup.value);
+    this.cohortService.registerCohort(this.registerFormGroup);
   }
 
   handleFileInput(e: any) {
