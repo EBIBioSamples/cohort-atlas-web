@@ -33,6 +33,7 @@ import {MatButtonModule} from "@angular/material/button";
 import {MatTabsModule} from "@angular/material/tabs";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from '@angular/material/chips';
+import {MatMenuModule} from "@angular/material/menu";
 
 @NgModule({
   declarations: [
@@ -48,31 +49,32 @@ import {MatChipsModule} from '@angular/material/chips';
     CohortsComponent,
     AboutComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MatExpansionModule,
-    BrowserAnimationsModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatStepperModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSelectModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatAutocompleteModule,
-    MatChipsModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatExpansionModule,
+        BrowserAnimationsModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatTableModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatSelectModule,
+        MatDividerModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatMenuModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

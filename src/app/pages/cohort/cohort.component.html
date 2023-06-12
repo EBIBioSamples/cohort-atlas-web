@@ -3,7 +3,16 @@
   <div class="cohort-header">
     <h1 class="cohort-header-title">{{cohort['cohortName']}}</h1>
     <div class="cohort-header-description">{{cohort['description']}}</div>
+
+    <div class="header-summary">
+      <div class="header-summary-tile">30 Fields</div>
+      <div class="header-summary-tile">10 Mapped Fields</div>
+      <div class="header-summary-tile">2 Archive Links</div>
+      <button mat-flat-button color="primary" class="header-summary-export">Export</button>
+    </div>
   </div>
+
+
 
 
   <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
@@ -34,26 +43,70 @@
 
         <div class="cohort-external-ref">
           <h2 class="cohort-subheader">Relationships</h2>
+
           <mat-chip-list aria-label="Fish selection">
-            <mat-chip color="primary" selected>SAMEA12345667</mat-chip>
+            <mat-chip color="primary" selected [matMenuTriggerFor]="menu">SAMEA12345667</mat-chip>
             <mat-chip color="primary" selected>SAMEA12345667</mat-chip>
           </mat-chip-list>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item>Go to resource</button>
+            <button mat-menu-item [matMenuTriggerFor]="exportFormats">Export to format</button>
+          </mat-menu>
+          <mat-menu #exportFormats="matMenu">
+            <button mat-menu-item>OMOP</button>
+            <button mat-menu-item>GECKO</button>
+          </mat-menu>
         </div>
 
       </div>
     </mat-tab>
     <mat-tab label="Dictionary">
-      <h2 class="cohort-subheader">Cohort Dictionary</h2>
-      <table class="mat-table" >
+<!--      <h2 class="cohort-subheader">Cohort Dictionary</h2>-->
+
+      <div class="cohort-dictionary">
+        <div class="cohort-dictionary-header">Cohort Dictionary</div>
+        <button mat-flat-button color="primary" class="header-summary-export cohort-actions">Download Mapping</button>
+        <button mat-flat-button color="primary" class="header-summary-export cohort-actions">Generate Synthetic</button>
+      </div>
+
+      <table class="mat-table"  style="width: 100%">
         <tr class="mat-header-row">
           <th class="mat-header-cell">Name</th>
           <th class="mat-header-cell">Description</th>
+          <th class="mat-header-cell">Type</th>
+          <th class="mat-header-cell">Parent</th>
           <th class="mat-header-cell">Mapping</th>
+          <th class="mat-header-cell">Tags</th>
         </tr>
-        <tr class="mat-row" *ngFor="let field of cohort['dictionary']">
-          <td class="mat-cell">{{field.name}}</td>
-          <td class="mat-cell">{{field.description}}</td>
-          <td class="mat-cell">{{field.mappedTerm}}</td>
+<!--        <tr class="mat-row" *ngFor="let field of cohort['dictionary']">-->
+<!--          <td class="mat-cell">{{field.name}}</td>-->
+<!--          <td class="mat-cell">{{field.description}}</td>-->
+<!--          <td class="mat-cell">{{field.mappedTerm}}</td>-->
+<!--        </tr>-->
+        <tr class="mat-row">
+          <td class="mat-cell">Gender</td>
+          <td class="mat-cell">Gender</td>
+          <td class="mat-cell">String</td>
+          <td class="mat-cell">-</td>
+          <td class="mat-cell">Gender</td>
+          <td class="mat-cell">-</td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-cell">Birthdate</td>
+          <td class="mat-cell">Birthdate</td>
+          <td class="mat-cell">String</td>
+          <td class="mat-cell">-</td>
+          <td class="mat-cell">Birthdate</td>
+          <td class="mat-cell">-</td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-cell">Age at present</td>
+          <td class="mat-cell">Age at present</td>
+          <td class="mat-cell">Number</td>
+          <td class="mat-cell">-</td>
+          <td class="mat-cell">Age</td>
+          <td class="mat-cell">-</td>
         </tr>
       </table>
     </mat-tab>

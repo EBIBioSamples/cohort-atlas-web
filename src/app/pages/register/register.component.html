@@ -2,7 +2,8 @@
 
   <div class="vf-section-header">
     <h2 class="vf-section-header__heading section-header">Register New Cohort</h2>
-    <p class="vf-section-header__text">Registration contains 3 steps. First step is mandatory which will register the cohort and generate an accession.
+    <p class="vf-section-header__text">Registration contains 3 steps. First step is mandatory which will register the
+      cohort and generate an accession.
       Optional second and third steps will improve the FAIRness of the cohort. </p>
   </div>
 
@@ -19,64 +20,66 @@
         <br>
 
 
-        <input type = "file" name = "file" (change)="handleFileInput($event)" />
-        <button class="vf-button vf-button--primary vf-button--sm" (click)="uploadFileToActivity()">Upload</button>
-
-
         <p>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="atlas-field">
             <mat-label>Cohort Name</mat-label>
             <input matInput placeholder="Cohort name" formControlName="cohortName" required>
           </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="atlas-field">
             <mat-label>Acronym</mat-label>
             <input matInput placeholder="Acronym" formControlName="acronym" required>
           </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="outline">
+          <mat-form-field appearance="outline" class="atlas-field">
             <mat-label>Description</mat-label>
             <input matInput placeholder="Description" formControlName="description" required>
             <mat-hint>Hint</mat-hint>
           </mat-form-field>
         </p>
 
+        <p>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>website</mat-label>
+            <input matInput placeholder="website" formControlName="website">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>license</mat-label>
+            <input matInput placeholder="license" formControlName="license">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>provider</mat-label>
+            <input matInput placeholder="provider" formControlName="provider">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>contacts</mat-label>
+            <input matInput placeholder="contacts" formControlName="contacts">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>startDate</mat-label>
+            <input matInput placeholder="startDate" formControlName="startDate">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>endDate</mat-label>
+            <input matInput placeholder="endDate" formControlName="endDate">
+          </mat-form-field>
+        </p>
+        <p>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>targetEnrollment</mat-label>
+            <input matInput placeholder="targetEnrollment" formControlName="targetEnrollment">
+          </mat-form-field>
+          <mat-form-field appearance="outline" class="atlas-field">
+            <mat-label>totalEnrollment</mat-label>
+            <input matInput placeholder="totalEnrollment" formControlName="totalEnrollment">
+          </mat-form-field>
+        </p>
 
-        <mat-form-field appearance="outline">
-          <mat-label>website</mat-label>
-          <input matInput placeholder="website" formControlName="website">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>provider</mat-label>
-          <input matInput placeholder="provider" formControlName="provider">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>license</mat-label>
-          <input matInput placeholder="license" formControlName="license">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>contacts</mat-label>
-          <input matInput placeholder="contacts" formControlName="contacts">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>startDate</mat-label>
-          <input matInput placeholder="startDate" formControlName="startDate">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>endDate</mat-label>
-          <input matInput placeholder="endDate" formControlName="endDate">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>targetEnrollment</mat-label>
-          <input matInput placeholder="targetEnrollment" formControlName="targetEnrollment">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>totalEnrollment</mat-label>
-          <input matInput placeholder="totalEnrollment" formControlName="totalEnrollment">
-        </mat-form-field>
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" class="atlas-field">
           <mat-label>territories</mat-label>
           <input matInput placeholder="territories" formControlName="territories">
         </mat-form-field>
@@ -96,11 +99,23 @@
         </mat-card-content>
       </mat-card>
 
+
+      <h3 class="vf-section-header__heading section-header">Add relationships</h3>
+      <h3 class="vf-section-header__heading section-header">Add statistics data</h3>
+
+
+
       <form [formGroup]="secondFormGroup">
-        <mat-form-field appearance="fill">
-          <mat-label>Address</mat-label>
-          <input matInput placeholder="Ex. 1 Main St, New York, NY" required>
+<!--        <mat-form-field appearance="fill">-->
+<!--          <mat-label>Address</mat-label>-->
+<!--          <input matInput placeholder="Ex. 1 Main St, New York, NY" required>-->
+<!--        </mat-form-field>-->
+
+        <mat-form-field appearance="outline" class="atlas-field">
+          <mat-label>territories</mat-label>
+          <input matInput placeholder="relationships">
         </mat-form-field>
+
         <div>
           <br>
           <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
@@ -120,6 +135,10 @@
           This is an asynchronous process, send an email to user with a link?
         </mat-card-content>
       </mat-card>
+
+
+      <input type="file" name="file" (change)="handleFileInput($event)"/>
+      <button class="vf-button vf-button--primary vf-button--sm" (click)="uploadFileToActivity()">Upload</button>
 
       <p>You are now done.</p>
       <div>

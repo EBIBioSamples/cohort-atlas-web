@@ -41,7 +41,7 @@ export class RegisterComponent implements OnInit {
 
   submitForm() {
     console.warn('Your order has been submitted', this.registerFormGroup.value);
-    this.cohortService.registerCohort(this.registerFormGroup);
+    // this.cohortService.registerCohort(this.registerFormGroup);
   }
 
   handleFileInput(e: any) {
