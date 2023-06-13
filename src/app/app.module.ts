@@ -34,6 +34,7 @@ import {MatTabsModule} from "@angular/material/tabs";
 import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from "@angular/material/menu";
+import {MatRadioModule} from "@angular/material/radio";
 
 @NgModule({
   declarations: [
@@ -49,32 +50,33 @@ import {MatMenuModule} from "@angular/material/menu";
     CohortsComponent,
     AboutComponent
   ],
-    imports: [
-        BrowserModule,
-        HttpClientModule,
-        AppRoutingModule,
-        MatExpansionModule,
-        BrowserAnimationsModule,
-        MatCheckboxModule,
-        FormsModule,
-        MatTableModule,
-        MatButtonToggleModule,
-        MatIconModule,
-        MatStepperModule,
-        ReactiveFormsModule,
-        MatInputModule,
-        MatCardModule,
-        MatToolbarModule,
-        MatPaginatorModule,
-        MatSortModule,
-        MatSelectModule,
-        MatDividerModule,
-        MatButtonModule,
-        MatTabsModule,
-        MatAutocompleteModule,
-        MatChipsModule,
-        MatMenuModule
-    ],
+  imports: [
+    BrowserModule,
+    HttpClientModule,
+    AppRoutingModule,
+    MatExpansionModule,
+    BrowserAnimationsModule,
+    MatCheckboxModule,
+    FormsModule,
+    MatTableModule,
+    MatButtonToggleModule,
+    MatIconModule,
+    MatStepperModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatPaginatorModule,
+    MatSortModule,
+    MatSelectModule,
+    MatDividerModule,
+    MatButtonModule,
+    MatTabsModule,
+    MatAutocompleteModule,
+    MatChipsModule,
+    MatMenuModule,
+    MatRadioModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })

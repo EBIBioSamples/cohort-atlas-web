@@ -2,8 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CohortService} from "../../service/cohort.service";
 
-import { MatChipList } from '@angular/material/chips';
-
 @Component({
   selector: 'app-cohort',
   templateUrl: './cohort.component.html',
@@ -21,7 +19,6 @@ export class CohortComponent implements OnInit {
     this.route.queryParamMap
       .subscribe((params) => {
           this.cohortAccession = params["params"]["accession"];
-          this.cohortAccession = "BSC0000001";
           this.getCohort(this.cohortAccession);
         }
       );

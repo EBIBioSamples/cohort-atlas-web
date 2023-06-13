@@ -10,7 +10,7 @@ export class CohortService {
 
   dataDictionary: any[];
 
-  cohortUrl = "http://localhost:8081/api/cohorts";
+  cohortUrl = "http://localhost:8080/api/cohorts";
   constructor(private http: HttpClient) {
 
   }
@@ -59,7 +59,7 @@ export class CohortService {
     formData.forEach((value, key) => object[key] = value);
 
     console.log('formData json str',JSON.stringify(object));
-    this.http.post<any>("http://localhost:8081/api/cohorts",
+    this.http.post<any>("http://localhost:8080/api/cohorts",
       JSON.stringify(object), this.httpOptions).subscribe(
       (res) => console.log(res),
       (err) => console.log(err)

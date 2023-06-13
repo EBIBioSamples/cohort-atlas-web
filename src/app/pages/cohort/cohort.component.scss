@@ -5,11 +5,24 @@
 
 .cohort-header {
   color: #3b6fb6;
+  width: 100%;
   overflow: hidden;
 }
 
-.cohort-subheader {
-  color: #3b6fb6;
+.cohort-header-title {
+  width: calc(100% - 450px);
+  float: left;
+  font-size: 30px;
+  margin: 2px 0;
+}
+
+.cohort-header-summary {
+  //width: 443px;
+  float: right;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  font-size: 15px;
+  color: #949494;
 }
 
 .cohort-header-description {
@@ -17,21 +30,18 @@
   margin: 10px 0;
   font-size: 17px;
   width: 100%;
+  float: left;
+}
+
+.cohort-header-subtitle {
+  font-size: 18px;
+  color: #949494;
 }
 
 .cohort-descriptor {
   width: 100%;
   font-size: 16px;
   margin: 5px 0;
-}
-
-
-.header-summary {
-  float: right;
-  border: 1px solid #dedede;
-  border-radius: 5px;
-  font-size: 15px;
-  color: #949494;
 }
 
 .header-summary-tile {
@@ -62,4 +72,29 @@
 
 .cohort-actions {
   float: right;
+}
+
+.cohort-content-card {
+  width: calc(50% - 24px);
+  float: left;
+  margin: 4px;
+  padding: 5px;
+  border: 2px solid #f5f5f5;
+  border-radius: 5px;
+}
+
+.cohort-content-card-full {
+  width: calc(100% - 24px);
+}
+
+.card-header {
+  color: #3b6fb6;
+  font-size: 20px;
+  border-bottom: 1px solid #a4bde5;
+  margin: 5px 0;
+  padding-bottom: 5px;
+}
+
+::ng-deep .mat-header-cell {
+  font-size: 14px;
 }
