@@ -40,8 +40,8 @@ export class RegisterComponent implements OnInit {
   }
 
   submitForm() {
-    console.warn('Your order has been submitted', this.registerFormGroup.value);
-    // this.cohortService.registerCohort(this.registerFormGroup);
+    console.warn('Creating a new cohort: ', this.registerFormGroup.value);
+    this.cohortService.registerCohort(this.registerFormGroup);
   }
 
   handleFileInput(e: any) {

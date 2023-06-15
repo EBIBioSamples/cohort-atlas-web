@@ -35,6 +35,7 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatTooltipModule} from "@angular/material/tooltip";
 
 @NgModule({
   declarations: [
@@ -75,7 +76,8 @@ import {MatRadioModule} from "@angular/material/radio";
     MatAutocompleteModule,
     MatChipsModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]
