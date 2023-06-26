@@ -3,43 +3,31 @@
   <button mat-button color="warn" class="" style="float: right; width: 75px; padding: 0; margin-top: 2px;">clear filters</button>
 <!--  <a class="" style="float: right; width: calc(100% - 100px);">clear filters</a>-->
 </div>
-
+<form (ngSubmit)="applyFilters()">
 <mat-accordion>
   <!--      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">-->
-  <mat-expansion-panel class="filter-facet">
+  <mat-expansion-panel class="filter-facet" >
     <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>Data Types</mat-panel-title>
       <mat-panel-description>
         <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-checkbox class="filter-facet-item">Biospecimens</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Environmental Data</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Genomic Data</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Phenotypic Data</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Other</mat-checkbox>
+    <div *ngFor="let dataType of dataTypes" [formGroup]="filterFormGroup.controls['dataTypes']" >
+      <mat-checkbox class="filter-facet-item" [formControlName]="dataType"  value="{{ dataType }}">{{ dataType }}</mat-checkbox>
+    </div>
   </mat-expansion-panel>
 
-  <mat-expansion-panel class="filter-facet">
+  <mat-expansion-panel class="filter-facet" >
     <mat-expansion-panel-header class="filter-facet-header">
-      <mat-panel-title>Territory</mat-panel-title>
+      <mat-panel-title>Licences</mat-panel-title>
       <mat-panel-description>
+        <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-checkbox class="filter-facet-item">UK</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">South Africa</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Canada</mat-checkbox>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel class="filter-facet">
-    <mat-expansion-panel-header class="filter-facet-header">
-      <mat-panel-title>License</mat-panel-title>
-      <mat-panel-description>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-checkbox class="filter-facet-item">MIT</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Apache</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">BSD</mat-checkbox>
+    <div *ngFor="let licence of licences"  [formGroup]="filterFormGroup.controls['licences']" >
+      <mat-checkbox class="filter-facet-item" [formControlName]="licence"  value="{{ licence }}">{{ licence }}</mat-checkbox>
+    </div>
   </mat-expansion-panel>
 
   <mat-expansion-panel class="filter-facet">
@@ -48,31 +36,11 @@
       <mat-panel-description>
       </mat-panel-description>
     </mat-expansion-panel-header>
-    <mat-checkbox class="filter-facet-item">Antibiotic</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Any Oxygen therapy</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Chloroquine/hydroxychloroquine</mat-checkbox>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel class="filter-facet">
-    <mat-expansion-panel-header class="filter-facet-header">
-      <mat-panel-title>Treatment</mat-panel-title>
-      <mat-panel-description>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-checkbox class="filter-facet-item">Antibiotic</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Any Oxygen therapy</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Chloroquine/hydroxychloroquine</mat-checkbox>
-  </mat-expansion-panel>
-
-  <mat-expansion-panel class="filter-facet">
-    <mat-expansion-panel-header class="filter-facet-header">
-      <mat-panel-title>Treatment</mat-panel-title>
-      <mat-panel-description>
-      </mat-panel-description>
-    </mat-expansion-panel-header>
-    <mat-checkbox class="filter-facet-item">Antibiotic</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Any Oxygen therapy</mat-checkbox>
-    <mat-checkbox class="filter-facet-item">Chloroquine/hydroxychloroquine</mat-checkbox>
+    <div *ngFor="let treatment of treatments"  [formGroup]="filterFormGroup.controls['treatments']" >
+      <mat-checkbox class="filter-facet-item" [formControlName]="treatment"  value="{{ treatment }}">{{ treatment }}</mat-checkbox>
+    </div>
   </mat-expansion-panel>
 
 </mat-accordion>
+  <button type="submit" class="vf-button vf-button--primary vf-button--sm" >Apply filters</button>
+</form>
