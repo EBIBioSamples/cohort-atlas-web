@@ -3,7 +3,7 @@
   <button mat-button color="warn" class="" style="float: right; width: 75px; padding: 0; margin-top: 2px;">clear filters</button>
 <!--  <a class="" style="float: right; width: calc(100% - 100px);">clear filters</a>-->
 </div>
-<form (ngSubmit)="applyFilters()">
+<form >
 <mat-accordion>
   <!--      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">-->
   <mat-expansion-panel class="filter-facet" >
@@ -42,5 +42,5 @@
   </mat-expansion-panel>
 
 </mat-accordion>
-  <button type="submit" class="vf-button vf-button--primary vf-button--sm" >Apply filters</button>
+  <button type="submit" class="vf-button vf-button--primary vf-button--sm" (click)="sendFilters()">Apply filters</button>
 </form>

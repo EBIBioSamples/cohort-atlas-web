@@ -1,5 +1,5 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from "@angular/common/http";
+import {HttpClient, HttpHeaders, HttpParams} from "@angular/common/http";
 import {Observable} from "rxjs";
 import {FormGroup} from "@angular/forms";
 
@@ -20,6 +20,14 @@ export class CohortService {
     return this.http.get<any>(this.cohortUrl);
   }
 
+  public searchCohorts(filterQueryParams : string) {
+    //term = term.trim();
+
+    // Add safe, URL encoded search parameter if there is a search term
+    const filterUrl:string = this.cohortUrl.concat("?").concat(filterQueryParams);
+    console.log("Filter URL:"+filterUrl);
+    return this.http.get<any>(filterUrl);
+  }
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type':  'application/json',

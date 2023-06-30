@@ -19,4 +19,12 @@ export class CohortsComponent implements OnInit {
     });
   }
 
+  applyFilters( filterQueryParams :  String) {
+
+    console.log('Applied filters in parent', filterQueryParams);
+     this.cohortService.searchCohorts(filterQueryParams.toString()).subscribe(data => {
+      this.cohorts = data["_embedded"]["cohorts"];
+      console.log(this.cohorts)
+    });
+  }
 }
