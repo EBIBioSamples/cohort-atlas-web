@@ -13,9 +13,10 @@ export class RegisterComponent implements OnInit {
   fileToUpload: File | null = null;
 
   registerFormGroup = this._formBuilder.group({
-    cohortName: ['', Validators.required],
-    description: ['', Validators.required],
-    acronym: ['', Validators.required],
+    // cohortName: ['', Validators.required],
+    cohortName: [''],
+    description: [''],
+    acronym: [''],
     website: [''],
     provider: [''],
     license: [''],
@@ -41,7 +42,7 @@ export class RegisterComponent implements OnInit {
 
   submitForm() {
     console.warn('Creating a new cohort: ', this.registerFormGroup.value);
-    this.cohortService.registerCohort(this.registerFormGroup);
+    // this.cohortService.registerCohort(this.registerFormGroup);
   }
 
   handleFileInput(e: any) {

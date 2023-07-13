@@ -23,15 +23,16 @@
           <div>
             <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
               <mat-label>Cohort Name</mat-label>
-              <input matInput placeholder="Cohort name" formControlName="cohortName" required>
+<!--              <input matInput placeholder="Cohort name" formControlName="cohortName" required>-->
+              <input matInput placeholder="Cohort name" formControlName="cohortName">
             </mat-form-field>
             <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
               <mat-label>Acronym</mat-label>
-              <input matInput placeholder="Acronym" formControlName="acronym" required>
+              <input matInput placeholder="Acronym" formControlName="acronym">
             </mat-form-field>
             <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
               <mat-label>Description</mat-label>
-              <input matInput placeholder="Description" formControlName="description" required>
+              <input matInput placeholder="Description" formControlName="description">
               <mat-hint>Hint</mat-hint>
             </mat-form-field>
 
@@ -67,8 +68,14 @@
               <input matInput placeholder="Total Enrollment" formControlName="totalEnrollment">
             </mat-form-field>
             <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
-              <mat-label>Type</mat-label>
-              <input matInput placeholder="Type" formControlName="territories">
+              <mat-label>Study design Type</mat-label>
+              <mat-select>
+                <mat-option value="one">Case-control</mat-option>
+                <mat-option value="two">Cross-sectional</mat-option>
+                <mat-option value="two">Longitudinal</mat-option>
+                <mat-option value="two">Health records</mat-option>
+                <mat-option value="two">Other</mat-option>
+              </mat-select>
             </mat-form-field>
             <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
               <mat-label>Territories</mat-label>
@@ -231,59 +238,34 @@
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup" label="Fill in additional data">
-
-      <mat-card class="info-card">
-        <mat-card-content>
-          Optional. Survey type questions. Helps to discover what data types cohort contains. Eg. Medication, Treatment.
-          If this is not filled we will try to guess them using data dictionary. (taken from IHCC survey)
-        </mat-card-content>
-      </mat-card>
-
-      <h3 class="vf-section-header__heading section-header">Add relationships</h3>
-      <h3 class="vf-section-header__heading section-header">Add statistics data</h3>
-
-      <form [formGroup]="secondFormGroup">
-        <!--        <mat-form-field appearance="fill">-->
-        <!--          <mat-label>Address</mat-label>-->
-        <!--          <input matInput placeholder="Ex. 1 Main St, New York, NY" required>-->
-        <!--        </mat-form-field>-->
-
-        <mat-form-field appearance="outline" class="atlas-field">
-          <mat-label>territories</mat-label>
-          <input matInput placeholder="relationships">
-        </mat-form-field>
-
-        <div>
-          <br>
-          <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
-          <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
-        </div>
-      </form>
+      <app-register-additional [secondFormGroup]="secondFormGroup"></app-register-additional>
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>Upload `Data Dictionary`</ng-template>
 
-      <mat-card class="info-card">
-        <mat-card-content>
-          Optional. Upload data dictionary in CSV/spreadsheet format. We will harmonise this data dictionary to standard
-          terms.
-          Send the suggested mapping to take action.
-          This is an asynchronous process, send an email to user with a link?
-        </mat-card-content>
-      </mat-card>
+      <app-register-dictionary></app-register-dictionary>
+
+<!--      <mat-card class="info-card">-->
+<!--        <mat-card-content>-->
+<!--          Optional. Upload data dictionary in CSV/spreadsheet format. We will harmonise this data dictionary to standard-->
+<!--          terms.-->
+<!--          Send the suggested mapping to take action.-->
+<!--          This is an asynchronous process, send an email to user with a link?-->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
 
 
-      <input type="file" name="file" (change)="handleFileInput($event)"/>
-      <button class="vf-button vf-button--primary vf-button--sm" (click)="uploadFileToActivity()">Upload</button>
+<!--      <input type="file" name="file" (change)="handleFileInput($event)"/>-->
+<!--      <button class="vf-button vf-button&#45;&#45;primary vf-button&#45;&#45;sm" (click)="uploadFileToActivity()">Upload</button>-->
 
-      <p>You are now done.</p>
-      <div>
-        <br>
-        <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
-        <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
-        <button class="vf-button vf-button--tertiary vf-button--sm" (click)="stepper.reset()">Reset</button>
-      </div>
+<!--      <p>You are now done.</p>-->
+<!--      <div>-->
+<!--        <br>-->
+<!--        <button class="vf-button vf-button&#45;&#45;secondary vf-button&#45;&#45;sm" matStepperPrevious>Back</button>-->
+<!--        <button class="vf-button vf-button&#45;&#45;primary vf-button&#45;&#45;sm" matStepperNext>Save</button>-->
+<!--        <button class="vf-button vf-button&#45;&#45;tertiary vf-button&#45;&#45;sm" (click)="stepper.reset()">Reset</button>-->
+<!--      </div>-->
     </mat-step>
   </mat-stepper>
 
