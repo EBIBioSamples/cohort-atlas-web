@@ -10,7 +10,7 @@ import {RegisterAdditionalComponent} from "./components/register-additional/regi
 import {RegisterDictionaryComponent} from "./components/register-dictionary/register-dictionary.component";
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: CohortComponent },
   { path: 'home', component: HomeComponent },
   { path: 'cohorts', component: CohortsComponent },
   { path: 'register', component: RegisterComponent },

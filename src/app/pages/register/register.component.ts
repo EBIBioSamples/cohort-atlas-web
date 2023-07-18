@@ -1,7 +1,9 @@
-import {Component, OnInit} from '@angular/core';
-import {FormBuilder, Validators} from '@angular/forms';
-import {CohortService} from "../../service/cohort.service";
+import {Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
 import {Router} from "@angular/router";
+import {RegisterBasicComponent} from "../../components/register-basic/register-basic.component";
+import {RegisterAdditionalComponent} from "../../components/register-additional/register-additional.component";
+import {RegisterDictionaryComponent} from "../../components/register-dictionary/register-dictionary.component";
 
 @Component({
   selector: 'app-register',
@@ -9,55 +11,26 @@ import {Router} from "@angular/router";
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  @ViewChild('registerBasicComponent') registerBasicComponent: RegisterBasicComponent;
+  @ViewChild('registerAdditionalComponent') registerAdditionalComponent: RegisterAdditionalComponent;
+  @ViewChild('registerDictionaryComponent') registerDictionaryComponent: RegisterDictionaryComponent;
 
-  fileToUpload: File | null = null;
-
-  registerFormGroup = this._formBuilder.group({
-    // cohortName: ['', Validators.required],
-    cohortName: [''],
-    description: [''],
-    acronym: [''],
-    website: [''],
-    provider: [''],
-    license: [''],
-    contacts: [''],
-    startDate: [''],
-    endDate: [''],
-    targetEnrollment: [''],
-    totalEnrollment: [''],
-    territories: ['']
-  });
-
-  secondFormGroup = this._formBuilder.group({
-    // secondCtrl: ['', Validators.required],
-  });
-
-  isLinear = true;
-
-  constructor(private router: Router, private _formBuilder: FormBuilder, private cohortService: CohortService) {
+  constructor(private router: Router, private _formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
   }
 
-  submitForm() {
-    console.warn('Creating a new cohort: ', this.registerFormGroup.value);
-    // this.cohortService.registerCohort(this.registerFormGroup);
+  get registerStudyForm() {
+    return this.registerBasicComponent ? this.registerBasicComponent.registerStudyForm : null;
   }
 
-  handleFileInput(e: any) {
-    this.fileToUpload = e.target.files.item(0);
+  get registerAdditionalStudyForm() {
+    return this.registerAdditionalComponent ? this.registerAdditionalComponent.registerAdditionalStudyForm : null;
   }
 
-  uploadFileToActivity() {
-    if (this.fileToUpload != null) {
-      this.cohortService.postFile(this.fileToUpload).subscribe(data => {
-        this.cohortService.dataDictionary = data;
-        this.router.navigate(['/harmonise']);
-      }, error => {
-        console.log(error);
-      });
-    }
+  get registerDictionaryForm() {
+    return this.registerAdditionalComponent ? this.registerAdditionalComponent.registerAdditionalStudyForm : null;
   }
 
 }

@@ -11,6 +11,7 @@ export class CohortService {
   dataDictionary: any[];
 
   cohortUrl = "http://localhost:8080/api/cohorts";
+
   constructor(private http: HttpClient) {
 
   }
@@ -22,10 +23,19 @@ export class CohortService {
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
     })
   };
-  public registerCohort( registerForm: FormGroup) {
+
+  public registerCohort1(cohort: any) {
+    this.http.post<any>("http://localhost:8080/api/cohorts",
+      cohort, this.httpOptions).subscribe(
+      (res) => console.log(res),
+      (err) => console.log(err)
+    );
+  }
+
+  public registerCohort(registerForm: FormGroup) {
     console.warn('FormgroupData', registerForm.value);
 
     const formData = new FormData();
@@ -48,17 +58,17 @@ export class CohortService {
     // @ts-ignore
     //formData.append('contacts', registerForm.get('contacts').value);
     // @ts-ignore
-   // formData.append('startDate', registerForm.get('startDate').value);
+    // formData.append('startDate', registerForm.get('startDate').value);
     // @ts-ignore
     //formData.append('endDate', registerForm.get('endDate').value);
     // @ts-ignore
     //formData.append('territories', registerForm.get('territories').value);
-    console.log('formData ',formData.get('cohortName'));
+    console.log('formData ', formData.get('cohortName'));
     const object = {};
     // @ts-ignore
     formData.forEach((value, key) => object[key] = value);
 
-    console.log('formData json str',JSON.stringify(object));
+    console.log('formData json str', JSON.stringify(object));
     this.http.post<any>("http://localhost:8080/api/cohorts",
       JSON.stringify(object), this.httpOptions).subscribe(
       (res) => console.log(res),
