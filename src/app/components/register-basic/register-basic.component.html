@@ -48,14 +48,14 @@
       </mat-form-field>
 
       <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
-        <mat-label>Target Enrollment</mat-label>
-        <input matInput placeholder="Target Enrollment" formControlName="targetEnrollment" type="number">
-      </mat-form-field>
-      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
         <mat-label>Total Enrollment</mat-label>
         <input matInput placeholder="Total Enrollment" formControlName="totalEnrollment" type="number">
       </mat-form-field>
       <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>Target Enrollment</mat-label>
+        <input matInput placeholder="Target Enrollment" formControlName="targetEnrollment" type="number">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
         <mat-label>Study design Type</mat-label>
         <mat-select formControlName="studyDesign">
           <mat-option value="Case control">Case-control</mat-option>
@@ -65,10 +65,34 @@
           <mat-option value="Other">Other</mat-option>
         </mat-select>
       </mat-form-field>
-      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
-        <mat-label>Territories</mat-label>
-        <input matInput placeholder="Territories" formControlName="territories">
-      </mat-form-field>
+      <div *ngFor="let territory of territories.controls; let i=index" formArrayName="territories">
+        <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+          <mat-label>Territories</mat-label>
+          <input matInput placeholder="Territories" formControlName="i">
+        </mat-form-field>
+      </div>
+
+<!--      <mat-form-field class="territory-chips">-->
+<!--        <mat-label>Territories</mat-label>-->
+<!--        <mat-chip-grid #chipGrid aria-label="Territory selection">-->
+<!--          <mat-chip-row *ngFor="let territory of territories" (removed)="remove(territory)">-->
+<!--            {{territory}}-->
+<!--            <button matChipRemove [attr.aria-label]="'remove ' + territory">-->
+<!--              <mat-icon>cancel</mat-icon>-->
+<!--            </button>-->
+<!--          </mat-chip-row>-->
+<!--        </mat-chip-grid>-->
+<!--        <input placeholder="add territory" #fruitInput [formControl]="te"-->
+<!--               [matChipInputFor]="chipGrid" [matAutocomplete]="auto"-->
+<!--               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+<!--               (matChipInputTokenEnd)="add($event)"/>-->
+<!--        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">-->
+<!--          <mat-option *ngFor="let territory of filteredFruits | async" [value]="territory">-->
+<!--            {{territory}}-->
+<!--          </mat-option>-->
+<!--        </mat-autocomplete>-->
+<!--      </mat-form-field>-->
+
     </div>
   </div>
 

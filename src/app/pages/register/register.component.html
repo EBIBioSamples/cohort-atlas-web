@@ -6,7 +6,7 @@
       cohort and generate an accession. Optional second and third steps will improve the FAIRness of the cohort. </p>
   </div>
 
-  <mat-stepper [linear]="true" #stepper>
+  <mat-stepper [linear]="false" #stepper>
     <mat-step [stepControl]="registerStudyForm" label="Register cohort with `Admin Metadata`">
       <app-register-basic #registerBasicComponent></app-register-basic>
     </mat-step>

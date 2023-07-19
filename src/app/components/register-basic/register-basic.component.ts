@@ -23,7 +23,9 @@ export class RegisterBasicComponent {
       targetEnrollment: [''],
       totalEnrollment: ['', Validators.required],
       studyDesign: ['', Validators.required],
-      territories: [''],
+      territories: this.formBuilder.array([
+        this.formBuilder.control([''])
+      ]),
 
       funding: [''],
       acknowledgements: [''],
@@ -79,6 +81,14 @@ export class RegisterBasicComponent {
   submitForm() {
     console.warn('Creating a new cohort: ', this.registerStudyForm.value);
     this.cohortService.registerCohort1(this.registerStudyForm.value);
+  }
+
+  get territories() {
+    return this.registerStudyForm.get('territories') as FormArray;
+  }
+
+  addTerritory() {
+    this.territories.push(this.formBuilder.control(['']));
   }
 
   get publications() {
