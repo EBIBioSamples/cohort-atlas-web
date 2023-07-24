@@ -45,7 +45,7 @@ export class FacetPanelComponent implements OnInit {
     });
 
     if(filterStr) {
-      queryParam = queryParam.concat(queryParam? "&filter=dataType:" : "filter=dataType:").concat(filterStr.slice(0, -1));
+      queryParam = queryParam.concat(queryParam? "&filter=dataTypes:" : "filter=dataTypes:").concat(filterStr.slice(0, -1));
     }
 
     filterStr = String("");
