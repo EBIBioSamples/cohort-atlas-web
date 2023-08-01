@@ -15,10 +15,16 @@ export class RegisterComponent implements OnInit {
   @ViewChild('registerAdditionalComponent') registerAdditionalComponent: RegisterAdditionalComponent;
   @ViewChild('registerDictionaryComponent') registerDictionaryComponent: RegisterDictionaryComponent;
 
+  accession: string;
+
   constructor(private router: Router, private _formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+  }
+
+  getRegisteredCohortAccession(registeredAccession: string) {
+    this.accession = registeredAccession;
   }
 
   get registerStudyForm() {

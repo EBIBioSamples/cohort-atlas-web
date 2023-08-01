@@ -1,8 +1,8 @@
-<form [formGroup]="registerStudyForm" (ngSubmit)="submitForm()">
+<form [formGroup]="registerStudyForm" (ngSubmit)="createNewCohort()">
   <ng-template matStepLabel>Register cohort with `Admin Metadata`</ng-template>
 
   <mat-card class="info-card">
-    <mat-card-content>Mandatory Fields (from CINECA, BMMRI Admin data sheet)</mat-card-content>
+    <mat-card-content>Mandatory Fields (from CINECA, BBMRI Admin data sheet)</mat-card-content>
   </mat-card>
 
   <br>
@@ -68,7 +68,7 @@
       <div *ngFor="let territory of territories.controls; let i=index" formArrayName="territories">
         <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
           <mat-label>Territories</mat-label>
-          <input matInput placeholder="Territories" formControlName="i">
+          <input matInput placeholder="Territories" [formControlName]="i">
         </mat-form-field>
       </div>
 

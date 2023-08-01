@@ -8,16 +8,16 @@
 
   <mat-stepper [linear]="false" #stepper>
     <mat-step [stepControl]="registerStudyForm" label="Register cohort with `Admin Metadata`">
-      <app-register-basic #registerBasicComponent></app-register-basic>
+      <app-register-basic #registerBasicComponent (accessionEmitter)="getRegisteredCohortAccession($event)"></app-register-basic>
     </mat-step>
 
     <mat-step [stepControl]="registerAdditionalStudyForm" label="Fill in additional data">
-      <app-register-additional #registerAdditionalComponent></app-register-additional>
+      <app-register-additional #registerAdditionalComponent [accession]="accession"></app-register-additional>
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>Upload `Data Dictionary`</ng-template>
-      <app-register-dictionary></app-register-dictionary>
+      <app-register-dictionary [accession]="accession"></app-register-dictionary>
     </mat-step>
   </mat-stepper>
 

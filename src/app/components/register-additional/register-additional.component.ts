@@ -9,11 +9,13 @@ import {CohortService} from "../../service/cohort.service";
 })
 export class RegisterAdditionalComponent {
   registerAdditionalStudyForm: FormGroup<{}>;
+  @Input() accession: string;
 
   constructor(private formBuilder: FormBuilder, private cohortService: CohortService) {
     this.registerAdditionalStudyForm = this.formBuilder.group({
       // secondCtrl: ['', Validators.required],
     });
+    console.log("and the accession is: " + this.accession);
   }
 
 }

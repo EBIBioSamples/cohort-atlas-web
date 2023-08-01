@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CohortService} from "../../service/cohort.service";
 
@@ -9,30 +9,33 @@ import {CohortService} from "../../service/cohort.service";
 })
 export class RegisterBasicComponent {
   registerStudyForm: FormGroup;
+  @Output() accessionEmitter = new EventEmitter<string>();
+
+  TEST_REQUIRED = '';
 
   constructor(private cohortService: CohortService, private formBuilder: FormBuilder) {
     this.registerStudyForm = this.formBuilder.group({
       cohortName: ['', Validators.required],
       acronym: ['', Validators.required],
-      description: ['', Validators.required],
+      description: ['', this.TEST_REQUIRED],
       website: [''],
-      license: ['', Validators.required],
+      license: ['', this.TEST_REQUIRED],
 
-      startDate: ['', Validators.required],
+      startDate: ['', this.TEST_REQUIRED],
       endDate: [''],
       targetEnrollment: [''],
-      totalEnrollment: ['', Validators.required],
-      studyDesign: ['', Validators.required],
+      totalEnrollment: ['', this.TEST_REQUIRED],
+      studyDesign: ['', this.TEST_REQUIRED],
       territories: this.formBuilder.array([
-        this.formBuilder.control([''])
+        this.formBuilder.control('')
       ]),
 
       funding: [''],
       acknowledgements: [''],
 
       provider: this.formBuilder.group({
-        name: ['', Validators.required],
-        description: ['', Validators.required],
+        name: ['', this.TEST_REQUIRED],
+        description: ['', this.TEST_REQUIRED],
         website: [''],
         acronym: [''],
         logo: [''],
@@ -56,31 +59,37 @@ export class RegisterBasicComponent {
 
       contacts: this.formBuilder.array([
         this.formBuilder.group({
-          name: ['', Validators.required],
-          email: ['', Validators.required],
+          name: ['', this.TEST_REQUIRED],
+          email: ['', this.TEST_REQUIRED],
           orcid: [''],
-          affiliation: ['', Validators.required],
+          affiliation: ['', this.TEST_REQUIRED],
           address: [''],
-          role: ['', Validators.required]
+          role: ['', this.TEST_REQUIRED]
         })
       ]),
       investigators: this.formBuilder.array([
         this.formBuilder.group({
-          name: ['', Validators.required],
-          email: ['', Validators.required],
+          name: ['', this.TEST_REQUIRED],
+          email: ['', this.TEST_REQUIRED],
           orcid: [''],
-          affiliation: ['', Validators.required],
+          affiliation: ['', this.TEST_REQUIRED],
           address: [''],
-          role: ['', Validators.required]
+          role: ['', this.TEST_REQUIRED]
         })
       ])
     });
   }
 
 
-  submitForm() {
+  createNewCohort() {
     console.warn('Creating a new cohort: ', this.registerStudyForm.value);
-    this.cohortService.registerCohort1(this.registerStudyForm.value);
+    this.cohortService.registerCohort1(this.registerStudyForm.value)
+      .subscribe((response) => {
+        console.log("registered" + JSON.stringify(response));
+        console.log("cohort: " + response["accession"]);
+        this.accessionEmitter.emit(response["accession"]);
+      });
+
   }
 
   get territories() {
@@ -88,7 +97,7 @@ export class RegisterBasicComponent {
   }
 
   addTerritory() {
-    this.territories.push(this.formBuilder.control(['']));
+    this.territories.push(this.formBuilder.control(''));
   }
 
   get publications() {
