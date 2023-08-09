@@ -24,6 +24,8 @@
 
   <button class="vf-button vf-button--primary vf-button--sm button-save" (click)="saveDictionary()">Save</button>
   <button class="vf-button vf-button--primary vf-button--sm button-save" (click)="saveDictionary()">Save and Finish Mapping</button>
+  <button class="vf-button vf-button--secondary vf-button--sm button-save"  (click)="f_input.click()">Upload File</button>
+  <input type='file' hidden #f_input (change)="handleFileInput($event)"/>
 
   <div>
     <table mat-table [dataSource]="dataSource" matSort>
@@ -56,13 +58,13 @@
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Parent </th>
         <td mat-cell *matCellDef="let row"> {{row.parent}} </td>
       </ng-container>
-      <ng-container matColumnDef="annotations">
+      <ng-container matColumnDef="suggestions">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Suggestions </th>
         <td mat-cell *matCellDef="let row">
 
           <mat-form-field appearance="fill">
-            <mat-select value="{{ row.annotations[0] }}">
-              <mat-option *ngFor="let option of row.annotations" [value]="option">
+            <mat-select value="{{ row.suggestions[0] }}">
+              <mat-option *ngFor="let option of row.suggestions" [value]="option">
                 {{option}}
               </mat-option>
               <mat-option *ngFor="let option of options" [value]="option">

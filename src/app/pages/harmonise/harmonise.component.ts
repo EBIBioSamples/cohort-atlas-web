@@ -3,8 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {CohortService} from "../../service/cohort.service";
-import {FormControl} from "@angular/forms";
-import {map, Observable, startWith} from "rxjs";
+import {Router} from "@angular/router";
 
 export interface DictionaryField {
   id: string;
@@ -14,7 +13,7 @@ export interface DictionaryField {
   type: string;
   values: string;
   parent: string;
-  annotations: string[];
+  suggestions: string[];
   tags: string;
 }
 
@@ -24,21 +23,26 @@ export interface DictionaryField {
   styleUrls: ['./harmonise.component.scss']
 })
 export class HarmoniseComponent implements AfterViewInit, OnInit {
-  displayedColumns: string[] = ['id', 'name', 'label', 'description', 'type', 'values', 'parent', 'annotations', 'tags'];
-  dataSource: MatTableDataSource<DictionaryField>;
-
-  @Input() dictionaryFields: DictionaryField[];
-  cohortAccession: string;
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
+  @Input() dictionaryFields: DictionaryField[];
+
+  displayedColumns: string[] = ['id', 'name', 'label', 'description', 'type', 'values', 'parent', 'suggestions', 'tags'];
+  dataSource: MatTableDataSource<DictionaryField>;
   options: string[] = ['Gender', 'Age/Birthdate', 'occupation', 'dietary history', 'heart rate', 'sleep history', 'prescription'];
 
-  constructor(private cohortService: CohortService) {
+  cohortAccession: string;
+  fileToUpload: File | null = null;
+  fileName: string = "";
+
+  dataDictionary: any;
+
+  constructor(private router: Router, private cohortService: CohortService) {
     // const fields = getTestDictionaryFields();
-    const fields = this.cohortService.dataDictionary;
-    this.dataSource = new MatTableDataSource(fields);
+    this.dataDictionary = this.cohortService.dataDictionary;
+    this.dataSource = new MatTableDataSource(this.dataDictionary);
   }
 
   ngOnInit(): void {
@@ -64,7 +68,7 @@ export class HarmoniseComponent implements AfterViewInit, OnInit {
       fields.push({
         "name": field.name,
         "description": field.description,
-        "mappedTerm": field.annotations[0],
+        "annotation": field.suggestions[0],
       })
     }
 
@@ -72,6 +76,27 @@ export class HarmoniseComponent implements AfterViewInit, OnInit {
     this.cohortService.saveDictionary(this.cohortAccession, fields).subscribe(data => {
       console.log("Dictionary saved")
     });
+  }
+
+
+  handleFileInput(e: any) {
+    this.fileToUpload = e.target.files.item(0);
+    this.fileName = this.fileToUpload.name;
+    this.uploadDictionary();
+  }
+
+  uploadDictionary() {
+    if (this.fileToUpload != null) {
+      this.cohortService.postFile(this.fileToUpload).subscribe(data => {
+        this.cohortService.dataDictionary = data;
+
+
+        this.dataDictionary = this.cohortService.dataDictionary;
+        this.dataSource = new MatTableDataSource(this.dataDictionary);
+      }, error => {
+        console.log(error);
+      });
+    }
   }
 }
 
@@ -86,7 +111,7 @@ function getTestDictionaryFields(): DictionaryField[] {
       type: "enum",
       values: "1, 2",
       parent: "Physical Characteristics",
-      annotations: ["Gender", "Sex"],
+      suggestions: ["Gender", "Sex"],
       tags: "",
     },
     {
@@ -97,7 +122,7 @@ function getTestDictionaryFields(): DictionaryField[] {
       type: "number",
       values: "1 - 300",
       parent: "physiological measurement",
-      annotations: ["Weight", "Height"],
+      suggestions: ["Weight", "Height"],
       tags: "",
     },
     {
@@ -108,8 +133,10 @@ function getTestDictionaryFields(): DictionaryField[] {
       type: "string",
       values: "",
       parent: "Substance use",
-      annotations: ["Tobacco use history", "Parent Tobacco use"],
+      suggestions: ["Tobacco use history", "Parent Tobacco use"],
       tags: "tobacco",
     }
   ];
+
+
 }

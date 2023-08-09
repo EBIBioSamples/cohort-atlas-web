@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CohortService} from "../../service/cohort.service";
+import {Cohort} from "../../modles/cohort";
 
 @Component({
   selector: 'app-cohort',
@@ -10,7 +11,7 @@ import {CohortService} from "../../service/cohort.service";
 export class CohortComponent implements OnInit {
 
   cohortAccession: string;
-  cohort: any;
+  cohort: Cohort;
   cohortSummary = {
     dictionaryTerms: 0,
     mappedTerms: 0,

@@ -1,1 +1,235 @@
-<p>register-basic works!</p>
+<form [formGroup]="registerStudyForm" (ngSubmit)="createNewCohort()">
+  <ng-template matStepLabel>Register cohort with `Admin Metadata`</ng-template>
+
+  <mat-card class="info-card">
+    <mat-card-content>Mandatory Fields (from CINECA, BBMRI Admin data sheet)</mat-card-content>
+  </mat-card>
+
+  <br>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Overview</div>
+    <div>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>Cohort Name</mat-label>
+        <!--              <input matInput placeholder="Cohort name" formControlName="cohortName" required>-->
+        <input matInput placeholder="Name" formControlName="cohortName">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>Acronym</mat-label>
+        <input matInput placeholder="Acronym" formControlName="acronym">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Description" formControlName="description">
+        <mat-hint>Hint</mat-hint>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>website</mat-label>
+        <input matInput placeholder="website" formControlName="website">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>license</mat-label>
+        <input matInput placeholder="license" formControlName="license">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Study Design</div>
+    <div>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>Start Year</mat-label>
+        <input matInput placeholder="Start Year" formControlName="startDate" type="number">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>End Year</mat-label>
+        <input matInput placeholder="Start Year" formControlName="endDate" type="number">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>Total Enrollment</mat-label>
+        <input matInput placeholder="Total Enrollment" formControlName="totalEnrollment" type="number">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>Target Enrollment</mat-label>
+        <input matInput placeholder="Target Enrollment" formControlName="targetEnrollment" type="number">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+        <mat-label>Study design Type</mat-label>
+        <mat-select formControlName="studyDesign">
+          <mat-option value="Case control">Case-control</mat-option>
+          <mat-option value="Cross sectional">Cross-sectional</mat-option>
+          <mat-option value="Longitudinal">Longitudinal</mat-option>
+          <mat-option value="Health records">Health records</mat-option>
+          <mat-option value="Other">Other</mat-option>
+        </mat-select>
+      </mat-form-field>
+      <div *ngFor="let territory of territories.controls; let i=index" formArrayName="territories">
+        <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+          <mat-label>Territories</mat-label>
+          <input matInput placeholder="Territories" [formControlName]="i">
+        </mat-form-field>
+      </div>
+
+<!--      <mat-form-field class="territory-chips">-->
+<!--        <mat-label>Territories</mat-label>-->
+<!--        <mat-chip-grid #chipGrid aria-label="Territory selection">-->
+<!--          <mat-chip-row *ngFor="let territory of territories" (removed)="remove(territory)">-->
+<!--            {{territory}}-->
+<!--            <button matChipRemove [attr.aria-label]="'remove ' + territory">-->
+<!--              <mat-icon>cancel</mat-icon>-->
+<!--            </button>-->
+<!--          </mat-chip-row>-->
+<!--        </mat-chip-grid>-->
+<!--        <input placeholder="add territory" #fruitInput [formControl]="te"-->
+<!--               [matChipInputFor]="chipGrid" [matAutocomplete]="auto"-->
+<!--               [matChipInputSeparatorKeyCodes]="separatorKeysCodes"-->
+<!--               (matChipInputTokenEnd)="add($event)"/>-->
+<!--        <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">-->
+<!--          <mat-option *ngFor="let territory of filteredFruits | async" [value]="territory">-->
+<!--            {{territory}}-->
+<!--          </mat-option>-->
+<!--        </mat-autocomplete>-->
+<!--      </mat-form-field>-->
+
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Available Data Types</div>
+    <div formGroupName="dataTypes">
+        <p><mat-checkbox formControlName="biospecimens">Biospecimens</mat-checkbox></p>
+        <p><mat-checkbox formControlName="environmentalData">Environmental</mat-checkbox></p>
+        <p><mat-checkbox formControlName="genomicData">Genomic</mat-checkbox></p>
+        <p><mat-checkbox formControlName="phenotypicData">Phenotypic</mat-checkbox></p>
+        <p><mat-checkbox formControlName="other">Other</mat-checkbox></p>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Funding and Acknowledgement</div>
+    <div>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+        <mat-label>Funding</mat-label>
+        <input matInput placeholder="Funding" formControlName="funding">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+        <mat-label>Acknowledgement</mat-label>
+        <input matInput placeholder="Acknowledgement" formControlName="acknowledgements">
+      </mat-form-field>
+      <br>
+      <br>
+      <br>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Provider</div>
+    <div formGroupName="provider">
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+        <mat-label>Description</mat-label>
+        <input matInput placeholder="Description" formControlName="description">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+        <mat-label>Website</mat-label>
+        <input matInput placeholder="Website" formControlName="website">
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Publications
+      <button type="button" mat-button color="primary" class="add-more-btn" aria-label="Add publication" (click)="addPublication()">add +</button>
+    </div>
+    <div *ngFor="let publication of publications.controls; let i=index" formArrayName="publications">
+      <ng-container [formGroupName]="i">
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>Title</mat-label>
+        <input matInput placeholder="Title" formControlName="title">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+        <mat-label>DOI</mat-label>
+        <input matInput placeholder="DOI" formControlName="doi">
+      </mat-form-field>
+      </ng-container>
+    </div>
+  </div>
+
+  <div class="cohort-content-card cohort-content-card-full">
+    <div class="card-header">Investigators
+      <button type="button" mat-button color="primary" class="add-more-btn" aria-label="Add more contacts" (click)="addInvestigator()">add +</button>
+    </div>
+    <div *ngFor="let investigator of investigators.controls; let i=index" formArrayName="investigators">
+      <ng-container [formGroupName]="i">
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Name</mat-label>
+        <input matInput placeholder="Name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>E-Mail</mat-label>
+        <input matInput placeholder="E-Mail">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>ORCID</mat-label>
+        <input matInput placeholder="ORCID">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Affiliation</mat-label>
+        <input matInput placeholder="Affiliation">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Role</mat-label>
+        <input matInput placeholder="Role">
+      </mat-form-field>
+      </ng-container>
+    </div>
+  </div>
+
+
+  <div class="cohort-content-card cohort-content-card-full">
+    <div class="card-header">Contacts
+      <button type="button" mat-button color="primary" class="add-more-btn" aria-label="Add more contacts" (click)="addContact()">add +</button>
+    </div>
+    <div *ngFor="let contact of contacts.controls; let i=index" formArrayName="contacts">
+      <ng-container [formGroupName]="i">
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Contact Name</mat-label>
+        <input matInput placeholder="Name" formControlName="name">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>E-Mail</mat-label>
+        <input matInput placeholder="E-Mail" formControlName="email">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>ORCID</mat-label>
+        <input matInput placeholder="ORCID" formControlName="orcid">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Affiliation</mat-label>
+        <input matInput placeholder="Affiliation" formControlName="affiliation">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Address</mat-label>
+        <input matInput placeholder="Address" formControlName="address">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Role</mat-label>
+        <input matInput placeholder="Role" formControlName="role">
+      </mat-form-field>
+    </ng-container>
+    </div>
+  </div>
+
+  <br>
+  <button type="submit" class="vf-button vf-button--primary vf-button--sm register-btn" matStepperNext>Register</button>
+
+</form>

@@ -1,0 +1,61 @@
+
+
+.mat-stepper-horizontal {
+  margin-top: 8px;
+}
+
+.mat-mdc-form-field {
+  margin-top: 16px;
+}
+
+.info-card {
+  box-shadow: none;
+  border: 1px solid #d2d2d2;
+  background-color: #f3f7ff;
+  margin: 5px 0;
+}
+
+.atlas-field {
+  margin-right: 10px;
+}
+
+.atlas-field-50 {
+  margin-right: 10px;
+  width: calc(50% - 10px);
+}
+
+.atlas-field-100 {
+  width: calc(100% - 10px);
+}
+
+.cohort-content-card {
+  width: calc(50% - 44px);
+  float: left;
+  margin: 8px 8px;
+  padding: 12px;
+  //border: 2px solid #f5f5f5;
+  border-radius: 5px;
+  //background: #fafcff;
+}
+
+.cohort-content-card-full {
+  width: calc(100% - 44px);
+}
+
+.card-header {
+  color: #3b6fb6;
+  font-size: 20px;
+  border-bottom: 1px solid #a4bde5;
+  margin: 5px 0;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+
+.add-more-btn {
+  float: right;
+  height: 25px;
+}
+
+.register-btn {
+  float: right;
+}

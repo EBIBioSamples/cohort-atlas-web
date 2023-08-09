@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, Input, OnInit} from '@angular/core';
 import {CohortService} from "../../service/cohort.service";
 import {Router} from "@angular/router";
 
@@ -8,6 +8,7 @@ import {Router} from "@angular/router";
   styleUrls: ['./register-dictionary.component.scss']
 })
 export class RegisterDictionaryComponent implements OnInit {
+  @Input() accession: string;
   fileToUpload: File | null = null;
   fileName: string = "";
 
@@ -22,9 +23,10 @@ export class RegisterDictionaryComponent implements OnInit {
   }
 
 
-  uploadFileToActivity() {
+  uploadDictionaryFile() {
     if (this.fileToUpload != null) {
-      this.cohortService.postFile(this.fileToUpload).subscribe(data => {
+      // this.cohortService.postFile(this.fileToUpload).subscribe(data => {
+      this.cohortService.uploadDictionaryFile(this.accession, this.fileToUpload).subscribe(data => {
         this.cohortService.dataDictionary = data;
         this.router.navigate(['/harmonise']);
       }, error => {
