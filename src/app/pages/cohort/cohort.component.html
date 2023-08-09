@@ -1,4 +1,4 @@
-<div class="cohort-body">
+<div class="cohort-body" *ngIf="cohort">
 
   <div class="cohort-header">
     <div class="cohort-header-title">
@@ -194,7 +194,7 @@
           <td class="mat-cell">{{field.description}}</td>
           <td class="mat-cell">String</td>
           <td class="mat-cell"> - </td>
-          <td class="mat-cell">{{field.mappedTerm}}</td>
+          <td class="mat-cell">{{field.annotation}}</td>
           <td class="mat-cell"> - </td>
         </tr>
       </table>

@@ -13,8 +13,14 @@ export class CohortsComponent implements OnInit {
   constructor(private cohortService: CohortService) { }
 
   ngOnInit(): void {
+    // this.cohortService.getCohorts1().subscribe(data => {
+    //   console.log("Get cohorts objects: " + JSON.stringify(data));
+    //   this.cohorts = data["_embedded"]["cohorts"];
+    //   console.log(this.cohorts)
+    // });
     this.cohortService.getCohorts().subscribe(data => {
-      this.cohorts = data["_embedded"]["cohorts"];
+      console.log("Get cohorts objects: " + JSON.stringify(data));
+      this.cohorts = data;
       console.log(this.cohorts)
     });
   }

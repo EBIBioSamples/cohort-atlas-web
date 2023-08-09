@@ -1,4 +1,4 @@
-<form [formGroup]="registerAdditionalStudyForm">
+<form [formGroup]="registerAdditionalStudyForm" (ngSubmit)="saveAdditionalCohortAttributes()">
 
   <mat-card class="info-card">
     <mat-card-content>
@@ -22,7 +22,7 @@
                   cdkTextareaAutosize
                   #autosize="cdkTextareaAutosize"
                   cdkAutosizeMinRows="1"
-                  cdkAutosizeMaxRows="5"></textarea>
+                  cdkAutosizeMaxRows="5" formControlName="biosampleAccessions"></textarea>
         <mat-icon matSuffix style="cursor: pointer;">attach_file</mat-icon>
       </mat-form-field>
     </div>
@@ -35,12 +35,13 @@
     <div class="card-body">
       <mat-form-field appearance="outline" class="atlas-field">
         <mat-label>Dataset/Study IDs</mat-label>
-        <input matInput placeholder="EGAD00001003161,EGAD00001003515,EGAS00001000969">
+        <input matInput placeholder="EGAD00001003161,EGAD00001003515,EGAS00001000969" formControlName="egaDatasets">
         <mat-icon matSuffix style="cursor: pointer;">attach_file</mat-icon>
       </mat-form-field>
     </div>
   </div>
 
+  <div formGroupName="survey">
   <div class="cohort-content-card">
     <div class="card-header">How would you describe the ancestry/ethnicity of your cohort?</div>
     <div class="card-body">
@@ -577,16 +578,17 @@
 
   <div class="cohort-content-card">
     <div class="card-header">What types of exposures would be most relevant to your cohort?</div>
-    <div class="card-body">
-        <mat-checkbox class="card-checkbox">Lifestyle</mat-checkbox>
-        <mat-checkbox class="card-checkbox">Built environment</mat-checkbox>
-        <mat-checkbox class="card-checkbox">Weather/atmosphere</mat-checkbox>
-        <mat-checkbox class="card-checkbox">Stress</mat-checkbox>
-        <mat-checkbox class="card-checkbox">Toxic or chemical exposures</mat-checkbox>
-        <mat-checkbox class="card-checkbox">Diet and medications</mat-checkbox>
-        <mat-checkbox class="card-checkbox">Social determinants of health</mat-checkbox>
-        <mat-checkbox class="card-checkbox">Other</mat-checkbox>
+    <div class="card-body" formGroupName="exposure">
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Lifestyle</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="builtEnvironment">Built environment</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Weather/atmosphere</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Stress</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Toxic or chemical exposures</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Diet and medications</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Social determinants of health</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Other</mat-checkbox>
     </div>
+  </div>
   </div>
 
   <div>

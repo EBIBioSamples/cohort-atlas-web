@@ -23,9 +23,10 @@ export class RegisterDictionaryComponent implements OnInit {
   }
 
 
-  uploadFileToActivity() {
+  uploadDictionaryFile() {
     if (this.fileToUpload != null) {
-      this.cohortService.postFile(this.fileToUpload).subscribe(data => {
+      // this.cohortService.postFile(this.fileToUpload).subscribe(data => {
+      this.cohortService.uploadDictionaryFile(this.accession, this.fileToUpload).subscribe(data => {
         this.cohortService.dataDictionary = data;
         this.router.navigate(['/harmonise']);
       }, error => {
