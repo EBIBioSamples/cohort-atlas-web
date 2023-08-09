@@ -1,79 +1,84 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
-import {Observable} from "rxjs";
-import {FormGroup} from "@angular/forms";
+import {map, Observable} from "rxjs";
+import {environment} from "../../environments/environment";
+import {Cohort, CohortList, DataTypes} from "../modles/cohort";
 
 @Injectable({
   providedIn: 'root'
 })
 export class CohortService {
+  cohortAtlasApi = environment.cohort_atlas_api;
+  harmonizationApi = environment.harmonization_api;
 
   dataDictionary: any[];
 
-  cohortUrl = "http://localhost:8080/api/cohorts";
+
   constructor(private http: HttpClient) {
 
   }
 
-  public getCohorts() {
+  public getCohorts1(): Observable<CohortList> {
+    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts');
+  }
 
-    return this.http.get<any>(this.cohortUrl);
+  public getCohorts(): Observable<CohortList> {
+    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts')
+      .pipe(
+        map((cohortList: CohortList) => cohortList["_embedded"]["cohorts"].map(cohort => {
+          if (!cohort.dataTypes) {
+            cohort.dataTypes = {};
+          }
+          return cohort
+        }))
+      );
   }
 
   httpOptions = {
     headers: new HttpHeaders({
-      'Content-Type':  'application/json',
+      'Content-Type': 'application/json',
     })
   };
-  public registerCohort( registerForm: FormGroup) {
-    console.warn('FormgroupData', registerForm.value);
 
-    const formData = new FormData();
-    // @ts-ignore
-    formData.append('cohortName', registerForm.get('cohortName').value);
-    // @ts-ignore
-    formData.append('description', registerForm.get('description').value);
-    // @ts-ignore
-    formData.append('acronym', registerForm.get('acronym').value);
-    // @ts-ignore
-    formData.append('targetEnrollment', registerForm.get('targetEnrollment').value);
-    // @ts-ignore
-    formData.append('totalEnrollment', registerForm.get('totalEnrollment').value);
-    // @ts-ignore
-    formData.append('website', registerForm.get('website').value);
-    // @ts-ignore
-    //formData.append('provider', registerForm.get('provider').value);
-    // @ts-ignore
-    formData.append('license', registerForm.get('license').value);
-    // @ts-ignore
-    //formData.append('contacts', registerForm.get('contacts').value);
-    // @ts-ignore
-   // formData.append('startDate', registerForm.get('startDate').value);
-    // @ts-ignore
-    //formData.append('endDate', registerForm.get('endDate').value);
-    // @ts-ignore
-    //formData.append('territories', registerForm.get('territories').value);
-    console.log('formData ',formData.get('cohortName'));
-    const object = {};
-    // @ts-ignore
-    formData.forEach((value, key) => object[key] = value);
 
-    console.log('formData json str',JSON.stringify(object));
-    this.http.post<any>("http://localhost:8080/api/cohorts",
-      JSON.stringify(object), this.httpOptions).subscribe(
-      (res) => console.log(res),
-      (err) => console.log(err)
+  public getCohort(accession: string): Observable<Cohort> {
+    const cohortUrl = this.cohortAtlasApi + '/cohorts/' + accession;
+    return this.http.get<Cohort>(cohortUrl).pipe(
+      map((cohort: Cohort) => {
+        if (!cohort.dataTypes) {
+          cohort.dataTypes = new DataTypes();
+        }
+        return cohort
+      })
     );
   }
 
-  public getCohort(accession: string): Observable<any> {
-    const cohortUrl = `http://localhost:8080/api/cohorts/${accession}`;
-    return this.http.get(cohortUrl);
+  public registerCohort1(cohort: any): Observable<any> {
+    return this.http.post<any>(this.cohortAtlasApi + '/cohorts', cohort, this.httpOptions);
+  }
+
+  public saveCohortRelationships(accession: string, relationships: any) {
+    return this.http.put<any>(this.cohortAtlasApi + '/cohorts/' + accession + '/relationships', relationships, this.httpOptions);
+  }
+
+  public saveSurveyData(accession: string, survey: any) {
+    return this.http.put<any>(this.cohortAtlasApi + '/cohorts/' + accession + '/survey', survey, this.httpOptions);
   }
 
   public postFile(fileToUpload: File): Observable<any> {
     let uploadHeaders = new Headers();
-    const endpoint = 'http://localhost:5000/uploader';
+    const endpoint = this.harmonizationApi + '/harmonise';
+    const formData: FormData = new FormData();
+    formData.append('file', fileToUpload, fileToUpload.name);
+    return this.http.post(endpoint, formData);
+    // .post(endpoint, formData, { headers: uploadHeaders })
+    // .map(() => { return true; })
+    // .catch((e) => this.handleError(e));
+  }
+
+  public uploadDictionaryFile(accession: string, fileToUpload: File): Observable<any> {
+    let uploadHeaders = new Headers();
+    const endpoint = this.cohortAtlasApi + '/cohorts/' + accession + '/dictionary';
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
     return this.http.post(endpoint, formData);
@@ -84,7 +89,7 @@ export class CohortService {
 
   public saveDictionary(accession: string, fields: any[]): Observable<any> {
     accession = "BSC0000001";
-    const endpoint = `http://localhost:8080/api/cohorts/${accession}/fields`;
+    const endpoint = `${this.cohortAtlasApi}/cohorts/${accession}/fields`;
     return this.http.put(endpoint, fields);
   }
 }

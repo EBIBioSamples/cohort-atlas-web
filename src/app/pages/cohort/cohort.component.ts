@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CohortService} from "../../service/cohort.service";
+import {Cohort} from "../../modles/cohort";
 
 @Component({
   selector: 'app-cohort',
@@ -10,7 +11,12 @@ import {CohortService} from "../../service/cohort.service";
 export class CohortComponent implements OnInit {
 
   cohortAccession: string;
-  cohort: any;
+  cohort: Cohort;
+  cohortSummary = {
+    dictionaryTerms: 0,
+    mappedTerms: 0,
+    archiveLinks: 0
+  }
 
   constructor(private route: ActivatedRoute, private cohortService: CohortService) {
   }
@@ -27,7 +33,15 @@ export class CohortComponent implements OnInit {
   getCohort(accession: string) {
     this.cohortService.getCohort(accession).subscribe(cohort => {
       this.cohort = cohort;
+
+      this.cohortSummary.dictionaryTerms = cohort.dictionary ? cohort.dictionary.length : 0;
+      this.cohortSummary.mappedTerms = cohort.dictionary ? cohort.dictionary.length : 0;
+      this.cohortSummary.archiveLinks = cohort.relationships ? cohort.relationships.length : 0;
     })
+  }
+
+  openDialog() {
+    alert("fill with data");
   }
 
 }

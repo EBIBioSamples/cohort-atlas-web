@@ -1,0 +1,599 @@
+<form [formGroup]="registerAdditionalStudyForm" (ngSubmit)="saveAdditionalCohortAttributes()">
+
+  <mat-card class="info-card">
+    <mat-card-content>
+      Optional. Survey type questions. Helps to discover what data types cohort contains. Eg. Medication, Treatment.
+      If this is not filled we will try to guess them using data dictionary. (taken from IHCC survey)
+    </mat-card-content>
+  </mat-card>
+
+  <div>Accession: {{this.accession}}</div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Do you have biosamples stored in public archives (eg. EBI BioSamples). Please add comma
+      seperated sample accessions or upload a file.
+    </div>
+    <div class="card-body">
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Accessions</mat-label>
+<!--        <input matInput placeholder="SAMEA2574900,SAMEA2574845">-->
+        <textarea matInput
+                  placeholder="SAMEA2574900,SAMEA2574845"
+                  cdkTextareaAutosize
+                  #autosize="cdkTextareaAutosize"
+                  cdkAutosizeMinRows="1"
+                  cdkAutosizeMaxRows="5" formControlName="biosampleAccessions"></textarea>
+        <mat-icon matSuffix style="cursor: pointer;">attach_file</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Do you have associated datasets or studies stored at EGA. Please add comma seperated IDs or
+      upload a file.
+    </div>
+    <div class="card-body">
+      <mat-form-field appearance="outline" class="atlas-field">
+        <mat-label>Dataset/Study IDs</mat-label>
+        <input matInput placeholder="EGAD00001003161,EGAD00001003515,EGAS00001000969" formControlName="egaDatasets">
+        <mat-icon matSuffix style="cursor: pointer;">attach_file</mat-icon>
+      </mat-form-field>
+    </div>
+  </div>
+
+  <div formGroupName="survey">
+  <div class="cohort-content-card">
+    <div class="card-header">How would you describe the ancestry/ethnicity of your cohort?</div>
+    <div class="card-body">
+      <table class="mat-table" style="width: 100%">
+        <tr class="mat-row">
+          <td class="mat-header-cell card-table-radio"></td>
+          <td class="mat-header-cell card-table-radio">None</td>
+          <td class="mat-header-cell card-table-radio">0 - 25%</td>
+          <td class="mat-header-cell card-table-radio">25 - 50%</td>
+          <td class="mat-header-cell card-table-radio">50 - 75%</td>
+          <td class="mat-header-cell card-table-radio">75 - 100%</td>
+          <td class="mat-header-cell card-table-radio">Don't Know</td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Asian</td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="None" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="25" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="50" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="75" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="100" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="unknown" name="asian"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Black, African American, or African</td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="None" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="25" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="50" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="75" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="100" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="unknown" name="black"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">European or White</td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="None" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="25" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="50" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="75" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="100" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="unknown" name="european"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Hispanic, Latino, or Spanish</td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="None" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="25" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="50" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="75" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="100" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="unknown" name="hispanic"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Middle Eastern or North African</td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="None" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="25" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="50" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="75" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="100" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="unknown" name="midEastern"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Other</td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell card-table-radio">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">Does your cohort include the following biosamples?</div>
+    <div class="card-body">
+      <table class="mat-table" style="width: 100%">
+        <tr class="mat-row">
+          <td class="mat-header-cell"></td>
+          <td class="mat-header-cell">None</td>
+          <td class="mat-header-cell">0 - 25%</td>
+          <td class="mat-header-cell">25 - 50%</td>
+          <td class="mat-header-cell">50 - 75%</td>
+          <td class="mat-header-cell">75 - 100%</td>
+          <td class="mat-header-cell">Don't Know</td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Plasma sample</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="asian"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Blood sample</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="black"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Saliva sample</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="european"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Cerebrospinal Fluid (CSF)</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="hispanic"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="hispanic"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Cells</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="midEastern"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="midEastern"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Specific tissue(s)</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Urine</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Feces</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Placenta</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Umbilical Cord Blood</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Breast Milk</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Hair, Nail</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Other</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">What type of genomic data are available in your cohort?</div>
+    <div class="card-body">
+      <table class="mat-table" style="width: 100%">
+        <tr class="mat-row">
+          <td class="mat-header-cell"></td>
+          <td class="mat-header-cell">None</td>
+          <td class="mat-header-cell">0 - 25%</td>
+          <td class="mat-header-cell">25 - 50%</td>
+          <td class="mat-header-cell">50 - 75%</td>
+          <td class="mat-header-cell">75 - 100%</td>
+          <td class="mat-header-cell">Don't Know</td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Genotype Arrays</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="asian"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="asian"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Whole Exomes</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="black"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="black"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Whole Genomes</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="european"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="european"></mat-radio-button>
+          </td>
+        </tr>
+        <tr class="mat-row">
+          <td class="mat-header-cell">Other</td>
+          <td class="mat-cell">
+            <mat-radio-button value="None" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="25" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="50" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="75" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="100" name="other"></mat-radio-button>
+          </td>
+          <td class="mat-cell">
+            <mat-radio-button value="unknown" name="other"></mat-radio-button>
+          </td>
+        </tr>
+      </table>
+    </div>
+  </div>
+
+  <div class="cohort-content-card">
+    <div class="card-header">What types of exposures would be most relevant to your cohort?</div>
+    <div class="card-body" formGroupName="exposure">
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Lifestyle</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="builtEnvironment">Built environment</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Weather/atmosphere</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Stress</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Toxic or chemical exposures</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Diet and medications</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Social determinants of health</mat-checkbox>
+        <mat-checkbox class="card-checkbox" formControlName="lifestyle">Other</mat-checkbox>
+    </div>
+  </div>
+  </div>
+
+  <div>
+    <br>
+    <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
+    <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
+  </div>
+</form>
