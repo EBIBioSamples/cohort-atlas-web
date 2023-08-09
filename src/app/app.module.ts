@@ -35,6 +35,10 @@ import {MatAutocompleteModule} from "@angular/material/autocomplete";
 import {MatChipsModule} from '@angular/material/chips';
 import {MatMenuModule} from "@angular/material/menu";
 import {MatRadioModule} from "@angular/material/radio";
+import {MatTooltipModule} from "@angular/material/tooltip";
+import { RegisterBasicComponent } from './components/register-basic/register-basic.component';
+import { RegisterAdditionalComponent } from './components/register-additional/register-additional.component';
+import { RegisterDictionaryComponent } from './components/register-dictionary/register-dictionary.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,10 @@ import {MatRadioModule} from "@angular/material/radio";
     TableComponent,
     FacetPanelComponent,
     CohortsComponent,
-    AboutComponent
+    AboutComponent,
+    RegisterBasicComponent,
+    RegisterAdditionalComponent,
+    RegisterDictionaryComponent
   ],
   imports: [
     BrowserModule,
@@ -75,7 +82,8 @@ import {MatRadioModule} from "@angular/material/radio";
     MatAutocompleteModule,
     MatChipsModule,
     MatMenuModule,
-    MatRadioModule
+    MatRadioModule,
+    MatTooltipModule
   ],
   providers: [],
   bootstrap: [AppComponent]

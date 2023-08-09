@@ -1,0 +1,39 @@
+<mat-card class="info-card">
+  <mat-card-content>
+    Optional. Upload data dictionary in CSV/spreadsheet format. We will harmonise this data dictionary to standard
+    terms.
+    Send the suggested mapping to take action.
+    This is an asynchronous process, send an email to user with a link?
+  </mat-card-content>
+</mat-card>
+
+<!--<div class="cohort-content-card">-->
+<!--  <div class="card-header">Upload your data dictionary</div>-->
+<!--  <div class="card-body">-->
+<!--    <input type="file" name="file" (change)="handleFileInput($event)"/>-->
+<!--    <button class="vf-button vf-button&#45;&#45;primary vf-button&#45;&#45;sm" (click)="uploadFileToActivity()">Upload</button>-->
+<!--  </div>-->
+<!--</div>-->
+
+<div class="cohort-content-card">
+  <div class="card-header">Upload your data dictionary</div>
+  <div class="card-body">
+    <mat-form-field class="upload-input">
+      <mat-label>Cohort Dictionary</mat-label>
+      <button mat-icon-button matPrefix (click)="f_input.click()">
+        <mat-icon>attach_file</mat-icon>
+      </button>
+      <input type="text" readonly matInput value="{{fileName}}" placeholder="cohort_dictionary.csv" (click)="f_input.click()"/>
+      <input type="file" hidden #f_input (change)="handleFileInput($event)"/>
+      <mat-error>this field is required</mat-error>
+    </mat-form-field>
+    <button class="vf-button vf-button--primary vf-button--sm upload-button" (click)="uploadFileToActivity()">Upload</button>
+  </div>
+</div>
+
+<div>
+  <br>
+  <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
+<!--  <button class="vf-button vf-button&#45;&#45;primary vf-button&#45;&#45;sm" matStepperNext>Save</button>-->
+<!--  <button class="vf-button vf-button&#45;&#45;tertiary vf-button&#45;&#45;sm" (click)="stepper.reset()">Reset</button>-->
+</div>

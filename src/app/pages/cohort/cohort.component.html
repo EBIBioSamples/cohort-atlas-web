@@ -7,9 +7,9 @@
     </div>
 
     <div class="cohort-header-summary">
-      <div class="header-summary-tile">30 Fields</div>
-      <div class="header-summary-tile">10 Mapped Fields</div>
-      <div class="header-summary-tile">2 Archive Links</div>
+      <div class="header-summary-tile">{{cohortSummary.dictionaryTerms}} Fields</div>
+      <div class="header-summary-tile">{{cohortSummary.mappedTerms}} Mapped Fields</div>
+      <div class="header-summary-tile">{{cohortSummary.archiveLinks}} Archive Links</div>
       <button mat-flat-button color="primary" class="header-summary-export">Export</button>
     </div>
 
@@ -38,11 +38,18 @@
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Provider</td>
-              <td class="mat-cell">{{cohort['provider']}}</td>
+              <td class="mat-cell">
+                <div class="dialog-wrapper" (click)="openDialog()">
+                  {{cohort['provider']['name']}}
+                </div>
+              </td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Data Sharing</td>
-              <td class="mat-cell">{{cohort['dataSharing']}}</td>
+              <td class="mat-cell">
+                <div class="ontology-wrapper"
+                     matTooltip="{{cohort['dataSharing']['label']}}">{{cohort['dataSharing']['label']}}</div>
+              </td>
             </tr>
           </table>
         </div>
@@ -70,7 +77,12 @@
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Territories</td>
-              <td class="mat-cell">{{cohort['territories'][0]["label"]}}</td>
+              <td class="mat-cell">
+                <div class="ontology-wrapper" matTooltip="{{territory['label']}}"
+                     *ngFor="let territory of cohort['territories']">
+                  {{territory['label']}}
+                </div>
+              </td>
             </tr>
           </table>
         </div>
@@ -82,23 +94,35 @@
           <table class="mat-table" style="width: 100%">
             <tr class="mat-row">
               <td class="mat-header-cell">Contacts</td>
-              <td class="mat-cell">{{cohort['contacts']}}</td>
+              <td class="mat-cell">
+                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort['contacts']">
+                  {{contact['name']}}
+                </div>
+              </td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Investigators</td>
-              <td class="mat-cell">{{cohort['investigators']}}</td>
+              <td class="mat-cell">
+                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort['investigators']">
+                  {{contact['name']}}
+                </div>
+              </td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Publications</td>
-              <td class="mat-cell">{{cohort['publications']}}</td>
+              <td class="mat-cell">
+                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let publication of cohort['publications']">
+                  {{publication['url']}}
+                </div>
+              </td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Funding</td>
-              <td class="mat-cell">{{cohort['startDate']}}</td>
+              <td class="mat-cell">{{cohort['funding']}}</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Acknowledgements</td>
-              <td class="mat-cell">{{cohort['startDate']}}</td>
+              <td class="mat-cell">{{cohort['acknowledgement']}}</td>
             </tr>
           </table>
         </div>
@@ -131,8 +155,9 @@
         <div class="card-header">Relationships</div>
         <div>
           <mat-chip-list aria-label="Fish selection">
-            <mat-chip color="primary" selected [matMenuTriggerFor]="menu">SAMEA12345667</mat-chip>
-            <mat-chip color="primary" selected>SAMEA12345667</mat-chip>
+            <mat-chip color="primary" selected [matMenuTriggerFor]="menu" *ngFor="let rel of cohort['relationships']">
+              {{rel.source}}
+            </mat-chip>
           </mat-chip-list>
           <mat-menu #menu="matMenu">
             <button mat-menu-item>Go to resource</button>
@@ -148,8 +173,6 @@
     </mat-tab>
 
     <mat-tab label="Dictionary">
-      <!--      <h2 class="cohort-subheader">Cohort Dictionary</h2>-->
-
       <div class="cohort-dictionary">
         <div class="cohort-dictionary-header">Cohort Dictionary</div>
         <button mat-flat-button color="primary" class="header-summary-export cohort-actions">Download Mapping</button>
@@ -165,38 +188,17 @@
           <th class="mat-header-cell">Mapping</th>
           <th class="mat-header-cell">Tags</th>
         </tr>
-        <!--        <tr class="mat-row" *ngFor="let field of cohort['dictionary']">-->
-        <!--          <td class="mat-cell">{{field.name}}</td>-->
-        <!--          <td class="mat-cell">{{field.description}}</td>-->
-        <!--          <td class="mat-cell">{{field.mappedTerm}}</td>-->
-        <!--        </tr>-->
-        <tr class="mat-row">
-          <td class="mat-cell">Gender</td>
-          <td class="mat-cell">Gender</td>
+
+        <tr class="mat-row" *ngFor="let field of cohort['dictionary']">
+          <td class="mat-cell">{{field.name}}</td>
+          <td class="mat-cell">{{field.description}}</td>
           <td class="mat-cell">String</td>
-          <td class="mat-cell">-</td>
-          <td class="mat-cell">Gender</td>
-          <td class="mat-cell">-</td>
-        </tr>
-        <tr class="mat-row">
-          <td class="mat-cell">Birthdate</td>
-          <td class="mat-cell">Birthdate</td>
-          <td class="mat-cell">String</td>
-          <td class="mat-cell">-</td>
-          <td class="mat-cell">Birthdate</td>
-          <td class="mat-cell">-</td>
-        </tr>
-        <tr class="mat-row">
-          <td class="mat-cell">Age at present</td>
-          <td class="mat-cell">Age at present</td>
-          <td class="mat-cell">Number</td>
-          <td class="mat-cell">-</td>
-          <td class="mat-cell">Age</td>
-          <td class="mat-cell">-</td>
+          <td class="mat-cell"> - </td>
+          <td class="mat-cell">{{field.mappedTerm}}</td>
+          <td class="mat-cell"> - </td>
         </tr>
       </table>
     </mat-tab>
   </mat-tab-group>
-
 
 </div>

@@ -7,7 +7,6 @@
       Optional second and third steps will improve the FAIRness of the cohort. </p>
   </div>
 
-
   <mat-stepper [linear]="isLinear" #stepper>
     <mat-step [stepControl]="registerFormGroup">
       <form [formGroup]="registerFormGroup" (ngSubmit)="submitForm()">
@@ -19,70 +18,218 @@
 
         <br>
 
+        <div class="cohort-content-card">
+          <div class="card-header">Overview</div>
+          <div>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>Cohort Name</mat-label>
+<!--              <input matInput placeholder="Cohort name" formControlName="cohortName" required>-->
+              <input matInput placeholder="Cohort name" formControlName="cohortName">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>Acronym</mat-label>
+              <input matInput placeholder="Acronym" formControlName="acronym">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+              <mat-label>Description</mat-label>
+              <input matInput placeholder="Description" formControlName="description">
+              <mat-hint>Hint</mat-hint>
+            </mat-form-field>
 
-        <p>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>Cohort Name</mat-label>
-            <input matInput placeholder="Cohort name" formControlName="cohortName" required>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>Acronym</mat-label>
-            <input matInput placeholder="Acronym" formControlName="acronym" required>
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>Description</mat-label>
-            <input matInput placeholder="Description" formControlName="description" required>
-            <mat-hint>Hint</mat-hint>
-          </mat-form-field>
-        </p>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>website</mat-label>
+              <input matInput placeholder="website" formControlName="website">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>license</mat-label>
+              <input matInput placeholder="license" formControlName="license">
+            </mat-form-field>
+          </div>
+        </div>
 
-        <p>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>website</mat-label>
-            <input matInput placeholder="website" formControlName="website">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>license</mat-label>
-            <input matInput placeholder="license" formControlName="license">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>provider</mat-label>
-            <input matInput placeholder="provider" formControlName="provider">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>contacts</mat-label>
-            <input matInput placeholder="contacts" formControlName="contacts">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>startDate</mat-label>
-            <input matInput placeholder="startDate" formControlName="startDate">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>endDate</mat-label>
-            <input matInput placeholder="endDate" formControlName="endDate">
-          </mat-form-field>
-        </p>
-        <p>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>targetEnrollment</mat-label>
-            <input matInput placeholder="targetEnrollment" formControlName="targetEnrollment">
-          </mat-form-field>
-          <mat-form-field appearance="outline" class="atlas-field">
-            <mat-label>totalEnrollment</mat-label>
-            <input matInput placeholder="totalEnrollment" formControlName="totalEnrollment">
-          </mat-form-field>
-        </p>
+        <div class="cohort-content-card">
+          <div class="card-header">Study Design</div>
+          <div>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>Start Date</mat-label>
+              <input matInput placeholder="Start Date" formControlName="startDate">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>End Date</mat-label>
+              <input matInput placeholder="End Date" formControlName="endDate">
+            </mat-form-field>
 
-        <mat-form-field appearance="outline" class="atlas-field">
-          <mat-label>territories</mat-label>
-          <input matInput placeholder="territories" formControlName="territories">
-        </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>Target Enrollment</mat-label>
+              <input matInput placeholder="Target Enrollment" formControlName="targetEnrollment">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>Total Enrollment</mat-label>
+              <input matInput placeholder="Total Enrollment" formControlName="totalEnrollment">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>Study design Type</mat-label>
+              <mat-select>
+                <mat-option value="one">Case-control</mat-option>
+                <mat-option value="two">Cross-sectional</mat-option>
+                <mat-option value="two">Longitudinal</mat-option>
+                <mat-option value="two">Health records</mat-option>
+                <mat-option value="two">Other</mat-option>
+              </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-50">
+              <mat-label>Territories</mat-label>
+              <input matInput placeholder="Territories" formControlName="territories">
+            </mat-form-field>
+          </div>
+        </div>
+
+
+        <div class="cohort-content-card cohort-content-card-full">
+          <div class="card-header">Investigators</div>
+          <div>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Contact Name</mat-label>
+              <input matInput placeholder="Cohort Name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>E-Mail</mat-label>
+              <input matInput placeholder="E-Mail">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>ORCID</mat-label>
+              <input matInput placeholder="ORCID">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Affiliation</mat-label>
+              <input matInput placeholder="Affiliation">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Address">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Role</mat-label>
+              <input matInput placeholder="Role">
+            </mat-form-field>
+
+            <div class="more-button-container">
+              <button mat-mini-fab color="white" aria-label="Add more contacts">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cohort-content-card cohort-content-card-full">
+          <div class="card-header">Provider</div>
+          <div>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Contact Name</mat-label>
+              <input matInput placeholder="Cohort Name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>E-Mail</mat-label>
+              <input matInput placeholder="E-Mail">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>ORCID</mat-label>
+              <input matInput placeholder="ORCID">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Affiliation</mat-label>
+              <input matInput placeholder="Affiliation">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Address">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Role</mat-label>
+              <input matInput placeholder="Role">
+            </mat-form-field>
+
+            <div class="more-button-container">
+              <button mat-mini-fab color="white" aria-label="Add more contacts">
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cohort-content-card cohort-content-card-full">
+          <div class="card-header">Contacts</div>
+          <div>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Contact Name</mat-label>
+              <input matInput placeholder="Cohort Name">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>E-Mail</mat-label>
+              <input matInput placeholder="E-Mail">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>ORCID</mat-label>
+              <input matInput placeholder="ORCID">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Affiliation</mat-label>
+              <input matInput placeholder="Affiliation">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Address</mat-label>
+              <input matInput placeholder="Address">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field">
+              <mat-label>Role</mat-label>
+              <input matInput placeholder="Role">
+            </mat-form-field>
+
+            <div class="more-button-container">
+              <button mat-mini-fab color="white" aria-label="Add more contacts">
+                <!--                <mat-icon>menu</mat-icon>-->
+                +
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="cohort-content-card">
+          <div class="card-header">Available Data Types</div>
+          <div>
+            <section class="example-section">
+              <p>
+                <mat-checkbox>Biospecimens</mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox>Environmental</mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox>Genomic</mat-checkbox>
+              </p>
+              <p>
+                <mat-checkbox>Phenotypic</mat-checkbox>
+              </p>
+            </section>
+          </div>
+        </div>
+        <div class="cohort-content-card">
+          <div class="card-header">Additional Information</div>
+          <div>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+              <mat-label>Publication</mat-label>
+              <input matInput placeholder="Publication" formControlName="territories">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+              <mat-label>Funding</mat-label>
+              <input matInput placeholder="Funding" formControlName="startDate">
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="atlas-field atlas-field-100">
+              <mat-label>Acknowledgement</mat-label>
+              <input matInput placeholder="Acknowledgement" formControlName="endDate">
+            </mat-form-field>
+          </div>
+        </div>
 
         <br>
         <button type="submit" class="vf-button vf-button--primary vf-button--sm" matStepperNext>Register</button>
@@ -91,62 +238,34 @@
     </mat-step>
 
     <mat-step [stepControl]="secondFormGroup" label="Fill in additional data">
-
-      <mat-card class="info-card">
-        <mat-card-content>
-          Optional. Survey type questions. Helps to discover what data types cohort contains. Eg. Medication, Treatment.
-          If this is not filled we will try to guess them using data dictionary. (taken from IHCC survey)
-        </mat-card-content>
-      </mat-card>
-
-
-      <h3 class="vf-section-header__heading section-header">Add relationships</h3>
-      <h3 class="vf-section-header__heading section-header">Add statistics data</h3>
-
-
-
-      <form [formGroup]="secondFormGroup">
-<!--        <mat-form-field appearance="fill">-->
-<!--          <mat-label>Address</mat-label>-->
-<!--          <input matInput placeholder="Ex. 1 Main St, New York, NY" required>-->
-<!--        </mat-form-field>-->
-
-        <mat-form-field appearance="outline" class="atlas-field">
-          <mat-label>territories</mat-label>
-          <input matInput placeholder="relationships">
-        </mat-form-field>
-
-        <div>
-          <br>
-          <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
-          <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
-        </div>
-      </form>
+      <app-register-additional [secondFormGroup]="secondFormGroup"></app-register-additional>
     </mat-step>
 
     <mat-step>
       <ng-template matStepLabel>Upload `Data Dictionary`</ng-template>
 
-      <mat-card class="info-card">
-        <mat-card-content>
-          Optional. Upload data dictionary in CSV/spreadsheet format. We will harmonise this data dictionary to standard
-          terms.
-          Send the suggested mapping to take action.
-          This is an asynchronous process, send an email to user with a link?
-        </mat-card-content>
-      </mat-card>
+      <app-register-dictionary></app-register-dictionary>
+
+<!--      <mat-card class="info-card">-->
+<!--        <mat-card-content>-->
+<!--          Optional. Upload data dictionary in CSV/spreadsheet format. We will harmonise this data dictionary to standard-->
+<!--          terms.-->
+<!--          Send the suggested mapping to take action.-->
+<!--          This is an asynchronous process, send an email to user with a link?-->
+<!--        </mat-card-content>-->
+<!--      </mat-card>-->
 
 
-      <input type="file" name="file" (change)="handleFileInput($event)"/>
-      <button class="vf-button vf-button--primary vf-button--sm" (click)="uploadFileToActivity()">Upload</button>
+<!--      <input type="file" name="file" (change)="handleFileInput($event)"/>-->
+<!--      <button class="vf-button vf-button&#45;&#45;primary vf-button&#45;&#45;sm" (click)="uploadFileToActivity()">Upload</button>-->
 
-      <p>You are now done.</p>
-      <div>
-        <br>
-        <button class="vf-button vf-button--secondary vf-button--sm" matStepperPrevious>Back</button>
-        <button class="vf-button vf-button--primary vf-button--sm" matStepperNext>Save</button>
-        <button class="vf-button vf-button--tertiary vf-button--sm" (click)="stepper.reset()">Reset</button>
-      </div>
+<!--      <p>You are now done.</p>-->
+<!--      <div>-->
+<!--        <br>-->
+<!--        <button class="vf-button vf-button&#45;&#45;secondary vf-button&#45;&#45;sm" matStepperPrevious>Back</button>-->
+<!--        <button class="vf-button vf-button&#45;&#45;primary vf-button&#45;&#45;sm" matStepperNext>Save</button>-->
+<!--        <button class="vf-button vf-button&#45;&#45;tertiary vf-button&#45;&#45;sm" (click)="stepper.reset()">Reset</button>-->
+<!--      </div>-->
     </mat-step>
   </mat-stepper>
 

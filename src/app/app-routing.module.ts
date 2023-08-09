@@ -6,6 +6,8 @@ import {HarmoniseComponent} from "./pages/harmonise/harmonise.component";
 import {CohortsComponent} from "./pages/cohorts/cohorts.component";
 import {AboutComponent} from "./pages/about/about.component";
 import {CohortComponent} from "./pages/cohort/cohort.component";
+import {RegisterAdditionalComponent} from "./components/register-additional/register-additional.component";
+import {RegisterDictionaryComponent} from "./components/register-dictionary/register-dictionary.component";
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -14,7 +16,8 @@ const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'harmonise', component: HarmoniseComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'cohort', component: CohortComponent }
+  { path: 'cohort', component: CohortComponent },
+  { path: 'test', component: RegisterAdditionalComponent }
 ];
 
 @NgModule({
