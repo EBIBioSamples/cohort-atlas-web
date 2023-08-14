@@ -2,8 +2,8 @@
 
   <div class="cohort-header">
     <div class="cohort-header-title">
-      <div class="cohort-header-title">{{cohort['cohortName']}}</div>
-      <div class="cohort-header-title cohort-header-subtitle">{{cohort['accession']}}</div>
+      <div class="header-title">{{cohort['cohortName']}}</div>
+      <div class="header-title cohort-header-subtitle">{{cohort['accession']}}</div>
     </div>
 
     <div class="cohort-header-summary">
@@ -47,8 +47,9 @@
             <tr class="mat-row">
               <td class="mat-header-cell">Data Sharing</td>
               <td class="mat-cell">
-                <div class="ontology-wrapper"
-                     matTooltip="{{cohort['dataSharing']['label']}}">{{cohort['dataSharing']['label']}}</div>
+                <div class="ontology-wrapper" matTooltip="{{cohort.dataSharing.label}}" *ngIf="cohort.dataSharing">
+                  {{cohort.dataSharing.label}}
+                </div>
               </td>
             </tr>
           </table>
@@ -64,6 +65,10 @@
               <td class="mat-cell">{{cohort['type']}}</td>
             </tr>
             <tr class="mat-row">
+              <td class="mat-header-cell">Study Design</td>
+              <td class="mat-cell">{{cohort.studyDesign}}</td>
+            </tr>
+            <tr class="mat-row">
               <td class="mat-header-cell">Start - End Year</td>
               <td class="mat-cell">{{cohort['startDate']}} - {{cohort['endDate']}}</td>
             </tr>
@@ -74,15 +79,6 @@
             <tr class="mat-row">
               <td class="mat-header-cell">Total Enrollment</td>
               <td class="mat-cell">{{cohort['totalEnrollment']}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Territories</td>
-              <td class="mat-cell">
-                <div class="ontology-wrapper" matTooltip="{{territory['label']}}"
-                     *ngFor="let territory of cohort['territories']">
-                  {{territory['label']}}
-                </div>
-              </td>
             </tr>
           </table>
         </div>
@@ -95,34 +91,26 @@
             <tr class="mat-row">
               <td class="mat-header-cell">Contacts</td>
               <td class="mat-cell">
-                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort['contacts']">
-                  {{contact['name']}}
+                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort.contacts">
+                  {{contact['name'] + ", "}}
                 </div>
               </td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Investigators</td>
               <td class="mat-cell">
-                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort['investigators']">
-                  {{contact['name']}}
+                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort.investigators">
+                  {{contact['name'] + ", "}}
                 </div>
               </td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Publications</td>
               <td class="mat-cell">
-                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let publication of cohort['publications']">
-                  {{publication['url']}}
+                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let publication of cohort.publications">
+                  {{publication.url}}
                 </div>
               </td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Funding</td>
-              <td class="mat-cell">{{cohort['funding']}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Acknowledgements</td>
-              <td class="mat-cell">{{cohort['acknowledgement']}}</td>
             </tr>
           </table>
         </div>
@@ -133,7 +121,7 @@
           <table class="mat-table" style="width: 100%">
             <tr class="mat-row">
               <td class="mat-header-cell">Biospecimens</td>
-              <td class="mat-cell">{{cohort['dataTypes']['biospecimens']}}</td>
+              <td class="mat-cell">{{cohort.dataTypes.biospecimens}}</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Environmental</td>
@@ -148,6 +136,17 @@
               <td class="mat-cell">{{cohort['dataTypes']['phenotypicData']}}</td>
             </tr>
           </table>
+        </div>
+      </div>
+
+      <div class="cohort-content-card cohort-content-card-full">
+        <div class="card-header">Territories</div>
+        <div>
+          <mat-chip-list aria-label="Fish selection">
+            <mat-chip color="primary" *ngFor="let territory of cohort.territories">
+              {{territory}}
+            </mat-chip>
+          </mat-chip-list>
         </div>
       </div>
 
@@ -168,6 +167,16 @@
             <button mat-menu-item>GECKO</button>
           </mat-menu>
         </div>
+      </div>
+
+
+      <div class="cohort-content-card cohort-content-card-full">
+        <div class="card-header">Funding</div>
+        <div>{{cohort.funding}}</div>
+      </div>
+      <div class="cohort-content-card cohort-content-card-full">
+        <div class="card-header">Acknowledgement</div>
+        <div>{{cohort.acknowledgements}}</div>
       </div>
 
     </mat-tab>
@@ -197,6 +206,23 @@
           <td class="mat-cell">{{field.annotation}}</td>
           <td class="mat-cell"> - </td>
         </tr>
+      </table>
+    </mat-tab>
+    <mat-tab label="FAIR Indicators">
+      <div class="cohort-fair-indicators">
+        FAIR Indicators displays the FAIRness of the cohort/dataset measured using <a href="https://fairplus.github.io/Data-Maturity/">FAIRplus Dataset Maturity (DSM) Model</a>.
+      </div>
+
+      <table class="mat-table" style="width: 100%">
+        <tr class="mat-header-row">
+          <th class="mat-header-cell">Indicator</th>
+          <th class="mat-header-cell">Assessment Score</th>
+        </tr>
+
+<!--        <tr class="mat-row">-->
+<!--          <td class="mat-cell">{{field.name}}</td>-->
+<!--          <td class="mat-cell">{{field.description}}</td>-->
+<!--        </tr>-->
       </table>
     </mat-tab>
   </mat-tab-group>

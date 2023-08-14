@@ -23,26 +23,40 @@ export class CohortService {
     return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts');
   }
 
-  public getCohorts(): Observable<CohortList> {
-    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts')
-      .pipe(
-        map((cohortList: CohortList) => cohortList["_embedded"]["cohorts"].map(cohort => {
+  public getCohorts(): Observable<Cohort[]> {
+    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts').pipe(
+      map((cohortList: CohortList) => cohortList._embedded.cohorts.map(cohort => {
+        if (!cohort.dataTypes) {
+          cohort.dataTypes = new DataTypes();
+        }
+        if (!cohort.acronym) {
+          cohort.acronym = cohort.accession;
+        }
+        return cohort
+      }))
+    );
+  }
+
+  public searchCohorts(filterQueryParams: string) {
+    const filterUrl: string = this.cohortAtlasApi + '/cohorts'.concat("?").concat(filterQueryParams);
+    console.log("Filter URL:" + filterUrl);
+    return this.http.get<CohortList>(filterUrl).pipe(
+      map((cohortList: CohortList) => {
+        let cohorts = cohortList._embedded ? cohortList._embedded.cohorts : [];
+        cohorts.map(cohort => {
           if (!cohort.dataTypes) {
-            cohort.dataTypes = {};
+            cohort.dataTypes = new DataTypes();
+          }
+          if (!cohort.acronym) {
+            cohort.acronym = cohort.accession;
           }
           return cohort
-        }))
-      );
+        })
+        return cohorts;
+      })
+    );
   }
 
-  public searchCohorts(filterQueryParams : string) {
-    //term = term.trim();
-
-    // Add safe, URL encoded search parameter if there is a search term
-    const filterUrl:string = this.cohortAtlasApi + '/cohorts'.concat("?").concat(filterQueryParams);
-    console.log("Filter URL:"+filterUrl);
-    return this.http.get<any>(filterUrl);
-  }
   httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/json',
@@ -56,6 +70,9 @@ export class CohortService {
       map((cohort: Cohort) => {
         if (!cohort.dataTypes) {
           cohort.dataTypes = new DataTypes();
+        }
+        if (!cohort.acronym) {
+          cohort.acronym = cohort.accession;
         }
         return cohort
       })

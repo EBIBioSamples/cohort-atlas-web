@@ -1,16 +1,17 @@
+
+<form >
 <div style="overflow: hidden; width: 100%; float: left; margin-bottom: 10px">
   <div class="filter-header">Filters</div>
-  <button mat-button color="warn" class="" style="float: right; width: 75px; padding: 0; margin-top: 2px;">clear filters</button>
-<!--  <a class="" style="float: right; width: calc(100% - 100px);">clear filters</a>-->
+  <button type="submit" mat-raised-button color="primary" class="submit-filters-btn" (click)="sendFilters()">Apply filters</button>
+  <button mat-button color="warn" class="" style="float: right; width: 75px; padding: 0; margin-top: 2px;">x</button>
+  <!--  <a class="" style="float: right; width: calc(100% - 100px);">clear filters</a>-->
 </div>
-<form >
 <mat-accordion>
   <!--      <mat-expansion-panel (opened)="panelOpenState = true" (closed)="panelOpenState = false">-->
-  <mat-expansion-panel class="filter-facet" >
+  <mat-expansion-panel class="filter-facet">
     <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>Data Types</mat-panel-title>
       <mat-panel-description>
-        <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div *ngFor="let dataType of dataTypes" [formGroup]="filterFormGroup.controls['dataTypes']" >
@@ -22,7 +23,6 @@
     <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>Licences</mat-panel-title>
       <mat-panel-description>
-        <!--            Currently I am {{panelOpenState ? 'open' : 'closed'}}-->
       </mat-panel-description>
     </mat-expansion-panel-header>
     <div *ngFor="let licence of licences"  [formGroup]="filterFormGroup.controls['licences']" >
@@ -33,14 +33,49 @@
   <mat-expansion-panel class="filter-facet">
     <mat-expansion-panel-header class="filter-facet-header">
       <mat-panel-title>Treatment</mat-panel-title>
-      <mat-panel-description>
-      </mat-panel-description>
     </mat-expansion-panel-header>
-    <div *ngFor="let treatment of treatments"  [formGroup]="filterFormGroup.controls['treatments']" >
-      <mat-checkbox class="filter-facet-item" [formControlName]="treatment"  value="{{ treatment }}">{{ treatment }}</mat-checkbox>
+    <div *ngFor="let treatment of treatments" [formGroup]="filterFormGroup.controls['treatments']">
+      <mat-checkbox class="filter-facet-item" [formControlName]="treatment"
+                    value="{{ treatment }}">{{ treatment }}</mat-checkbox>
+    </div>
+  </mat-expansion-panel>
+
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
+      <mat-panel-title>Diseases</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let val of diseases" [formGroup]="filterFormGroup.controls['diseases']">
+      <mat-checkbox class="filter-facet-item" [formControlName]="val"
+                    value="{{ val }}">{{ val }}</mat-checkbox>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="filter-facet" [expanded]=true>
+    <mat-expansion-panel-header class="filter-facet-header">
+      <mat-panel-title>Medication</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let val of medication" [formGroup]="filterFormGroup.controls['medication']">
+      <mat-checkbox class="filter-facet-item" [formControlName]="val"
+                    value="{{ val }}">{{ val }}</mat-checkbox>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
+      <mat-panel-title>Outcome</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let val of outcome" [formGroup]="filterFormGroup.controls['outcome']">
+      <mat-checkbox class="filter-facet-item" [formControlName]="val"
+                    value="{{ val }}">{{ val }}</mat-checkbox>
+    </div>
+  </mat-expansion-panel>
+  <mat-expansion-panel class="filter-facet">
+    <mat-expansion-panel-header class="filter-facet-header">
+      <mat-panel-title>Complications</mat-panel-title>
+    </mat-expansion-panel-header>
+    <div *ngFor="let val of complications" [formGroup]="filterFormGroup.controls['complications']">
+      <mat-checkbox class="filter-facet-item" [formControlName]="val"
+                    value="{{ val }}">{{ val }}</mat-checkbox>
     </div>
   </mat-expansion-panel>
 
 </mat-accordion>
-  <button type="submit" class="vf-button vf-button--primary vf-button--sm" (click)="sendFilters()">Apply filters</button>
 </form>
