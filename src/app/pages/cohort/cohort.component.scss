@@ -33,6 +33,12 @@
   float: left;
 }
 
+.header-title {
+  width: 100%;
+  margin: 2px 0;
+  line-height: 1;
+}
+
 .cohort-header-subtitle {
   font-size: 18px;
   color: #949494;
@@ -68,6 +74,10 @@
   width: 50%;
   color: #3b6fb6;
   font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif
+}
+
+.cohort-fair-indicators {
+  margin: 10px 0;
 }
 
 .cohort-actions {

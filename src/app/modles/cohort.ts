@@ -1,6 +1,6 @@
 export class CohortList {
-  _embedded: string;
-  _links: string;
+  _embedded: Embedded;
+  _links: Links;
   page: Page;
 }
 
@@ -90,6 +90,7 @@ export class Ontology {
 export class Publication {
   title: string;
   doi: string;
+  url: string;
 }
 
 export class DataTypes {

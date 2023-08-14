@@ -21,7 +21,7 @@
 
     <ng-container matColumnDef="Enrollment Period">
       <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Enrollment Period </th>
-      <td mat-cell *matCellDef="let element"> {{element["startDate"]}} </td>
+      <td mat-cell *matCellDef="let element"> {{element["startDate"]}} - {{element["endDate"]}} </td>
     </ng-container>
 
     <ng-container matColumnDef="License">

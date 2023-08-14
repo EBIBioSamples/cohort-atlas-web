@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {CohortService} from "../../service/cohort.service";
+import {Cohort} from "../../modles/cohort";
 
 @Component({
   selector: 'app-cohorts',
@@ -7,22 +8,20 @@ import {CohortService} from "../../service/cohort.service";
   styleUrls: ['./cohorts.component.scss']
 })
 export class CohortsComponent implements OnInit {
+  cohorts: Cohort[];
 
-  cohorts: any;
-
-  constructor(private cohortService: CohortService) { }
+  constructor(private cohortService: CohortService) {
+  }
 
   ngOnInit(): void {
-    // this.cohortService.getCohorts1().subscribe(data => {
-    //   console.log("Get cohorts objects: " + JSON.stringify(data));
-    //   this.cohorts = data["_embedded"]["cohorts"];
-    //   console.log(this.cohorts)
-    // });
     this.cohortService.getCohorts().subscribe(data => {
-      console.log("Get cohorts objects: " + JSON.stringify(data));
       this.cohorts = data;
-      console.log(this.cohorts)
     });
   }
 
+  applyFilters(filterQueryParams: String) {
+    this.cohortService.searchCohorts(filterQueryParams.toString()).subscribe(data => {
+      this.cohorts = data;
+    });
+  }
 }

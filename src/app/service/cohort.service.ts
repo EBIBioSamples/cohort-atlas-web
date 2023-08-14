@@ -3,6 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Cohort, CohortList, DataTypes} from "../modles/cohort";
+import {FormGroup} from "@angular/forms";
 
 @Injectable({
   providedIn: 'root'
@@ -22,16 +23,38 @@ export class CohortService {
     return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts');
   }
 
-  public getCohorts(): Observable<CohortList> {
-    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts')
-      .pipe(
-        map((cohortList: CohortList) => cohortList["_embedded"]["cohorts"].map(cohort => {
+  public getCohorts(): Observable<Cohort[]> {
+    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts').pipe(
+      map((cohortList: CohortList) => cohortList._embedded.cohorts.map(cohort => {
+        if (!cohort.dataTypes) {
+          cohort.dataTypes = new DataTypes();
+        }
+        if (!cohort.acronym) {
+          cohort.acronym = cohort.accession;
+        }
+        return cohort
+      }))
+    );
+  }
+
+  public searchCohorts(filterQueryParams: string) {
+    const filterUrl: string = this.cohortAtlasApi + '/cohorts'.concat("?").concat(filterQueryParams);
+    console.log("Filter URL:" + filterUrl);
+    return this.http.get<CohortList>(filterUrl).pipe(
+      map((cohortList: CohortList) => {
+        let cohorts = cohortList._embedded ? cohortList._embedded.cohorts : [];
+        cohorts.map(cohort => {
           if (!cohort.dataTypes) {
-            cohort.dataTypes = {};
+            cohort.dataTypes = new DataTypes();
+          }
+          if (!cohort.acronym) {
+            cohort.acronym = cohort.accession;
           }
           return cohort
-        }))
-      );
+        })
+        return cohorts;
+      })
+    );
   }
 
   httpOptions = {
@@ -47,6 +70,9 @@ export class CohortService {
       map((cohort: Cohort) => {
         if (!cohort.dataTypes) {
           cohort.dataTypes = new DataTypes();
+        }
+        if (!cohort.acronym) {
+          cohort.acronym = cohort.accession;
         }
         return cohort
       })
