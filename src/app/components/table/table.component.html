@@ -1,77 +1,31 @@
 <section class="cohort-table-container" tabindex="0">
-  <table mat-table [dataSource]="cohorts">
+  <div style="float: right; margin: -5px 5px">...</div><!--edit columns here-->
 
-    <ng-container matColumnDef="Acronym" sticky>
-      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Acronym </th>
-      <td mat-cell *matCellDef="let element" class="table-link"
-          [routerLink]="['/cohort']" [queryParams]="{ accession: element['accession']}">
-        {{element["acronym"]}}
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Title">
-      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Title </th>
-      <td mat-cell *matCellDef="let element"> {{element["cohortName"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Participants">
-      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Participants </th>
-      <td mat-cell *matCellDef="let element"> {{element["totalEnrollment"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Enrollment Period">
-      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> Enrollment Period </th>
-      <td mat-cell *matCellDef="let element"> {{element["startDate"]}} - {{element["endDate"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="License">
-      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="2"> License </th>
-      <td mat-cell *matCellDef="let element"> {{element["license"]}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="Data Types" sticky>
-      <th mat-header-cell *matHeaderCellDef [attr.colspan]="5" class="th-parent th-last"> Data Types </th>
-    </ng-container>
-
-    <ng-container matColumnDef="data1">
-      <th mat-header-cell *matHeaderCellDef class="th-first" style="padding-left: 0"> <i title="biospecimens" class="icon icon-common icon-flask icon-padder icon-center"></i> </th>
-      <td mat-cell *matCellDef="let element">
-        <i title="Availability" class="icon icon-common icon-center icon-xs" [ngClass]="element['dataTypes']['biospecimens'] ? 'icon-check' : 'icon-minus'"></i>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="data2">
-      <th mat-header-cell *matHeaderCellDef> <i title="environmental" class="icon icon-common icon-stethoscope icon-padder icon-center"></i> </th>
-      <td mat-cell *matCellDef="let element">
-        <i title="Availability" class="icon icon-common icon-center icon-xs" [ngClass]="element['dataTypes']['environmentalData'] ? 'icon-check' : 'icon-minus'"></i>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="data3">
-      <th mat-header-cell *matHeaderCellDef> <i title="genomic" class="icon icon-species icon-human icon-padder icon-center"></i>  </th>
-      <td mat-cell *matCellDef="let element">
-        <i title="Availability" class="icon icon-common icon-center icon-xs" [ngClass]="element['dataTypes']['genomicData'] ? 'icon-check' : 'icon-minus'"></i>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="data4">
-      <th mat-header-cell *matHeaderCellDef> <i title="phenotypic" class="icon icon-species icon-virus icon-padder icon-center"></i>  </th>
-      <td mat-cell *matCellDef="let element">
-        <i title="Availability" class="icon icon-common icon-center icon-xs" [ngClass]="element['dataTypes']['phenotypicData'] ? 'icon-check' : 'icon-minus'"></i>
-      </td>
-    </ng-container>
-
-    <ng-container matColumnDef="data5" style="padding-right: 2px">
-      <th mat-header-cell *matHeaderCellDef style="padding-right: 0">
-        <i title="more" class="icon icon-common icon-plus icon-padder icon-center"></i>
+  <table mat-table [dataSource]="tableBuilder.data">
+    <ng-container *ngFor="let colDef of tableBuilder.getColumnDefinitions() | keyvalue" [matColumnDef]="colDef.key">
+      <th mat-header-cell *matHeaderCellDef [attr.rowspan]="colDef.value['rowspan']" [attr.colspan]="colDef.value['colspan']">
+        <ng-container *ngIf="colDef.value['icon']">
+          <i title="phenotypic" class="icon icon-padder icon-center" [ngClass]="colDef.value['icon']"></i>
+        </ng-container>
+        <ng-container *ngIf="!colDef.value['icon']">
+          {{colDef.key}}
+        </ng-container>
       </th>
-      <td mat-cell *matCellDef="let element" style="padding-right: 0">
-        <i title="Availability" class="icon icon-common icon-minus icon-center icon-xs"></i>
-      </td>
+      <ng-container *ngIf="colDef.value['colspan'] == 1">
+        <td mat-cell *matCellDef="let element" class="table-link" [routerLink]="['/cohort']" [queryParams]="{ accession: element['accession']}">
+          <ng-container *ngIf="'boolean'===colDef.value['type']">
+            <i class="icon icon-common icon-center icon-xs" [ngClass]="getChildElementValue(element, colDef.value['path']) ? 'icon-check' : 'icon-minus'"></i>
+          </ng-container>
+          <ng-container *ngIf="'boolean'!==colDef.value['type']">
+            {{getChildElementValue(element, colDef.value['path'])}}
+            <i *ngIf="!getChildElementValue(element, colDef.value['path'])" class="icon icon-common icon-center icon-xs icon-minus"></i>
+          </ng-container>
+        </td>
+      </ng-container>
     </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true" class="table-header"></tr>
-    <tr mat-header-row *matHeaderRowDef="['data1', 'data2', 'data3', 'data4', 'data5']" class="table-header"></tr>
-    <tr mat-row *matRowDef="let row; columns: ['Acronym',	'Title',	'Participants',	'Enrollment Period', 'License',	'data1', 'data2', 'data3', 'data4', 'data5'];"></tr>
+    <tr mat-header-row *matHeaderRowDef="tableBuilder.getHeaderNames()" class="table-header"></tr>
+    <tr mat-header-row *matHeaderRowDef="tableBuilder.getSubHeaderNames()" class="table-header"></tr>
+    <tr mat-row (click)="onClickTableRow(row)" *matRowDef="let row; columns: headers;"></tr>
   </table>
 </section>

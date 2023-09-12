@@ -7,8 +7,24 @@
   width: 100px;
 }
 
-.filter-facet-label {
-  padding: 5px
+.filters {
+  margin-left: -10px;
+  padding-left: 10px;
+  background: #f5f5ff;
+}
+
+.applied-filters {
+  margin-left: -10px;
+  padding-left: 10px;
+  background: #f5f5ff;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.clear-filter-btn {
+  color: #cecece;
+  float: right;
+  margin-right: 10px;
+  margin-top: 1px;
 }
 
 .filter-facet-item {
@@ -19,8 +35,9 @@
   border-radius: 2px;
   box-shadow: none;
   margin-top: 5px;
-  border: 1px solid #f0f0f0;
-  background-color: #fafafa;
+  border: 1px solid #ffffff;
+  border-bottom: 1px solid #f6f6f6;
+  background: #f5f5ff;
 }
 
 .filter-facet-header {
@@ -29,4 +46,21 @@
 
 .submit-filters-btn {
   float: right;
+}
+
+:host ::ng-deep .mat-badge-content
+{
+  right: -6px !important;
+  top: 2px !important;
+  background: #e7e7e7;
+  color: #7c7c7c;
+  text-overflow: ellipsis;
+}
+
+:host ::ng-deep .mat-checkbox-layout {
+  width: 90%;
+  overflow: hidden;
+  display: block;
+  text-overflow: ellipsis;
+  word-break: break-all;
 }

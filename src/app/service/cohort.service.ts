@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {Cohort, CohortList, DataTypes} from "../modles/cohort";
+import {Cohort, CohortList, DataTypes} from "../models/cohort";
 import {FormGroup} from "@angular/forms";
 
 @Injectable({

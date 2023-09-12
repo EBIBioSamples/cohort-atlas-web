@@ -1,0 +1,69 @@
+<h2 class="vf-section-header__heading section-header">Select a Term from Standard Dictionary</h2>
+
+<div>A set of suggested fields are displayed below. If none of the above suggestions work,
+  you can browse the dictionary below in categories.
+</div>
+
+<div class="dialog-field">
+  <div class="card-title">Field Overview</div>
+  <mat-table [dataSource]="[field]">
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef>Field Name</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.name}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="label">
+      <mat-header-cell *matHeaderCellDef>Label</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.label}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="description">
+      <mat-header-cell *matHeaderCellDef>Description</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.description}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="type">
+      <mat-header-cell *matHeaderCellDef>Data Type</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.type}} </mat-cell>
+    </ng-container>
+    <ng-container matColumnDef="values">
+      <mat-header-cell *matHeaderCellDef>Values</mat-header-cell>
+      <mat-cell *matCellDef="let element"> {{element.values}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="['name', 'label', 'description', 'type', 'values']"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: ['name', 'label', 'description', 'type', 'values'];"></mat-row>
+  </mat-table>
+</div>
+
+
+<mat-dialog-content class="mat-typography">
+
+  <mat-radio-group aria-labelledby="example-radio-group-label"
+                   class="mapped-field-radio-group"
+                   [(ngModel)]="mapping">
+
+    <div class="card-title">Map to Standard Dictionary Field</div>
+    <div class="dictionary-category">
+      <h3>Top Suggestions</h3>
+      <mat-radio-button
+        class="mapped-field-button" [matTooltip]="suggestion.fieldName"
+        *ngFor="let suggestion of field.suggestions" [value]="suggestion.fieldName">
+        {{suggestion.fieldName}}
+        <mat-chip>{{suggestion.matchPercentage}} match</mat-chip>
+      </mat-radio-button>
+    </div>
+
+    <div class="card-subtitle">All Dictionary Fields by Category</div>
+    <div *ngFor="let category of dictionary">
+      <div class="dictionary-category">
+        <h3>{{category["category"]}}</h3>
+        <mat-radio-button class="mapped-field-button" [matTooltip]="standardField['description']"
+                          *ngFor="let standardField of category['fields']" [value]="standardField['name']">
+          {{standardField["name"]}}
+        </mat-radio-button>
+      </div>
+    </div>
+  </mat-radio-group>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button [mat-dialog-close]="null">Cancel</button>
+  <button mat-button [mat-dialog-close]="mapping" cdkFocusInitial>Select</button>
+</mat-dialog-actions>

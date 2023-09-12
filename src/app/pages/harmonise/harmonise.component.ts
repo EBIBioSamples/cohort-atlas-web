@@ -4,6 +4,9 @@ import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {CohortService} from "../../service/cohort.service";
 import {Router} from "@angular/router";
+import {MatDialog} from "@angular/material/dialog";
+import {DictionaryDialogComponent} from "../../components/dictionary-dialog/dictionary-dialog.component";
+import {Field} from "../../models/cohort";
 
 export interface DictionaryField {
   id: string;
@@ -27,19 +30,36 @@ export class HarmoniseComponent implements AfterViewInit, OnInit {
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  @Input() dictionaryFields: DictionaryField[];
+  @Input() dictionaryFields: Field[];
 
   displayedColumns: string[] = ['id', 'name', 'label', 'description', 'type', 'values', 'parent', 'suggestions', 'tags'];
-  dataSource: MatTableDataSource<DictionaryField>;
+  dataSource: MatTableDataSource<Field>;
   options: string[] = ['Gender', 'Age/Birthdate', 'occupation', 'dietary history', 'heart rate', 'sleep history', 'prescription'];
+  suggestions = [
+    {
+      "field": "Gender",
+      "description": "Sex or gender of the participants",
+      "matchPercentage": 95.3
+    },
+    {
+      "field": "Age/Birthdate",
+      "description": "Information about current age or birthdate",
+      "matchPercentage": 85.3
+    },
+    {
+      "field": "dietary history",
+      "description": "dietary history",
+      "matchPercentage": 70
+    }
+  ];
 
   cohortAccession: string;
   fileToUpload: File | null = null;
   fileName: string = "";
 
-  dataDictionary: any;
+  dataDictionary: Field[];
 
-  constructor(private router: Router, private cohortService: CohortService) {
+  constructor(private router: Router, public dialog: MatDialog, private cohortService: CohortService) {
     // const fields = getTestDictionaryFields();
     this.dataDictionary = this.cohortService.dataDictionary;
     this.dataSource = new MatTableDataSource(this.dataDictionary);
@@ -62,13 +82,25 @@ export class HarmoniseComponent implements AfterViewInit, OnInit {
     }
   }
 
+  openDialog(field) {
+    const dialogRef = this.dialog.open(DictionaryDialogComponent, {data: field, width: '80%', height: '90%'});
+
+    dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        field.annotation = result;
+      }
+      console.log(`Dialog result: ${result}`);
+
+    });
+  }
+
   saveDictionary() {
     let fields = [];
     for (let field of this.cohortService.dataDictionary) {
       fields.push({
         "name": field.name,
         "description": field.description,
-        "annotation": field.suggestions[0],
+        "annotation": field.annotation,
       })
     }
 

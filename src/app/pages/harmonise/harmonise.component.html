@@ -1,17 +1,32 @@
-<div  class="harmonise-body">
+<div class="harmonise-body">
 
   <div class="vf-section-header">
     <h2 class="vf-section-header__heading section-header">Data Dictionary Harmonisation</h2>
-    <p class="vf-section-header__text">Once the data dictionary is uploaded, we will try to harmonise it and find mappings with the standard fields.
+    <p class="vf-section-header__text">Once the data dictionary is uploaded, we will try to harmonise it and find
+      mappings with the standard fields.
       The table below lists data dictionary fields and mapping suggestions. Select a suggestion or suitable field.
-      Optionally tag the dictionary fields with available tags. The mappings will improve the discoverability of the cohort.
-      Once the mapping is completed, mapping rules can be downloaded in several different standards including GECKO, Maelstrom, OMOP.
+      Optionally tag the dictionary fields with available tags. The mappings will improve the discoverability of the
+      cohort.
+      Once the mapping is completed, mapping rules can be downloaded in several different standards including GECKO,
+      Maelstrom, OMOP.
     </p>
   </div>
 
-  Download the CSV/spreadsheet template, or try out harmonisation with test data:
-  <button class="vf-button vf-button--secondary vf-button--sm">Download CSV template</button>
-  <button class="vf-button vf-button--secondary vf-button--sm">Load Test Data</button>
+  <div class="harmonise-template-wrapper">
+    Download the CSV/spreadsheet template, or try out harmonisation with test data:
+    <button mat-raised-button class="harmonise-template-btn">Download CSV template</button>
+    <button mat-raised-button class="harmonise-template-btn">Download Test Data</button>
+    <button mat-button (click)="openDialog({
+    name: 'gen_xyz',
+    label: 'gender',
+    description: 'gender of the participant',
+    type: 'enum',
+    values: '1, 2',
+    parent: 'Physical Characteristics',
+    suggestions: [{'fieldName': 'Gender', 'matchPercentage': 85}, {'fieldName': 'Sex', 'matchPercentage': 70}],
+    tags: ''
+    })">Suggesstion</button>
+  </div>
 
   <br>
   <mat-divider></mat-divider>
@@ -22,32 +37,34 @@
     <input matInput (keyup)="applyFilter($event)" placeholder="eg. smoking" #input>
   </mat-form-field>
 
-  <button class="vf-button vf-button--primary vf-button--sm button-save" (click)="saveDictionary()">Save</button>
-  <button class="vf-button vf-button--primary vf-button--sm button-save" (click)="saveDictionary()">Save and Finish Mapping</button>
-  <button class="vf-button vf-button--secondary vf-button--sm button-save"  (click)="f_input.click()">Upload File</button>
+
+  <button mat-raised-button color="primary" class="button-save" (click)="saveDictionary()">Save</button>
+  <button mat-raised-button color="primary" class="button-save" (click)="saveDictionary()">Save and Finish Mapping
+  </button>
+  <button mat-raised-button color="primary" class="button-save" (click)="f_input.click()">Upload File</button>
   <input type='file' hidden #f_input (change)="handleFileInput($event)"/>
 
   <div>
     <table mat-table [dataSource]="dataSource" matSort>
 
       <ng-container matColumnDef="id">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> ID</th>
         <td mat-cell *matCellDef="let row"> {{row.id}} </td>
       </ng-container>
       <ng-container matColumnDef="name">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Name</th>
         <td mat-cell *matCellDef="let row"> {{row.name}} </td>
       </ng-container>
       <ng-container matColumnDef="label">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Label </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Label</th>
         <td mat-cell *matCellDef="let row"> {{row.label}} </td>
       </ng-container>
       <ng-container matColumnDef="description">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Description</th>
         <td mat-cell *matCellDef="let row"> {{row.description}} </td>
       </ng-container>
       <ng-container matColumnDef="type">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Field Type </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Field Type</th>
         <td mat-cell *matCellDef="let row"> {{row.type}}</td>
       </ng-container>
       <ng-container matColumnDef="values">
@@ -55,27 +72,27 @@
         <td mat-cell *matCellDef="let row"> {{row.values}} </td>
       </ng-container>
       <ng-container matColumnDef="parent">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Parent </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Parent</th>
         <td mat-cell *matCellDef="let row"> {{row.parent}} </td>
       </ng-container>
       <ng-container matColumnDef="suggestions">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Suggestions </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Annotation/Suggestion</th>
         <td mat-cell *matCellDef="let row">
-
-          <mat-form-field appearance="fill">
-            <mat-select value="{{ row.suggestions[0] }}">
-              <mat-option *ngFor="let option of row.suggestions" [value]="option">
-                {{option}}
-              </mat-option>
-              <mat-option *ngFor="let option of options" [value]="option">
-                {{option}}
-              </mat-option>
-            </mat-select>
-          </mat-form-field>
+          <button mat-button (click)="openDialog(row)">{{row.annotation}}</button>
+          <!--          <mat-form-field appearance="fill">-->
+          <!--            <mat-select value="{{ row.suggestions[0] }}">-->
+          <!--              <mat-option *ngFor="let option of row.suggestions" [value]="option">-->
+          <!--                {{option}}-->
+          <!--              </mat-option>-->
+          <!--              <mat-option *ngFor="let option of options" [value]="option">-->
+          <!--                {{option}}-->
+          <!--              </mat-option>-->
+          <!--            </mat-select>-->
+          <!--          </mat-form-field>-->
         </td>
       </ng-container>
       <ng-container matColumnDef="tags">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tags </th>
+        <th mat-header-cell *matHeaderCellDef mat-sort-header> Tags</th>
         <td mat-cell *matCellDef="let row">
           <mat-form-field class="example-form-field">
             <input matInput type="text" [(ngModel)]="row.tags">

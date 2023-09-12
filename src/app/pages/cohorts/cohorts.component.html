@@ -12,31 +12,35 @@
       </button>
     </div>
 
-    <div class="header-summary">
-      <div class="header-summary-tile">5 Cohorts</div>
-      <div class="header-summary-tile">345 Fields</div>
-      <div class="header-summary-tile">45 Mapped Fields</div>
-      <div class="header-summary-tile">32 Archive Links</div>
+    <div *ngIf="facetSummary" class="header-summary">
+      <div class="header-summary-tile">{{facetSummary.projects}} Projects</div>
+      <div class="header-summary-tile">{{facetSummary.datasets}} Cohorts</div>
+      <div class="header-summary-tile">{{facetSummary.variables}} Fields</div>
+      <div class="header-summary-tile">{{facetSummary.harmonisedVariables}} Mapped Fields</div>
+      <div class="header-summary-tile">{{facetSummary.links}} Archive Links</div>
       <button mat-flat-button color="primary" class="header-summary-export">Export</button>
     </div>
   </div>
 
-  <div class="filters">
-    <div>
-      <app-facet-panel (applyFilterEvent)="applyFilters($event)" ></app-facet-panel>
+  <div class="filter-table-wrapper">
+    <div class="filters">
+      <div>
+        <app-facet-panel (applyFilterEvent)="applyFilters($event)"></app-facet-panel>
+      </div>
+    </div>
+
+    <div class="cohort-content">
+      <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
+        <mat-tab label="Cohorts">
+          <app-table *ngIf="cohortsTableBuilder" [cohorts]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
+        </mat-tab>
+        <mat-tab label="Projects">
+          <app-table *ngIf="cohortsTableBuilder" [cohorts]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
+        </mat-tab>
+        <mat-tab label="Variables">
+          <app-table *ngIf="cohortsTableBuilder" [cohorts]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
+        </mat-tab>
+      </mat-tab-group>
     </div>
   </div>
-
-
-  <div class="cohort-content">
-
-    <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
-      <mat-tab label="Table">
-        <app-table [cohorts]="cohorts"></app-table>
-      </mat-tab>
-      <mat-tab label="Graphs">Graphs</mat-tab>
-    </mat-tab-group>
-
-  </div>
-
 </div>

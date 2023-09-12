@@ -39,6 +39,9 @@ import {MatTooltipModule} from "@angular/material/tooltip";
 import { RegisterBasicComponent } from './components/register-basic/register-basic.component';
 import { RegisterAdditionalComponent } from './components/register-additional/register-additional.component';
 import { RegisterDictionaryComponent } from './components/register-dictionary/register-dictionary.component';
+import { DictionaryDialogComponent } from './components/dictionary-dialog/dictionary-dialog.component';
+import {MatDialogModule} from "@angular/material/dialog";
+import {MatBadgeModule} from "@angular/material/badge";
 
 @NgModule({
   declarations: [
@@ -55,36 +58,39 @@ import { RegisterDictionaryComponent } from './components/register-dictionary/re
     AboutComponent,
     RegisterBasicComponent,
     RegisterAdditionalComponent,
-    RegisterDictionaryComponent
+    RegisterDictionaryComponent,
+    DictionaryDialogComponent
   ],
-  imports: [
-    BrowserModule,
-    HttpClientModule,
-    AppRoutingModule,
-    MatExpansionModule,
-    BrowserAnimationsModule,
-    MatCheckboxModule,
-    FormsModule,
-    MatTableModule,
-    MatButtonToggleModule,
-    MatIconModule,
-    MatStepperModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatCardModule,
-    MatToolbarModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatSelectModule,
-    MatDividerModule,
-    MatButtonModule,
-    MatTabsModule,
-    MatAutocompleteModule,
-    MatChipsModule,
-    MatMenuModule,
-    MatRadioModule,
-    MatTooltipModule
-  ],
+    imports: [
+        BrowserModule,
+        HttpClientModule,
+        AppRoutingModule,
+        MatExpansionModule,
+        BrowserAnimationsModule,
+        MatCheckboxModule,
+        FormsModule,
+        MatTableModule,
+        MatButtonToggleModule,
+        MatIconModule,
+        MatStepperModule,
+        ReactiveFormsModule,
+        MatInputModule,
+        MatCardModule,
+        MatToolbarModule,
+        MatPaginatorModule,
+        MatSortModule,
+        MatSelectModule,
+        MatDividerModule,
+        MatButtonModule,
+        MatTabsModule,
+        MatAutocompleteModule,
+        MatChipsModule,
+        MatMenuModule,
+        MatRadioModule,
+        MatTooltipModule,
+        MatDialogModule,
+        MatBadgeModule
+    ],
   providers: [],
   bootstrap: [AppComponent]
 })

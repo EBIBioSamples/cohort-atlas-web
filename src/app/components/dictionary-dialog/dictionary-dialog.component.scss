@@ -1,0 +1,45 @@
+.section-header {
+  color: #3b6fb6;
+}
+
+.dialog-field {
+  margin: 25px 0;
+}
+
+.card-title {
+  color: #3b6fb6;
+  font-size: 20px;
+  border-bottom: 1px solid #a4bde5;
+  margin: 10px 0 5px 0;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+
+.card-subtitle {
+  color: #868686;
+  font-size: 18px;
+  margin: 27px 0 5px 0;
+  padding-bottom: 5px;
+  overflow: hidden;
+}
+
+.dictionary-category {
+  background-color: #f5f5f5;
+  border: 1px solid #a6a6a6;
+  border-radius: 5px;
+  margin: 10px 0;
+  padding: 5px;
+}
+
+.mapped-field-button {
+  width: calc(25% - 10px);
+  margin: 5px;
+}
+
+.mat-chip {
+  float: right;
+  margin-left: 5px;
+  color: #898989;
+  padding: 2px;
+  border-radius: 5px;
+}

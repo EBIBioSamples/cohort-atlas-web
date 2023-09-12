@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {ActivatedRoute} from "@angular/router";
 import {CohortService} from "../../service/cohort.service";
-import {Cohort} from "../../modles/cohort";
+import {Cohort} from "../../models/cohort";
 
 @Component({
   selector: 'app-cohort',
