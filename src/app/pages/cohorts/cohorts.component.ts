@@ -2,7 +2,11 @@ import {Component, OnInit} from '@angular/core';
 import {CohortService} from "../../service/cohort.service";
 import {Cohort, CohortTableBuilder} from "../../models/cohort";
 import {FacetService} from "../../service/facet.service";
-import {FacetSummary} from "../../models/facet";
+import {FacetSummary, Filter} from "../../models/facet";
+import {Field, FieldTableBuilder} from "../../models/Field";
+import {Project, ProjectTableBuilder} from "../../models/project";
+import {FieldService} from "../../service/field.service";
+import {ProjectService} from "../../service/project.service";
 
 @Component({
   selector: 'app-cohorts',
@@ -10,11 +14,19 @@ import {FacetSummary} from "../../models/facet";
   styleUrls: ['./cohorts.component.scss']
 })
 export class CohortsComponent implements OnInit {
+  projects: Project[];
   cohorts: Cohort[];
+  fields: Field[];
+  projectsTableBuilder: ProjectTableBuilder;
   cohortsTableBuilder: CohortTableBuilder;
+  fieldTableBuilder: FieldTableBuilder;
   facetSummary: FacetSummary;
 
-  constructor(private cohortService: CohortService, private facetService: FacetService) {
+  filters: Filter[];
+  searchText: string;
+
+  constructor(private cohortService: CohortService, private facetService: FacetService,
+              private fieldService: FieldService, private projectService: ProjectService) {
   }
 
   ngOnInit(): void {
@@ -23,14 +35,33 @@ export class CohortsComponent implements OnInit {
       this.cohortsTableBuilder = new CohortTableBuilder(this.cohorts);
     });
 
+    this.projectService.getProjects().subscribe(data => {
+      this.projects = data;
+      this.projectsTableBuilder = new ProjectTableBuilder(this.projects);
+    });
+
+    this.fieldService.getFields().subscribe(data => {
+      this.fields = data;
+      this.fieldTableBuilder = new FieldTableBuilder(this.fields);
+    });
+
     this.facetService.getOverallSummary().subscribe(data => {
       this.facetSummary = data;
     })
   }
 
-  applyFilters(filterQueryParams: String) {
-    this.cohortService.searchCohorts(filterQueryParams.toString()).subscribe(data => {
+  applyFilters(filters: Filter[]) {
+    this.filters = filters;
+    let queryParam = "";
+    for (let filter of filters) {
+      queryParam += "filter=" + filter.searchPath + ":" + filter.value + "&";
+    }
+
+    this.searchText = this.searchText ? this.searchText : "";
+    this.cohortService.searchCohorts(this.searchText, queryParam).subscribe(data => {
       this.cohorts = data;
+      this.cohortsTableBuilder = new CohortTableBuilder(this.cohorts);
     });
   }
+
 }

@@ -2,8 +2,8 @@ import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
-import {Cohort, CohortList, DataTypes} from "../models/cohort";
-import {FormGroup} from "@angular/forms";
+import {Cohort, DataTypes, EmbeddedCohort} from "../models/cohort";
+import {PageModel} from "../models/PageModel";
 
 @Injectable({
   providedIn: 'root'
@@ -11,37 +11,38 @@ import {FormGroup} from "@angular/forms";
 export class CohortService {
   cohortAtlasApi = environment.cohort_atlas_api;
   harmonizationApi = environment.harmonization_api;
-
   dataDictionary: any[];
-
 
   constructor(private http: HttpClient) {
 
   }
 
-  public getCohorts1(): Observable<CohortList> {
-    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts');
+  public getCohorts1(): Observable<PageModel<EmbeddedCohort>> {
+    return this.http.get<PageModel<EmbeddedCohort>>(this.cohortAtlasApi + '/cohorts');
   }
 
   public getCohorts(): Observable<Cohort[]> {
-    return this.http.get<CohortList>(this.cohortAtlasApi + '/cohorts').pipe(
-      map((cohortList: CohortList) => cohortList._embedded.cohorts.map(cohort => {
+    return this.http.get<PageModel<EmbeddedCohort>>(this.cohortAtlasApi + '/cohorts').pipe(
+      map((cohortList: PageModel<EmbeddedCohort>) => cohortList._embedded.cohorts.map(cohort => {
         if (!cohort.dataTypes) {
           cohort.dataTypes = new DataTypes();
         }
         if (!cohort.acronym) {
           cohort.acronym = cohort.accession;
         }
+        cohort.enrollmentPeriod = cohort.startDate + ' - ' + cohort.endDate;
         return cohort
       }))
     );
   }
 
-  public searchCohorts(filterQueryParams: string) {
-    const filterUrl: string = this.cohortAtlasApi + '/cohorts'.concat("?").concat(filterQueryParams);
+  public searchCohorts(searchText: string, filterQueryParams: string) {
+    const filterUrl: string = this.cohortAtlasApi + '/cohorts'.concat("?")
+      .concat("text=").concat(searchText)
+      .concat("&").concat(filterQueryParams);
     console.log("Filter URL:" + filterUrl);
-    return this.http.get<CohortList>(filterUrl).pipe(
-      map((cohortList: CohortList) => {
+    return this.http.get<PageModel<EmbeddedCohort>>(filterUrl).pipe(
+      map((cohortList: PageModel<EmbeddedCohort>) => {
         let cohorts = cohortList._embedded ? cohortList._embedded.cohorts : [];
         cohorts.map(cohort => {
           if (!cohort.dataTypes) {
@@ -50,6 +51,7 @@ export class CohortService {
           if (!cohort.acronym) {
             cohort.acronym = cohort.accession;
           }
+          cohort.enrollmentPeriod = cohort.startDate + ' - ' + cohort.endDate;
           return cohort
         })
         return cohorts;
@@ -74,6 +76,7 @@ export class CohortService {
         if (!cohort.acronym) {
           cohort.acronym = cohort.accession;
         }
+        cohort.enrollmentPeriod = cohort.startDate + ' - ' + cohort.endDate;
         return cohort
       })
     );

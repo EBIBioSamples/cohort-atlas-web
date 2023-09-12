@@ -8,7 +8,7 @@ import {TableManagerService} from "../../service/table-manager.service";
   styleUrls: ['./table.component.scss']
 })
 export class TableComponent<T> implements OnInit {
-  @Input() cohorts: T[];
+  @Input() data: T[];
   @Input() tableBuilder: TableBuilder<T>;
 
   displayedColumns = [

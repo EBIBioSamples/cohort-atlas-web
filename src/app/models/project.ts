@@ -1,8 +1,27 @@
 import {TableBuilder} from "./table-builder";
-import {Cohort, DataTypes} from "./cohort";
+import {Embedded} from "./PageModel";
+
+
+export class EmbeddedProject implements Embedded<Project> {
+  projects: Project[];
+
+  getData(): Project[] {
+    return this.projects;
+  }
+}
 
 export class Project {
-
+  accession: string;
+  name: string;
+  description: string;
+  acronym: string;
+  website: string;
+  provider: string;
+  rights: string;
+  startDate: string;
+  endDate: string;
+  funding: string;
+  acknowledgements: string;
 }
 
 export class ProjectTableBuilder implements TableBuilder<Project> {
@@ -21,81 +40,35 @@ export class ProjectTableBuilder implements TableBuilder<Project> {
       },
       'Title': {
         'field': 'Title',
-        'path': 'cohortName',
+        'path': 'name',
         'rowspan': 2,
         'colspan': 1
       },
-      'Participants': {
-        'field': 'Participants',
-        'path': 'totalEnrollment',
-        'rowspan': 2,
-        'colspan': 1
-      },
-      'Enrollment Period': {
-        'field': 'Enrollment Period',
+      'Start Date': {
+        'field': 'startDate',
         'path': 'startDate',
         'rowspan': 2,
         'colspan': 1
       },
-      'Data Types': {
-        'field': 'Data Types',
+      'End Date': {
+        'field': 'endDate',
         'path': 'endDate',
-        'rowspan': 1,
-        'colspan': 5
-      },
-      'data1': {
-        'field': 'data1',
-        'path': 'dataTypes.biospecimens',
-        'rowspan': 1,
-        'colspan': 1,
-        'type': 'boolean',
-        'icon': 'icon-common icon-flask'
-      },
-      'data2': {
-        'field': 'data2',
-        'path': 'dataTypes.environmentalData',
-        'rowspan': 1,
-        'colspan': 1,
-        'type': 'boolean',
-        'icon': 'icon-common icon-stethoscope'
-      },
-      'data3': {
-        'field': 'data3',
-        'path': 'dataTypes.genomicData',
-        'rowspan': 1,
-        'colspan': 1,
-        'type': 'boolean',
-        'icon': 'icon-species icon-human'
-      },
-      'data4': {
-        'field': 'data4',
-        'path': 'dataTypes.phenotypicData',
-        'rowspan': 1,
-        'colspan': 1,
-        'type': 'boolean',
-        'icon': 'icon-species icon-virus'
-      },
-      'data5': {
-        'field': 'data5',
-        'path': 'dataTypes.other',
-        'rowspan': 1,
-        'colspan': 1,
-        'type': 'boolean',
-        'icon': 'icon-common icon-plus'
+        'rowspan': 2,
+        'colspan': 1
       }
     };
   }
 
   getTableHeaders(): string[] {
-    return ['Acronym', 'Title', 'Participants', 'Enrollment Period', 'data1', 'data2', 'data3', 'data4', 'data5'];
+    return ['Acronym', 'Title', 'Start Date', 'End Date'];
   }
 
   getHeaderNames(): string[] {
-    return ['Acronym', 'Title', 'Participants', 'Enrollment Period', 'Data Types'];
+    return ['Acronym', 'Title', 'Start Date', 'End Date'];
   }
 
   getSubHeaderNames(): string[] {
-    return ['data1', 'data2', 'data3', 'data4', 'data5'];
+    return [];
   }
 
   getColumnDefinitions(): {} {

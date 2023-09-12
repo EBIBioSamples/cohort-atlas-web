@@ -1,29 +1,13 @@
 import {TableBuilder} from "./table-builder";
-import {bootstrapApplication} from "@angular/platform-browser";
+import {Field} from "./Field";
+import {Embedded} from "./PageModel";
 
-export class CohortList {
-  _embedded: Embedded;
-  _links: Links;
-  page: Page;
-}
-
-export class Embedded {
+export class EmbeddedCohort implements Embedded<Cohort> {
   cohorts: Cohort[];
-}
 
-export class Links {
-  // _links: {
-  //   self: {
-  //     href: "http://localhost:8080/cohorts"
-  //   }
-  // }
-}
-
-export class Page {
-  size: number;
-  totalElements: number;
-  totalPages: number;
-  number: number;
+  getData(): Cohort[] {
+    return this.cohorts;
+  }
 }
 
 export class Cohort {
@@ -43,6 +27,8 @@ export class Cohort {
   investigators: Contact[];
   startDate: string;
   endDate: string;
+  enrollmentPeriod: string;
+
   targetEnrollment: number;
   totalEnrollment: number;
   publications: Publication[];
@@ -51,8 +37,7 @@ export class Cohort {
   territories: string[];
   dataTypes: DataTypes;
 
-  datasets: Dataset[];
-  projects: Project[];
+  projects: string[];
 
   attachments: Attachment[];
   externalLinks: ExternalLink[];
@@ -103,14 +88,6 @@ export class DataTypes {
   phenotypicData: boolean;
 }
 
-export class Dataset {
-  name: string;
-}
-
-export class Project {
-  name: string;
-}
-
 export class Attachment {
   name: string;
   resource: string;
@@ -125,18 +102,6 @@ export class ExternalLink {
   type: string;
   archive: string;
   cohort: string;
-}
-
-export class Field {
-  name: string;
-  label: string;
-  description: string;
-  type: string;
-  values: string;
-  parent: string;
-  suggestions: Suggestion[];
-  annotation: string;
-  tags: string;
 }
 
 export class Relation {
@@ -160,11 +125,6 @@ export class Summary {
   inclusionCriteria: string;
   releaseType: string;
   linkageOptions: string;
-}
-
-export class Suggestion {
-  fieldName: string;
-  matchPercentage: number;
 }
 
 
@@ -196,7 +156,7 @@ export class CohortTableBuilder implements TableBuilder<Cohort> {
       },
       'Enrollment Period': {
         'field': 'Enrollment Period',
-        'path': 'startDate',
+        'path': 'enrollmentPeriod',
         'rowspan': 2,
         'colspan': 1
       },

@@ -1,6 +1,6 @@
 import {Component, Inject, OnInit} from '@angular/core';
 import {MAT_DIALOG_DATA} from "@angular/material/dialog";
-import {Field} from "../../models/cohort";
+import {Field} from "../../models/Field";
 
 @Component({
   selector: 'app-dictionary-dialog',

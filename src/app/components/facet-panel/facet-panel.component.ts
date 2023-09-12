@@ -11,7 +11,7 @@ import {Facet, Filter} from "../../models/facet";
   styleUrls: ['./facet-panel.component.scss']
 })
 export class FacetPanelComponent implements OnInit {
-  @Output() applyFilterEvent = new EventEmitter<String>();
+  @Output() applyFilterEvent = new EventEmitter<Filter[]>();
 
   filterFormGroup = this._formBuilder.group({});
   filters: Filter[] = [];
@@ -37,7 +37,7 @@ export class FacetPanelComponent implements OnInit {
   clearFilters() {
     this.filters = [];
     this.filterFormGroup.reset();
-    this.applyFilterEvent.emit("");
+    this.applyFilterEvent.emit(this.filters);
   }
 
   applyFilters() {
@@ -49,11 +49,6 @@ export class FacetPanelComponent implements OnInit {
         }
       }
     }
-
-    let queryParam = "";
-    for (let filter of this.filters) {
-      queryParam += "filter=" + filter.searchPath + ":" + filter.value + "&";
-    }
-    this.applyFilterEvent.emit(queryParam);
+    this.applyFilterEvent.emit(this.filters);
   }
 }

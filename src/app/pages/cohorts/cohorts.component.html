@@ -6,8 +6,8 @@
     </div>
 
     <div class="cohort-search">
-      <input matInput placeholder="eg. UKB" class="cohort-search-input">
-      <button mat-button color="primary" class="cohort-search-btn">
+      <input matInput placeholder="eg. UKB" class="cohort-search-input" [(ngModel)]="searchText">
+      <button mat-button color="primary" class="cohort-search-btn" (click)="applyFilters(filters)">
         <mat-icon>search</mat-icon>
       </button>
     </div>
@@ -32,13 +32,13 @@
     <div class="cohort-content">
       <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
         <mat-tab label="Cohorts">
-          <app-table *ngIf="cohortsTableBuilder" [cohorts]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
+          <app-table *ngIf="cohortsTableBuilder" [data]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
         </mat-tab>
         <mat-tab label="Projects">
-          <app-table *ngIf="cohortsTableBuilder" [cohorts]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
+          <app-table *ngIf="projectsTableBuilder" [data]="projects" [tableBuilder]="projectsTableBuilder"></app-table>
         </mat-tab>
         <mat-tab label="Variables">
-          <app-table *ngIf="cohortsTableBuilder" [cohorts]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
+          <app-table *ngIf="fieldTableBuilder" [data]="fields" [tableBuilder]="fieldTableBuilder"></app-table>
         </mat-tab>
       </mat-tab-group>
     </div>
