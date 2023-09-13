@@ -1,6 +1,6 @@
 import {TableBuilder} from "./table-builder";
 import {Field} from "./Field";
-import {Embedded} from "./PageModel";
+import {Embedded, PageModel} from "./PageModel";
 
 export class EmbeddedCohort implements Embedded<Cohort> {
   cohorts: Cohort[];
@@ -128,7 +128,8 @@ export class Summary {
 }
 
 
-export class CohortTableBuilder implements TableBuilder<Cohort> {
+export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> {
+  pageModel: PageModel<EmbeddedCohort>;
   data: Cohort[];
   columnDef: {};
 

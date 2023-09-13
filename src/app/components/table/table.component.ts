@@ -1,29 +1,36 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TableBuilder} from "../../models/table-builder";
 import {TableManagerService} from "../../service/table-manager.service";
+import {MatPaginator, PageEvent} from "@angular/material/paginator";
+import {MatTableDataSource} from "@angular/material/table";
+import {Filter} from "../../models/facet";
+import {Embedded} from "../../models/PageModel";
 
 @Component({
   selector: 'app-table',
   templateUrl: './table.component.html',
   styleUrls: ['./table.component.scss']
 })
-export class TableComponent<T> implements OnInit {
+export class TableComponent<T, S extends Embedded<any>> implements OnInit, AfterViewInit {
   @Input() data: T[];
-  @Input() tableBuilder: TableBuilder<T>;
+  @Input() tableBuilder: TableBuilder<T, S>;
+  @Output() pageChange = new EventEmitter<PageEvent>();
 
-  displayedColumns = [
-    'Acronym', 'Title', 'Participants', 'Enrollment Period', 'License', 'Data Types'
-  ];
-
-  headers: string[];
-  columnHeaders: string[];
-  columnSubHeaders: string[];
+  totalRecords: number;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(private tableManagerService: TableManagerService) {
   }
 
   ngOnInit(): void {
-    this.headers = this.tableBuilder.getTableHeaders();
+    // this.dataSource = new MatTableDataSource<T>(this.data);
+    this.totalRecords = this.data.length + 1;
+  }
+
+  ngAfterViewInit() {
+    this.paginator.page.subscribe(() => {
+      this.pageChange.emit(this.paginator);
+    })
   }
 
   getChildElementValue(object: any, path: string) {

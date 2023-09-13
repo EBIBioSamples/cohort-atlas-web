@@ -36,10 +36,11 @@ export class CohortService {
     );
   }
 
-  public searchCohorts(searchText: string, filterQueryParams: string) {
+  public searchCohorts(searchText: string, filterQueryParams: string, page: number) {
     const filterUrl: string = this.cohortAtlasApi + '/cohorts'.concat("?")
       .concat("text=").concat(searchText)
-      .concat("&").concat(filterQueryParams);
+      .concat("&").concat(filterQueryParams)
+      .concat("&").concat("page=").concat(page.toString());
     console.log("Filter URL:" + filterUrl);
     return this.http.get<PageModel<EmbeddedCohort>>(filterUrl).pipe(
       map((cohortList: PageModel<EmbeddedCohort>) => {

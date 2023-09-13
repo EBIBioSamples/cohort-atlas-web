@@ -7,6 +7,7 @@ import {Field, FieldTableBuilder} from "../../models/Field";
 import {Project, ProjectTableBuilder} from "../../models/project";
 import {FieldService} from "../../service/field.service";
 import {ProjectService} from "../../service/project.service";
+import {MatPaginator} from "@angular/material/paginator";
 
 @Component({
   selector: 'app-cohorts',
@@ -22,7 +23,7 @@ export class CohortsComponent implements OnInit {
   fieldTableBuilder: FieldTableBuilder;
   facetSummary: FacetSummary;
 
-  filters: Filter[];
+  filters: Filter[] = [];
   searchText: string;
 
   constructor(private cohortService: CohortService, private facetService: FacetService,
@@ -50,7 +51,7 @@ export class CohortsComponent implements OnInit {
     })
   }
 
-  applyFilters(filters: Filter[]) {
+  applyFilters(filters: Filter[], page: number) {
     this.filters = filters;
     let queryParam = "";
     for (let filter of filters) {
@@ -58,10 +59,14 @@ export class CohortsComponent implements OnInit {
     }
 
     this.searchText = this.searchText ? this.searchText : "";
-    this.cohortService.searchCohorts(this.searchText, queryParam).subscribe(data => {
+    this.cohortService.searchCohorts(this.searchText, queryParam, page).subscribe(data => {
       this.cohorts = data;
       this.cohortsTableBuilder = new CohortTableBuilder(this.cohorts);
     });
+  }
+
+  nextPage(page) {
+    this.applyFilters(this.filters, page.pageIndex);
   }
 
 }

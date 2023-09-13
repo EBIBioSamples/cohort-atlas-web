@@ -1,5 +1,5 @@
 import {TableBuilder} from "./table-builder";
-import {Embedded} from "./PageModel";
+import {Embedded, PageModel} from "./PageModel";
 
 
 export class EmbeddedProject implements Embedded<Project> {
@@ -24,7 +24,8 @@ export class Project {
   acknowledgements: string;
 }
 
-export class ProjectTableBuilder implements TableBuilder<Project> {
+export class ProjectTableBuilder implements TableBuilder<Project, EmbeddedProject> {
+  pageModel: PageModel<EmbeddedProject>;
   data: Project[];
   columnDef: {};
 

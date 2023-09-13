@@ -7,7 +7,7 @@
 
     <div class="cohort-search">
       <input matInput placeholder="eg. UKB" class="cohort-search-input" [(ngModel)]="searchText">
-      <button mat-button color="primary" class="cohort-search-btn" (click)="applyFilters(filters)">
+      <button mat-button color="primary" class="cohort-search-btn" (click)="applyFilters(filters, 0)">
         <mat-icon>search</mat-icon>
       </button>
     </div>
@@ -25,14 +25,14 @@
   <div class="filter-table-wrapper">
     <div class="filters">
       <div>
-        <app-facet-panel (applyFilterEvent)="applyFilters($event)"></app-facet-panel>
+        <app-facet-panel (applyFilterEvent)="applyFilters($event, 0)"></app-facet-panel>
       </div>
     </div>
 
     <div class="cohort-content">
       <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
         <mat-tab label="Cohorts">
-          <app-table *ngIf="cohortsTableBuilder" [data]="cohorts" [tableBuilder]="cohortsTableBuilder"></app-table>
+          <app-table *ngIf="cohortsTableBuilder" [data]="cohorts" [tableBuilder]="cohortsTableBuilder" (pageChange)="nextPage($event)"></app-table>
         </mat-tab>
         <mat-tab label="Projects">
           <app-table *ngIf="projectsTableBuilder" [data]="projects" [tableBuilder]="projectsTableBuilder"></app-table>

@@ -1,5 +1,5 @@
 import {TableBuilder} from "./table-builder";
-import {Embedded} from "./PageModel";
+import {Embedded, PageModel} from "./PageModel";
 
 export class EmbeddedField implements Embedded<Field> {
   dictionaryFields: Field[];
@@ -26,7 +26,8 @@ export class Suggestion {
   matchPercentage: number;
 }
 
-export class FieldTableBuilder implements TableBuilder<Field> {
+export class FieldTableBuilder implements TableBuilder<Field, EmbeddedField> {
+  pageModel: PageModel<EmbeddedField>;
   data: Field[];
   columnDef: {};
 
