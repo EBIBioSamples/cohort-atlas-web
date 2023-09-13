@@ -14,11 +14,10 @@ export class FieldService {
   constructor(private http: HttpClient) {
   }
 
-  public getFields(): Observable<Field[]> {
+  public getFields(searchText: string = "", filterQueryParams: string = "", page: number = 0): Observable<PageModel<EmbeddedField>> {
     return this.http.get<PageModel<EmbeddedField>>(this.cohortAtlasApi + '/fields').pipe(
       map((fieldPageModel: PageModel<EmbeddedField>) => {
-        console.log(fieldPageModel);
-        return fieldPageModel._embedded.dictionaryFields;
+        return fieldPageModel;
       })
     );
   }

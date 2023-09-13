@@ -29,8 +29,9 @@ export class ProjectTableBuilder implements TableBuilder<Project, EmbeddedProjec
   data: Project[];
   columnDef: {};
 
-  constructor(projects: Project[]) {
-    this.data = projects;
+  constructor(pageModel: PageModel<EmbeddedProject>) {
+    this.pageModel = pageModel;
+    this.data = pageModel._embedded.projects;
 
     this.columnDef = {
       'Acronym': {

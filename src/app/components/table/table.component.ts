@@ -14,7 +14,7 @@ import {Embedded} from "../../models/PageModel";
 export class TableComponent<T, S extends Embedded<any>> implements OnInit, AfterViewInit {
   @Input() data: T[];
   @Input() tableBuilder: TableBuilder<T, S>;
-  @Output() pageChange = new EventEmitter<PageEvent>();
+  @Output() pageChange = new EventEmitter<MatPaginator>();
 
   totalRecords: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -24,7 +24,8 @@ export class TableComponent<T, S extends Embedded<any>> implements OnInit, After
 
   ngOnInit(): void {
     // this.dataSource = new MatTableDataSource<T>(this.data);
-    this.totalRecords = this.data.length + 1;
+    // this.totalRecords = this.data.length + 1;
+    this.totalRecords = this.tableBuilder.pageModel.page.totalElements;
   }
 
   ngAfterViewInit() {

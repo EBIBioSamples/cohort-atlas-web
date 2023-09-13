@@ -13,7 +13,7 @@ export class HomeComponent implements OnInit {
   constructor(private cohortService: CohortService) { }
 
   ngOnInit(): void {
-    this.cohortService.getCohorts().subscribe(data => {
+    this.cohortService.searchCohorts("", "", 0).subscribe(data => {
       this.cohorts = data["_embedded"]["cohorts"];
       console.log(this.cohorts)
     });

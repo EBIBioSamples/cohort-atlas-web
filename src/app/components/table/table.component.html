@@ -29,6 +29,6 @@
     <tr mat-row (click)="onClickTableRow(row)" *matRowDef="let row; columns: tableBuilder.getTableHeaders();"></tr>
   </table>
 
-  <mat-paginator [length]="totalRecords" [pageSizeOptions]="[10, 20]" showFirstLastButtons aria-label="dataset pages">
+  <mat-paginator [length]="totalRecords" [pageSizeOptions]="[10]" showFirstLastButtons aria-label="dataset pages">
   </mat-paginator>
 </section>

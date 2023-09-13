@@ -14,11 +14,10 @@ export class ProjectService {
   constructor(private http: HttpClient) {
   }
 
-  public getProjects(): Observable<Project[]> {
+  public searchProjects(searchText: string = "", filterQueryParams: string = "", page: number = 0): Observable<PageModel<EmbeddedProject>> {
     return this.http.get<PageModel<EmbeddedProject>>(this.cohortAtlasApi + '/projects').pipe(
       map((pageModel: PageModel<EmbeddedProject>) => {
-        console.log(pageModel);
-        return pageModel._embedded.projects;
+        return pageModel;
       })
     );
   }

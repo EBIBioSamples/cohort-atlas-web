@@ -31,19 +31,19 @@ export class CohortsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.cohortService.getCohorts().subscribe(data => {
-      this.cohorts = data;
-      this.cohortsTableBuilder = new CohortTableBuilder(this.cohorts);
+    this.cohortService.searchCohorts().subscribe(page => {
+      this.cohorts = page._embedded.cohorts;
+      this.cohortsTableBuilder = new CohortTableBuilder(page);
     });
 
-    this.projectService.getProjects().subscribe(data => {
-      this.projects = data;
-      this.projectsTableBuilder = new ProjectTableBuilder(this.projects);
+    this.projectService.searchProjects().subscribe(page => {
+      this.projects = page._embedded.projects;
+      this.projectsTableBuilder = new ProjectTableBuilder(page);
     });
 
-    this.fieldService.getFields().subscribe(data => {
-      this.fields = data;
-      this.fieldTableBuilder = new FieldTableBuilder(this.fields);
+    this.fieldService.getFields().subscribe(page => {
+      this.fields = page._embedded.dictionaryFields;
+      this.fieldTableBuilder = new FieldTableBuilder(page);
     });
 
     this.facetService.getOverallSummary().subscribe(data => {
@@ -60,12 +60,12 @@ export class CohortsComponent implements OnInit {
 
     this.searchText = this.searchText ? this.searchText : "";
     this.cohortService.searchCohorts(this.searchText, queryParam, page).subscribe(data => {
-      this.cohorts = data;
-      this.cohortsTableBuilder = new CohortTableBuilder(this.cohorts);
+      this.cohorts = data._embedded.cohorts;
+      this.cohortsTableBuilder = new CohortTableBuilder(data);
     });
   }
 
-  nextPage(page) {
+  nextPage(page: MatPaginator) {
     this.applyFilters(this.filters, page.pageIndex);
   }
 

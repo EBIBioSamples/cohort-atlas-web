@@ -17,35 +17,16 @@ export class CohortService {
 
   }
 
-  public getCohorts1(): Observable<PageModel<EmbeddedCohort>> {
-    return this.http.get<PageModel<EmbeddedCohort>>(this.cohortAtlasApi + '/cohorts');
-  }
-
-  public getCohorts(): Observable<Cohort[]> {
-    return this.http.get<PageModel<EmbeddedCohort>>(this.cohortAtlasApi + '/cohorts').pipe(
-      map((cohortList: PageModel<EmbeddedCohort>) => cohortList._embedded.cohorts.map(cohort => {
-        if (!cohort.dataTypes) {
-          cohort.dataTypes = new DataTypes();
-        }
-        if (!cohort.acronym) {
-          cohort.acronym = cohort.accession;
-        }
-        cohort.enrollmentPeriod = cohort.startDate + ' - ' + cohort.endDate;
-        return cohort
-      }))
-    );
-  }
-
-  public searchCohorts(searchText: string, filterQueryParams: string, page: number) {
+  public searchCohorts(searchText: string = "", filterQueryParams: string = "", page: number = 0): Observable<PageModel<EmbeddedCohort>> {
     const filterUrl: string = this.cohortAtlasApi + '/cohorts'.concat("?")
       .concat("text=").concat(searchText)
       .concat("&").concat(filterQueryParams)
       .concat("&").concat("page=").concat(page.toString());
     console.log("Filter URL:" + filterUrl);
     return this.http.get<PageModel<EmbeddedCohort>>(filterUrl).pipe(
-      map((cohortList: PageModel<EmbeddedCohort>) => {
-        let cohorts = cohortList._embedded ? cohortList._embedded.cohorts : [];
-        cohorts.map(cohort => {
+      map((cohortPage: PageModel<EmbeddedCohort>) => {
+        let cohorts = cohortPage._embedded ? cohortPage._embedded.cohorts : [];
+        cohortPage._embedded.cohorts = cohorts.map(cohort => {
           if (!cohort.dataTypes) {
             cohort.dataTypes = new DataTypes();
           }
@@ -55,7 +36,7 @@ export class CohortService {
           cohort.enrollmentPeriod = cohort.startDate + ' - ' + cohort.endDate;
           return cohort
         })
-        return cohorts;
+        return cohortPage;
       })
     );
   }

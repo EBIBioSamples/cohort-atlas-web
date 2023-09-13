@@ -31,8 +31,9 @@ export class FieldTableBuilder implements TableBuilder<Field, EmbeddedField> {
   data: Field[];
   columnDef: {};
 
-  constructor(fields: Field[]) {
-    this.data = fields;
+  constructor(pageModel: PageModel<EmbeddedField>) {
+    this.data = pageModel._embedded.dictionaryFields;
+    this.pageModel = pageModel;
 
     this.columnDef = {
       'Name': {

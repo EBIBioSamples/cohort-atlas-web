@@ -133,8 +133,9 @@ export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> 
   data: Cohort[];
   columnDef: {};
 
-  constructor(cohorts: Cohort[]) {
-    this.data = cohorts;
+  constructor(pageModel: PageModel<EmbeddedCohort>) {
+    this.data = pageModel._embedded.cohorts;
+    this.pageModel = pageModel;
 
     this.columnDef = {
       'Acronym': {
