@@ -69,4 +69,17 @@ export class CohortsComponent implements OnInit {
     this.applyFilters(this.filters, page.pageIndex);
   }
 
+  nextFieldPage(page: MatPaginator) {
+    let queryParam = "";
+    for (let filter of this.filters) {
+      queryParam += "filter=" + filter.searchPath + ":" + filter.value + "&";
+    }
+    this.searchText = this.searchText ? this.searchText : "";
+
+    this.fieldService.getFields(this.searchText, queryParam, page.pageIndex).subscribe(page => {
+      this.fields = page._embedded.dictionaryFields;
+      this.fieldTableBuilder = new FieldTableBuilder(page);
+    });
+  }
+
 }

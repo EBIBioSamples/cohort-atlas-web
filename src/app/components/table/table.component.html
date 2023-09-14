@@ -1,5 +1,25 @@
 <section class="cohort-table-container" tabindex="0">
-  <div style="float: right; margin: -5px 5px">...</div><!--edit columns here-->
+  <div class="table-controls">
+    <mat-paginator [length]="totalRecords" [pageSizeOptions]="[10]" showFirstLastButtons aria-label="dataset pages" class="table-paginator">
+    </mat-paginator>
+    <button mat-icon-button class="table-columns-btn" [matMenuTriggerFor]="columnSelectMenu">
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <mat-menu #columnSelectMenu="matMenu">
+      <div class="column-select-wrapper">
+        <mat-checkbox class="column-select-option" (click) = "$event.stopPropagation()"
+                      *ngFor="let header of tableBuilder.getHeaderNames()">
+          {{header}}
+        </mat-checkbox>
+
+        <mat-checkbox>Extra Cheese</mat-checkbox>
+      </div>
+    </mat-menu>
+
+
+  </div>
+
 
   <table mat-table [dataSource]="tableBuilder.data">
     <ng-container *ngFor="let colDef of tableBuilder.getColumnDefinitions() | keyvalue" [matColumnDef]="colDef.key">
@@ -28,7 +48,4 @@
     <tr mat-header-row *matHeaderRowDef="tableBuilder.getSubHeaderNames()" class="table-header"></tr>
     <tr mat-row (click)="onClickTableRow(row)" *matRowDef="let row; columns: tableBuilder.getTableHeaders();"></tr>
   </table>
-
-  <mat-paginator [length]="totalRecords" [pageSizeOptions]="[10]" showFirstLastButtons aria-label="dataset pages">
-  </mat-paginator>
 </section>

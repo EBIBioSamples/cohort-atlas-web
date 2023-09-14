@@ -23,8 +23,6 @@ export class TableComponent<T, S extends Embedded<any>> implements OnInit, After
   }
 
   ngOnInit(): void {
-    // this.dataSource = new MatTableDataSource<T>(this.data);
-    // this.totalRecords = this.data.length + 1;
     this.totalRecords = this.tableBuilder.pageModel.page.totalElements;
   }
 

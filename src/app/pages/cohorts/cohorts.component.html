@@ -38,7 +38,7 @@
           <app-table *ngIf="projectsTableBuilder" [data]="projects" [tableBuilder]="projectsTableBuilder"></app-table>
         </mat-tab>
         <mat-tab label="Variables">
-          <app-table *ngIf="fieldTableBuilder" [data]="fields" [tableBuilder]="fieldTableBuilder"></app-table>
+          <app-table *ngIf="fieldTableBuilder" [data]="fields" [tableBuilder]="fieldTableBuilder" (pageChange)="nextFieldPage($event)"></app-table>
         </mat-tab>
       </mat-tab-group>
     </div>

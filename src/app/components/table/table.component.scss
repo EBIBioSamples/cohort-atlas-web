@@ -4,15 +4,31 @@
 
 .cohort-table-container {
   height: 100%;
-  //width: 550px;
+  width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
+  padding: 0 10px;
+  background: #ffffff;
+}
+
+.table-controls {
   width: 100%;
-  max-width: 100%;
-  //overflow: scroll;
-  //margin-bottom: 300px;
+  background: white;
+  display: block;
+  overflow: hidden;
+  margin-bottom: -10px;
+}
+
+.table-paginator {
+  float: left;
+  margin-left: -10px;
+}
+
+.table-columns-btn {
+  float: right;
+  color: #7c7c7c;
 }
 
 table {
-  //width: 800px;
   width: 100%;
 }
 
@@ -60,11 +76,6 @@ th.mat-column-position, td.mat-column-position {
   cursor: pointer;
 }
 
-//th.mat-header-cell, td.mat-cell, td.mat-footer-cell {
-//  padding-left: 10px;
-//  margin-left: 10px;
-//}
-
 th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
   padding-left: 0;
 }
@@ -81,4 +92,12 @@ th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:la
 
 .mat-row:hover {
   background-color: #eaecfa;
+}
+
+.column-select-wrapper {
+  padding: 20px;
+}
+
+.column-select-option {
+  margin: 5px;
 }

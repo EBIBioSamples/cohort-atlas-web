@@ -15,7 +15,11 @@ export class FieldService {
   }
 
   public getFields(searchText: string = "", filterQueryParams: string = "", page: number = 0): Observable<PageModel<EmbeddedField>> {
-    return this.http.get<PageModel<EmbeddedField>>(this.cohortAtlasApi + '/fields').pipe(
+    const searchUrl: string = this.cohortAtlasApi + '/fields'.concat("?")
+      .concat("text=").concat(searchText)
+      .concat("&").concat(filterQueryParams)
+      .concat("&").concat("page=").concat(page.toString());
+    return this.http.get<PageModel<EmbeddedField>>(searchUrl).pipe(
       map((fieldPageModel: PageModel<EmbeddedField>) => {
         return fieldPageModel;
       })

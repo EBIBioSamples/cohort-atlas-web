@@ -1,6 +1,8 @@
 .cohort-body {
   width: 1400px;
   margin: 20px auto;
+  background: #ffffff;
+  padding: 12px;
 }
 
 .cohort-header {
@@ -60,7 +62,6 @@
   float: left;
   font-size: 16px;
   padding: 1px 25px;
-  margin-right: 3px;
 }
 
 .cohort-dictionary {
@@ -105,7 +106,7 @@
   padding-bottom: 5px;
 }
 
-::ng-deep .mat-header-cell {
+:host ::ng-deep .mat-header-cell {
   font-size: 14px;
 }
 
@@ -140,5 +141,9 @@ table {
 
 td.mat-cell {
   border: none;
+}
+
+.mat-table {
+  background: none;
 }
 
