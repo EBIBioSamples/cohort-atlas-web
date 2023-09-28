@@ -8,16 +8,12 @@
 
     <mat-menu #columnSelectMenu="matMenu">
       <div class="column-select-wrapper">
-        <mat-checkbox class="column-select-option" (click) = "$event.stopPropagation()"
-                      *ngFor="let header of tableBuilder.getHeaderNames()">
+        <mat-checkbox class="column-select-option" (click) = "onSelectNewColumn(tableBuilder.columnDef[header], $event)" value="{{header}}"
+                      *ngFor="let header of tableBuilder.getDisplayHeaders()" [checked]="tableBuilder.columnDef[header].display">
           {{header}}
         </mat-checkbox>
-
-        <mat-checkbox>Extra Cheese</mat-checkbox>
       </div>
     </mat-menu>
-
-
   </div>
 
 

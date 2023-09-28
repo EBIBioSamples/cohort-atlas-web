@@ -1,5 +1,5 @@
 import {TableBuilder} from "./table-builder";
-import {Embedded, PageModel} from "./PageModel";
+import {Embedded, PageModel} from "./page-model";
 
 
 export class EmbeddedProject implements Embedded<Project> {
@@ -24,12 +24,10 @@ export class Project {
   acknowledgements: string;
 }
 
-export class ProjectTableBuilder implements TableBuilder<Project, EmbeddedProject> {
-  pageModel: PageModel<EmbeddedProject>;
-  data: Project[];
-  columnDef: {};
+export class ProjectTableBuilder extends TableBuilder<Project, EmbeddedProject> {
 
   constructor(pageModel: PageModel<EmbeddedProject>) {
+    super();
     this.pageModel = pageModel;
     this.data = pageModel._embedded.projects;
 
@@ -37,44 +35,44 @@ export class ProjectTableBuilder implements TableBuilder<Project, EmbeddedProjec
       'Acronym': {
         'field': 'Acronym',
         'path': 'acronym',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Title': {
         'field': 'Title',
         'path': 'name',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Start Date': {
         'field': 'startDate',
         'path': 'startDate',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'End Date': {
         'field': 'endDate',
         'path': 'endDate',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       }
     };
-  }
-
-  getTableHeaders(): string[] {
-    return ['Acronym', 'Title', 'Start Date', 'End Date'];
-  }
-
-  getHeaderNames(): string[] {
-    return ['Acronym', 'Title', 'Start Date', 'End Date'];
-  }
-
-  getSubHeaderNames(): string[] {
-    return [];
-  }
-
-  getColumnDefinitions(): {} {
-    return this.columnDef;
   }
 }
 

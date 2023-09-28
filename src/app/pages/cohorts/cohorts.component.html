@@ -13,9 +13,9 @@
     </div>
 
     <div *ngIf="facetSummary" class="header-summary">
-      <div class="header-summary-tile">{{facetSummary.projects}} Projects</div>
-      <div class="header-summary-tile">{{facetSummary.datasets}} Cohorts</div>
-      <div class="header-summary-tile">{{facetSummary.variables}} Fields</div>
+      <div class="header-summary-tile">{{projectsTableBuilder.pageModel.page.totalElements}} Projects</div>
+      <div class="header-summary-tile">{{cohortsTableBuilder.pageModel.page.totalElements}} Cohorts</div>
+      <div class="header-summary-tile">{{fieldTableBuilder.pageModel.page.totalElements}} Fields</div>
       <div class="header-summary-tile">{{facetSummary.harmonisedVariables}} Mapped Fields</div>
       <div class="header-summary-tile">{{facetSummary.links}} Archive Links</div>
       <button mat-flat-button color="primary" class="header-summary-export">Export</button>

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {environment} from "../../environments/environment";
 import {HttpClient} from "@angular/common/http";
 import {map, Observable} from "rxjs";
-import {PageModel} from "../models/PageModel";
+import {PageModel} from "../models/page-model";
 import {EmbeddedProject, Project} from "../models/project";
 
 @Injectable({

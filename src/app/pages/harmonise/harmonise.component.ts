@@ -6,7 +6,7 @@ import {CohortService} from "../../service/cohort.service";
 import {Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DictionaryDialogComponent} from "../../components/dictionary-dialog/dictionary-dialog.component";
-import {Field} from "../../models/Field";
+import {Field} from "../../models/field";
 
 export interface DictionaryField {
   id: string;

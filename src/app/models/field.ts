@@ -1,5 +1,5 @@
 import {TableBuilder} from "./table-builder";
-import {Embedded, PageModel} from "./PageModel";
+import {Embedded, PageModel} from "./page-model";
 
 export class EmbeddedField implements Embedded<Field> {
   dictionaryFields: Field[];
@@ -28,12 +28,10 @@ export class Suggestion {
   matchPercentage: number;
 }
 
-export class FieldTableBuilder implements TableBuilder<Field, EmbeddedField> {
-  pageModel: PageModel<EmbeddedField>;
-  data: Field[];
-  columnDef: {};
+export class FieldTableBuilder extends TableBuilder<Field, EmbeddedField> {
 
   constructor(pageModel: PageModel<EmbeddedField>) {
+    super();
     this.data = pageModel._embedded.dictionaryFields;
     this.pageModel = pageModel;
 
@@ -41,56 +39,64 @@ export class FieldTableBuilder implements TableBuilder<Field, EmbeddedField> {
       'Name': {
         'field': 'Name',
         'path': 'name',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Description': {
         'field': 'description',
         'path': 'description',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Type': {
         'field': 'type',
         'path': 'type',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Annotation': {
         'field': 'annotation',
         'path': 'annotation',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Project': {
         'field': 'project',
         'path': 'project',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Cohort': {
         'field': 'cohort',
         'path': 'cohort',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       }
     };
-  }
-
-  getTableHeaders(): string[] {
-    return ['Name', 'Description', 'Type', 'Annotation', 'Project', 'Cohort'];
-  }
-
-  getHeaderNames(): string[] {
-    return ['Name', 'Description', 'Type', 'Annotation', 'Project', 'Cohort'];
-  }
-
-  getSubHeaderNames(): string[] {
-    return [];
-  }
-
-  getColumnDefinitions(): {} {
-    return this.columnDef;
   }
 }
 

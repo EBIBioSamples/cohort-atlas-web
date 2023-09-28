@@ -3,7 +3,7 @@ import {HttpClient, HttpHeaders} from "@angular/common/http";
 import {map, Observable} from "rxjs";
 import {environment} from "../../environments/environment";
 import {Cohort, DataTypes, EmbeddedCohort} from "../models/cohort";
-import {PageModel} from "../models/PageModel";
+import {PageModel} from "../models/page-model";
 
 @Injectable({
   providedIn: 'root'

@@ -1,16 +1,31 @@
-import {Embedded, PageModel} from "./PageModel";
+import {Embedded, PageModel} from "./page-model";
+import {ColumnDefinition} from "./column-definition";
 
-export interface TableBuilder<T, S extends Embedded<any>> {
+export class TableBuilder<T, S extends Embedded<any>> {
   pageModel: PageModel<S>;
   data: T[];
-  columnDef: {};
+  columnDef: Record<string, ColumnDefinition>;
 
-  getTableHeaders(): string[];
+  getColumnDefinitions(): {} {
+    return this.columnDef;
+  }
 
-  getHeaderNames(): string[];
+  getTableHeaders(): string[] {
+    return this.getHeaderNames().filter(key => this.columnDef[key].colspan === 1)
+      .concat(this.getSubHeaderNames());
+  }
 
-  getSubHeaderNames(): string[];
+  getHeaderNames(): string[] {
+    return Object.keys(this.columnDef).filter(key => this.columnDef[key].primary && this.columnDef[key].display);
+  }
 
-  getColumnDefinitions(): {};
+  getSubHeaderNames(): string[] {
+    return Object.keys(this.columnDef).filter(key => !this.columnDef[key].primary);
+  }
+
+  getDisplayHeaders(): any[] {
+    return Object.keys(this.columnDef)
+      .filter(key => this.columnDef[key].primary && this.columnDef[key].colspan === 1);
+  }
 }
 

@@ -3,7 +3,7 @@ import {CohortService} from "../../service/cohort.service";
 import {Cohort, CohortTableBuilder} from "../../models/cohort";
 import {FacetService} from "../../service/facet.service";
 import {FacetSummary, Filter} from "../../models/facet";
-import {Field, FieldTableBuilder} from "../../models/Field";
+import {Field, FieldTableBuilder} from "../../models/field";
 import {Project, ProjectTableBuilder} from "../../models/project";
 import {FieldService} from "../../service/field.service";
 import {ProjectService} from "../../service/project.service";
@@ -81,5 +81,4 @@ export class CohortsComponent implements OnInit {
       this.fieldTableBuilder = new FieldTableBuilder(page);
     });
   }
-
 }

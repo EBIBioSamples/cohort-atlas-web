@@ -1,10 +1,9 @@
 import {AfterViewInit, Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
 import {TableBuilder} from "../../models/table-builder";
 import {TableManagerService} from "../../service/table-manager.service";
-import {MatPaginator, PageEvent} from "@angular/material/paginator";
-import {MatTableDataSource} from "@angular/material/table";
-import {Filter} from "../../models/facet";
-import {Embedded} from "../../models/PageModel";
+import {MatPaginator} from "@angular/material/paginator";
+import {Embedded} from "../../models/page-model";
+import {ColumnDefinition} from "../../models/column-definition";
 
 @Component({
   selector: 'app-table',
@@ -35,9 +34,14 @@ export class TableComponent<T, S extends Embedded<any>> implements OnInit, After
   getChildElementValue(object: any, path: string) {
     let value = this.tableManagerService.getChildElementValue(object, path);
     if (!value) {
-     value = "";
+      value = "";
     }
     return value;
+  }
+
+  onSelectNewColumn(columnDef: ColumnDefinition, event: Event) {
+    columnDef.display = !columnDef.display;
+    event.stopPropagation();
   }
 
   onClickTableRow(row) {

@@ -1,6 +1,6 @@
 import {TableBuilder} from "./table-builder";
-import {Field} from "./Field";
-import {Embedded, PageModel} from "./PageModel";
+import {Field} from "./field";
+import {Embedded, PageModel} from "./page-model";
 
 export class EmbeddedCohort implements Embedded<Cohort> {
   cohorts: Cohort[];
@@ -128,12 +128,10 @@ export class Summary {
 }
 
 
-export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> {
-  pageModel: PageModel<EmbeddedCohort>;
-  data: Cohort[];
-  columnDef: {};
+export class CohortTableBuilder extends TableBuilder<Cohort, EmbeddedCohort> {
 
   constructor(pageModel: PageModel<EmbeddedCohort>) {
+    super();
     this.data = pageModel._embedded.cohorts;
     this.pageModel = pageModel;
 
@@ -141,36 +139,68 @@ export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> 
       'Acronym': {
         'field': 'Acronym',
         'path': 'acronym',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
+      },
+      'startDate': {
+        'field': 'startDate',
+        'path': 'startDate',
+        'primary': true,
+        'display': false,
+        'rowspan': 2,
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Title': {
         'field': 'Title',
         'path': 'cohortName',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Participants': {
         'field': 'Participants',
         'path': 'totalEnrollment',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Enrollment Period': {
         'field': 'Enrollment Period',
         'path': 'enrollmentPeriod',
+        'primary': true,
+        'display': true,
         'rowspan': 2,
-        'colspan': 1
+        'colspan': 1,
+        'type': 'string',
+        'icon': ''
       },
       'Data Types': {
         'field': 'Data Types',
         'path': 'endDate',
+        'primary': true,
+        'display': true,
         'rowspan': 1,
-        'colspan': 5
+        'colspan': 5,
+        'type': 'string',
+        'icon': ''
       },
       'data1': {
         'field': 'data1',
         'path': 'dataTypes.biospecimens',
+        'primary': false,
+        'display': true,
         'rowspan': 1,
         'colspan': 1,
         'type': 'boolean',
@@ -179,6 +209,8 @@ export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> 
       'data2': {
         'field': 'data2',
         'path': 'dataTypes.environmentalData',
+        'primary': false,
+        'display': true,
         'rowspan': 1,
         'colspan': 1,
         'type': 'boolean',
@@ -187,6 +219,8 @@ export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> 
       'data3': {
         'field': 'data3',
         'path': 'dataTypes.genomicData',
+        'primary': false,
+        'display': true,
         'rowspan': 1,
         'colspan': 1,
         'type': 'boolean',
@@ -195,6 +229,8 @@ export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> 
       'data4': {
         'field': 'data4',
         'path': 'dataTypes.phenotypicData',
+        'primary': false,
+        'display': true,
         'rowspan': 1,
         'colspan': 1,
         'type': 'boolean',
@@ -203,27 +239,13 @@ export class CohortTableBuilder implements TableBuilder<Cohort, EmbeddedCohort> 
       'data5': {
         'field': 'data5',
         'path': 'dataTypes.other',
+        'primary': false,
+        'display': true,
         'rowspan': 1,
         'colspan': 1,
         'type': 'boolean',
         'icon': 'icon-common icon-plus'
       }
     };
-  }
-
-  getTableHeaders(): string[] {
-    return ['Acronym', 'Title', 'Participants', 'Enrollment Period', 'data1', 'data2', 'data3', 'data4', 'data5'];
-  }
-
-  getHeaderNames(): string[] {
-    return ['Acronym', 'Title', 'Participants', 'Enrollment Period', 'Data Types'];
-  }
-
-  getSubHeaderNames(): string[] {
-    return ['data1', 'data2', 'data3', 'data4', 'data5'];
-  }
-
-  getColumnDefinitions(): {} {
-    return this.columnDef;
   }
 }
