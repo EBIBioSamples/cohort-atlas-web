@@ -1,0 +1,28 @@
+.login-wrapper {
+  width: 350px;
+  margin: 50px auto 300px;
+  color: #605f5f;
+}
+
+.login-title {
+  font-size: 24px;
+  text-align: center;
+  margin: 40px 0 30px;
+}
+
+.login-wrapper a {
+  all: unset;
+}
+
+.login-method {
+  border: 1px solid #ececec;
+  text-align: center;
+  font-size: 16px;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.login-method:hover {
+  background: white;
+  cursor: pointer;
+}

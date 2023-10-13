@@ -12,7 +12,7 @@
       </button>
     </div>
 
-    <div *ngIf="facetSummary" class="header-summary">
+    <div *ngIf="facetSummary && projectsTableBuilder && cohortsTableBuilder && fieldTableBuilder" class="header-summary">
       <div class="header-summary-tile">{{projectsTableBuilder.pageModel.page.totalElements}} Projects</div>
       <div class="header-summary-tile">{{cohortsTableBuilder.pageModel.page.totalElements}} Cohorts</div>
       <div class="header-summary-tile">{{fieldTableBuilder.pageModel.page.totalElements}} Fields</div>

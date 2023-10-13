@@ -5,7 +5,15 @@
 export const environment = {
   production: false,
   cohort_atlas_api: "http://localhost:8080/api",
-  harmonization_api: "http://localhost:5000"
+  harmonization_api: "http://localhost:5000",
+  oauth2: {
+    keycloak: {
+      client_id: "cohort-atlas-web-angular",
+      grant_type: "authorization_code",
+      redirect_uri: "http://localhost:4200",
+      auth_endpoint: "http://localhost:8090/realms/cohort-atlas/protocol/openid-connect/token",
+    }
+  }
 };
 
 /*

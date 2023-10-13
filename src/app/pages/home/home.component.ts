@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {CohortService} from "../../service/cohort.service";
+import {ActivatedRoute} from "@angular/router";
 
 @Component({
   selector: 'app-home',

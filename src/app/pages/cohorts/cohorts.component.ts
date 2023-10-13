@@ -8,6 +8,8 @@ import {Project, ProjectTableBuilder} from "../../models/project";
 import {FieldService} from "../../service/field.service";
 import {ProjectService} from "../../service/project.service";
 import {MatPaginator} from "@angular/material/paginator";
+import {ActivatedRoute} from "@angular/router";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-cohorts',
@@ -27,10 +29,17 @@ export class CohortsComponent implements OnInit {
   searchText: string;
 
   constructor(private cohortService: CohortService, private facetService: FacetService,
-              private fieldService: FieldService, private projectService: ProjectService) {
+              private fieldService: FieldService, private projectService: ProjectService,
+              private authService: AuthService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
+    let authCode = this.route.snapshot.queryParamMap.get("code");
+    if (authCode) {
+      console.log("Redirection after login detected. Continuing authorization_code flow for an access_token.")
+      this.authService.getAccessToken(authCode);
+    }
+
     this.cohortService.searchCohorts().subscribe(page => {
       this.cohorts = page._embedded.cohorts;
       this.cohortsTableBuilder = new CohortTableBuilder(page);

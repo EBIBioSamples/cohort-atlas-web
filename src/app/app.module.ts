@@ -6,7 +6,7 @@ import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import {HomeComponent} from './pages/home/home.component';
 import {RegisterComponent} from './pages/register/register.component';
-import {HttpClientModule} from "@angular/common/http";
+import {HttpClientModule, HTTP_INTERCEPTORS} from "@angular/common/http";
 import {HarmoniseComponent} from './pages/harmonise/harmonise.component';
 import {CohortComponent} from './pages/cohort/cohort.component';
 import {FooterComponent} from './footer/footer.component';
@@ -42,6 +42,8 @@ import { RegisterDictionaryComponent } from './components/register-dictionary/re
 import { DictionaryDialogComponent } from './components/dictionary-dialog/dictionary-dialog.component';
 import {MatDialogModule} from "@angular/material/dialog";
 import {MatBadgeModule} from "@angular/material/badge";
+import {AuthInterceptor} from "./interceptor/auth.interceptor";
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,8 @@ import {MatBadgeModule} from "@angular/material/badge";
     RegisterBasicComponent,
     RegisterAdditionalComponent,
     RegisterDictionaryComponent,
-    DictionaryDialogComponent
+    DictionaryDialogComponent,
+    LoginComponent
   ],
     imports: [
         BrowserModule,
@@ -91,7 +94,7 @@ import {MatBadgeModule} from "@angular/material/badge";
         MatDialogModule,
         MatBadgeModule
     ],
-  providers: [],
+  providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]
 })
 export class AppModule {

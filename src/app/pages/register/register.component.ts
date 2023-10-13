@@ -1,5 +1,5 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
-import {FormBuilder} from '@angular/forms';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
+import {FormBuilder, FormGroup} from '@angular/forms';
 import {Router} from "@angular/router";
 import {RegisterBasicComponent} from "../../components/register-basic/register-basic.component";
 import {RegisterAdditionalComponent} from "../../components/register-additional/register-additional.component";
@@ -16,23 +16,19 @@ export class RegisterComponent implements OnInit {
   @ViewChild('registerDictionaryComponent') registerDictionaryComponent: RegisterDictionaryComponent;
 
   accession: string;
+  registerStudyForm: FormGroup;
+  registerAdditionalStudyForm: FormGroup;
 
   constructor(private router: Router, private _formBuilder: FormBuilder) {
   }
 
   ngOnInit(): void {
+    this.registerStudyForm = this.registerBasicComponent ? this.registerBasicComponent.registerStudyForm : null;
+    this.registerAdditionalStudyForm = this.registerAdditionalComponent ? this.registerAdditionalComponent.registerAdditionalStudyForm : null;
   }
 
   getRegisteredCohortAccession(registeredAccession: string) {
     this.accession = registeredAccession;
-  }
-
-  get registerStudyForm() {
-    return this.registerBasicComponent ? this.registerBasicComponent.registerStudyForm : null;
-  }
-
-  get registerAdditionalStudyForm() {
-    return this.registerAdditionalComponent ? this.registerAdditionalComponent.registerAdditionalStudyForm : null;
   }
 
   get registerDictionaryForm() {
