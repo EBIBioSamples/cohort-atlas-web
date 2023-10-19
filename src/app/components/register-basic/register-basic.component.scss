@@ -16,11 +16,12 @@
 }
 
 .atlas-field {
-  margin-right: 10px;
+  margin-right: 5px;
+  margin-left: 5px;
+  width: calc(16.66% - 10px);
 }
 
 .atlas-field-50 {
-  margin-right: 10px;
   width: calc(50% - 10px);
 }
 

@@ -121,19 +121,19 @@
           <table class="mat-table" style="width: 100%">
             <tr class="mat-row">
               <td class="mat-header-cell">Biospecimens</td>
-              <td class="mat-cell">{{cohort.dataTypes.biospecimens}}</td>
+              <td class="mat-cell">{{cohort.dataTypes.includes('biospecimens')}}</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Environmental</td>
-              <td class="mat-cell">{{cohort['dataTypes']['environmentalData']}}</td>
+              <td class="mat-cell">{{cohort['dataTypes'].includes('environmentalData')}}</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Genomic</td>
-              <td class="mat-cell">{{cohort['dataTypes']['genomicData']}}</td>
+              <td class="mat-cell">{{cohort['dataTypes'].includes('genomicData')}}</td>
             </tr>
             <tr class="mat-row">
               <td class="mat-header-cell">Phenotypic</td>
-              <td class="mat-cell">{{cohort['dataTypes']['phenotypicData']}}</td>
+              <td class="mat-cell">{{cohort['dataTypes'].includes('phenotypicData')}}</td>
             </tr>
           </table>
         </div>

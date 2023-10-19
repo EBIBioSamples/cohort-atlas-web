@@ -35,7 +35,7 @@ export class Cohort {
   funding: string;
   acknowledgements: string;
   territories: string[];
-  dataTypes: DataTypes;
+  dataTypes: string[];
 
   projects: string[];
 

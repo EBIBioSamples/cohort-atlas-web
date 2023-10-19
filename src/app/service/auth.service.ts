@@ -43,7 +43,7 @@ export class AuthService {
     let accessToken = authResponse['access_token'];
 
     localStorage.setItem('access_token', accessToken);
-    localStorage.setItem('expires_at', expiresIn.toString());
+    localStorage.setItem('expires_in', expiresIn.toString());
   }
 
   public getSessionToken(): string {
@@ -60,7 +60,7 @@ export class AuthService {
       } else {
         //todo refresh token?
         localStorage.removeItem('access_token');
-        localStorage.removeItem('expires_at');
+        localStorage.removeItem('expires_in');
       }
     }
     return loggedIn;
@@ -68,6 +68,6 @@ export class AuthService {
 
   public logout(): void {
     localStorage.removeItem('access_token');
-    localStorage.removeItem('expires_at');
+    localStorage.removeItem('expires_in');
   }
 }

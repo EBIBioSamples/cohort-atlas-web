@@ -28,7 +28,7 @@ export class CohortService {
         let cohorts = cohortPage._embedded ? cohortPage._embedded.cohorts : [];
         cohortPage._embedded.cohorts = cohorts.map(cohort => {
           if (!cohort.dataTypes) {
-            cohort.dataTypes = new DataTypes();
+            cohort.dataTypes = [];
           }
           if (!cohort.acronym) {
             cohort.acronym = cohort.accession;
@@ -53,7 +53,7 @@ export class CohortService {
     return this.http.get<Cohort>(cohortUrl).pipe(
       map((cohort: Cohort) => {
         if (!cohort.dataTypes) {
-          cohort.dataTypes = new DataTypes();
+          cohort.dataTypes = [];
         }
         if (!cohort.acronym) {
           cohort.acronym = cohort.accession;
