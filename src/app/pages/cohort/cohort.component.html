@@ -20,165 +20,161 @@
   <mat-tab-group animationDuration="0ms" mat-align-tabs="start" class="cohort-content-main">
     <mat-tab label="Metadata">
 
-      <div class="cohort-content-card">
-        <div class="card-header">Overview</div>
-        <div>
-          <table class="mat-table" style="width: 100%">
-            <tr class="mat-row">
-              <td class="mat-header-cell">Acronym</td>
-              <td class="mat-cell">{{cohort['acronym']}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Website</td>
-              <td class="mat-cell"><a href="{{cohort['website']}}">{{cohort['cohortName']}}</a></td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">License</td>
-              <td class="mat-cell">{{cohort['license']}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Provider</td>
-              <td class="mat-cell">
-                <div class="dialog-wrapper" (click)="openDialog()">
-                  {{cohort['provider']['name']}}
-                </div>
-              </td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Data Sharing</td>
-              <td class="mat-cell">
-                <div class="ontology-wrapper" matTooltip="{{cohort.dataSharing.label}}" *ngIf="cohort.dataSharing">
-                  {{cohort.dataSharing.label}}
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="cohort-content-card">
-        <div class="card-header">Study Design</div>
-        <div>
-          <table class="mat-table" style="width: 100%">
-            <tr class="mat-row">
-              <td class="mat-header-cell">Type</td>
-              <td class="mat-cell">{{cohort['type']}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Study Design</td>
-              <td class="mat-cell">{{cohort.studyDesign}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Start - End Year</td>
-              <td class="mat-cell">{{cohort['startDate']}} - {{cohort['endDate']}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Target Enrollment</td>
-              <td class="mat-cell">{{cohort['targetEnrollment']}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Total Enrollment</td>
-              <td class="mat-cell">{{cohort['totalEnrollment']}}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="cohort-content-card">
-        <div class="card-header">Additional Information</div>
-        <div>
-          <table class="mat-table" style="width: 100%">
-            <tr class="mat-row">
-              <td class="mat-header-cell">Contacts</td>
-              <td class="mat-cell">
-                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort.contacts">
-                  {{contact['name'] + ", "}}
-                </div>
-              </td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Investigators</td>
-              <td class="mat-cell">
-                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort.investigators">
-                  {{contact['name'] + ", "}}
-                </div>
-              </td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Publications</td>
-              <td class="mat-cell">
-                <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let publication of cohort.publications">
-                  {{publication.url}}
-                </div>
-              </td>
-            </tr>
-          </table>
-        </div>
-      </div>
-      <div class="cohort-content-card">
-        <div class="card-header">Data Types</div>
-        <div>
-          <table class="mat-table" style="width: 100%">
-            <tr class="mat-row">
-              <td class="mat-header-cell">Biospecimens</td>
-              <td class="mat-cell">{{cohort.dataTypes.includes('biospecimens')}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Environmental</td>
-              <td class="mat-cell">{{cohort['dataTypes'].includes('environmentalData')}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Genomic</td>
-              <td class="mat-cell">{{cohort['dataTypes'].includes('genomicData')}}</td>
-            </tr>
-            <tr class="mat-row">
-              <td class="mat-header-cell">Phenotypic</td>
-              <td class="mat-cell">{{cohort['dataTypes'].includes('phenotypicData')}}</td>
-            </tr>
-          </table>
-        </div>
-      </div>
-
-      <div class="cohort-content-card cohort-content-card-full">
-        <div class="card-header">Territories</div>
-        <div>
-          <mat-chip-list aria-label="Fish selection">
-            <mat-chip color="primary" *ngFor="let territory of cohort.territories">
-              {{territory}}
-            </mat-chip>
-          </mat-chip-list>
-        </div>
-      </div>
-
-      <div class="cohort-content-card cohort-content-card-full">
-        <div class="card-header">Relationships</div>
-        <div>
-          <mat-chip-list aria-label="Fish selection">
-            <mat-chip color="primary" selected [matMenuTriggerFor]="menu" *ngFor="let rel of cohort['relationships']">
-              {{rel.source}}
-            </mat-chip>
-          </mat-chip-list>
-          <mat-menu #menu="matMenu">
-            <button mat-menu-item>Go to resource</button>
-            <button mat-menu-item [matMenuTriggerFor]="exportFormats">Export to format</button>
-          </mat-menu>
-          <mat-menu #exportFormats="matMenu">
-            <button mat-menu-item>OMOP</button>
-            <button mat-menu-item>GECKO</button>
-          </mat-menu>
-        </div>
-      </div>
-
-
-      <div class="cohort-content-card cohort-content-card-full">
-        <div class="card-header">Funding</div>
-        <div>{{cohort.funding}}</div>
-      </div>
-      <div class="cohort-content-card cohort-content-card-full">
-        <div class="card-header">Acknowledgement</div>
-        <div>{{cohort.acknowledgements}}</div>
-      </div>
-
+      <mat-grid-list cols="4" rowHeight="50px">
+        <mat-grid-tile [colspan]="2" [rowspan]="4">
+          <div class="cohort-content-card-ex">
+            <div class="card-header">Overview</div>
+            <div class="card-body">
+              <table class="mat-table" style="width: 100%">
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Acronym</td>
+                  <td class="mat-cell">{{cohort['acronym']}}</td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Website</td>
+                  <td class="mat-cell"><a href="{{cohort['website']}}">{{cohort['cohortName']}}</a></td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Provider</td>
+                  <td class="mat-cell">
+                    <div class="dialog-wrapper" (click)="openDialog()">
+                      {{cohort['provider']['name']}}
+                    </div>
+                  </td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Data Sharing</td>
+                  <td class="mat-cell">
+                    <div class="ontology-wrapper" matTooltip="{{cohort.dataSharing.label}}" *ngIf="cohort.dataSharing">
+                      {{cohort.dataSharing.label}}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="7">
+          <div class="cohort-content-card-ex">
+            <div class="card-header">Study Design</div>
+            <div class="card-body">
+              <table class="mat-table" style="width: 100%">
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Type</td>
+                  <td class="mat-cell">{{cohort['type']}}</td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Study Design</td>
+                  <td class="mat-cell">{{cohort.studyDesign}}</td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Start - End Year</td>
+                  <td class="mat-cell">{{cohort['startDate']}} - {{cohort['endDate']}}</td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Target Enrollment</td>
+                  <td class="mat-cell">{{cohort['targetEnrollment']}}</td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Total Enrollment</td>
+                  <td class="mat-cell">{{cohort['totalEnrollment']}}</td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Data Types</td>
+                  <td class="mat-cell">
+                    <div class="ontology-wrapper" *ngFor="let dataType of cohort.dataTypes">
+                      {{dataType}}
+                    </div>
+                  </td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Territories</td>
+                  <td class="mat-cell">
+                    <div class="ontology-wrapper" *ngFor="let territory of cohort.territories">
+                      {{territory}}
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="2" [rowspan]="3">
+          <div class="cohort-content-card-ex">
+            <div class="card-header">Additional Information</div>
+            <div class="card-body">
+              <table class="mat-table" style="width: 100%">
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Contacts</td>
+                  <td class="mat-cell">
+                    <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort.contacts">
+                      {{contact['name'] + ", "}}
+                    </div>
+                  </td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Investigators</td>
+                  <td class="mat-cell">
+                    <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let contact of cohort.investigators">
+                      {{contact['name'] + ", "}}
+                    </div>
+                  </td>
+                </tr>
+                <tr class="mat-row">
+                  <td class="mat-header-cell">Publications</td>
+                  <td class="mat-cell">
+                    <div class="dialog-wrapper" (click)="openDialog()" *ngFor="let publication of cohort.publications">
+                      <a [href]="publication.url">
+                        <mat-icon [matTooltip]="publication.url" class="table-icon">library_books</mat-icon>
+                      </a>
+                    </div>
+                  </td>
+                </tr>
+              </table>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4" [rowspan]="2">
+          <div class="cohort-content-card-ex cohort-content-card-full">
+            <div class="card-header">Relationships</div>
+            <div class="card-body">
+              <span *ngIf="!cohort.relationships">No Data</span>
+              <mat-chip-list aria-label="Relationships selection">
+                <mat-chip color="primary" selected [matMenuTriggerFor]="menu"
+                          *ngFor="let rel of cohort['relationships']">
+                  {{rel.source}}
+                </mat-chip>
+              </mat-chip-list>
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item>Go to resource</button>
+                <button mat-menu-item [matMenuTriggerFor]="exportFormats">Export to format</button>
+              </mat-menu>
+              <mat-menu #exportFormats="matMenu">
+                <button mat-menu-item>OMOP</button>
+                <button mat-menu-item>GECKO</button>
+              </mat-menu>
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4" [rowspan]="4">
+          <div class="cohort-content-card-ex cohort-content-card-full">
+            <div class="card-header">Funding</div>
+            <div class="card-body">
+              <span *ngIf="!cohort.funding">No Data</span>
+              {{cohort.funding}}
+            </div>
+          </div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="4" [rowspan]="4">
+          <div class="cohort-content-card-ex cohort-content-card-full">
+            <div class="card-header">Acknowledgement</div>
+            <div class="card-body">
+              <span *ngIf="!cohort.acknowledgements">No Data</span>
+              {{cohort.acknowledgements}}
+            </div>
+          </div>
+        </mat-grid-tile>
+      </mat-grid-list>
     </mat-tab>
 
     <mat-tab label="Dictionary">
@@ -202,15 +198,16 @@
           <td class="mat-cell">{{field.name}}</td>
           <td class="mat-cell">{{field.description}}</td>
           <td class="mat-cell">String</td>
-          <td class="mat-cell"> - </td>
+          <td class="mat-cell"> -</td>
           <td class="mat-cell">{{field.annotation}}</td>
-          <td class="mat-cell"> - </td>
+          <td class="mat-cell"> -</td>
         </tr>
       </table>
     </mat-tab>
     <mat-tab label="FAIR Indicators">
       <div class="cohort-fair-indicators">
-        FAIR Indicators displays the FAIRness of the cohort/dataset measured using <a href="https://fairplus.github.io/Data-Maturity/">FAIRplus Dataset Maturity (DSM) Model</a>.
+        FAIR Indicators displays the FAIRness of the cohort/dataset measured using <a
+        href="https://fairplus.github.io/Data-Maturity/">FAIRplus Dataset Maturity (DSM) Model</a>.
       </div>
 
       <table class="mat-table" style="width: 100%">
@@ -219,10 +216,10 @@
           <th class="mat-header-cell">Assessment Score</th>
         </tr>
 
-<!--        <tr class="mat-row">-->
-<!--          <td class="mat-cell">{{field.name}}</td>-->
-<!--          <td class="mat-cell">{{field.description}}</td>-->
-<!--        </tr>-->
+        <!--        <tr class="mat-row">-->
+        <!--          <td class="mat-cell">{{field.name}}</td>-->
+        <!--          <td class="mat-cell">{{field.description}}</td>-->
+        <!--        </tr>-->
       </table>
     </mat-tab>
   </mat-tab-group>

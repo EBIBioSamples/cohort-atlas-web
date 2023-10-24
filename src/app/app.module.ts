@@ -44,6 +44,7 @@ import {MatDialogModule} from "@angular/material/dialog";
 import {MatBadgeModule} from "@angular/material/badge";
 import {AuthInterceptor} from "./interceptor/auth.interceptor";
 import { LoginComponent } from './pages/login/login.component';
+import {MatGridListModule} from "@angular/material/grid-list";
 
 @NgModule({
   declarations: [
@@ -92,7 +93,8 @@ import { LoginComponent } from './pages/login/login.component';
         MatRadioModule,
         MatTooltipModule,
         MatDialogModule,
-        MatBadgeModule
+        MatBadgeModule,
+        MatGridListModule
     ],
   providers: [{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],
   bootstrap: [AppComponent]

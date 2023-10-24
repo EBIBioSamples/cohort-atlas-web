@@ -94,6 +94,16 @@
   border-radius: 5px;
 }
 
+.cohort-content-card-ex {
+  width: calc(100% - 24px);
+  height: calc(100% - 20px);
+  float: left;
+  margin: 4px;
+  padding: 5px;
+  border: 2px solid #f5f5f5;
+  border-radius: 5px;
+}
+
 .cohort-content-card-full {
   width: calc(100% - 24px);
 }
@@ -104,6 +114,12 @@
   border-bottom: 1px solid #a4bde5;
   margin: 5px 0;
   padding-bottom: 5px;
+}
+
+.card-body {
+  font-size: 16px;
+  padding: 6px;
+  color: #545454;
 }
 
 :host ::ng-deep .mat-header-cell {
@@ -147,3 +163,15 @@ td.mat-cell {
   background: none;
 }
 
+.mat-header-cell {
+  font-size: 15px;
+}
+
+.mat-cell {
+  font-size: 16px;
+}
+
+.table-icon {
+  color: #605f5f;
+  margin-right: 10px;
+}
