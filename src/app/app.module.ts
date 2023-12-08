@@ -45,6 +45,7 @@ import {MatBadgeModule} from "@angular/material/badge";
 import {AuthInterceptor} from "./interceptor/auth.interceptor";
 import { LoginComponent } from './pages/login/login.component';
 import {MatGridListModule} from "@angular/material/grid-list";
+import {QuickviewComponent} from "./components/table/quickview.component";
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import {MatGridListModule} from "@angular/material/grid-list";
     RegisterAdditionalComponent,
     RegisterDictionaryComponent,
     DictionaryDialogComponent,
-    LoginComponent
+    LoginComponent,
+    QuickviewComponent
   ],
     imports: [
         BrowserModule,

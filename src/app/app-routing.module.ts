@@ -8,6 +8,7 @@ import {AboutComponent} from "./pages/about/about.component";
 import {CohortComponent} from "./pages/cohort/cohort.component";
 import {RegisterAdditionalComponent} from "./components/register-additional/register-additional.component";
 import {LoginComponent} from "./pages/login/login.component";
+import {QuickviewComponent} from "./components/table/quickview.component";
 
 const routes: Routes = [
   {path: '', component: CohortsComponent},
@@ -18,7 +19,8 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'cohort', component: CohortComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'test', component: RegisterAdditionalComponent}
+  {path: 'test', component: RegisterAdditionalComponent},
+  {path: 'quickview', component: QuickviewComponent}
 ];
 
 @NgModule({

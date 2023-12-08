@@ -28,7 +28,7 @@
         </ng-container>
       </th>
       <ng-container *ngIf="colDef.value['colspan'] == 1">
-        <td mat-cell *matCellDef="let element" class="table-link" [routerLink]="['/cohort']" [queryParams]="{ accession: element['accession']}">
+        <td mat-cell *matCellDef="let element" class="table-link" >
           <ng-container *ngIf="'boolean'===colDef.value['type']">
             <i class="icon icon-common icon-center icon-xs" [ngClass]="getChildElementValue(element, colDef.value['path']) ? 'icon-check' : 'icon-minus'"></i>
           </ng-container>
@@ -36,6 +36,7 @@
             {{getChildElementValue(element, colDef.value['path'])}}
             <i *ngIf="!getChildElementValue(element, colDef.value['path'])" class="icon icon-common icon-center icon-xs icon-minus"></i>
           </ng-container>
+          <app-quickview *ngIf="element.expanded" [detail]="element"></app-quickview>
         </td>
       </ng-container>
     </ng-container>

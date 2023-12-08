@@ -1,0 +1,280 @@
+.table-header {
+  height: 28px;
+}
+
+.cohort-table-container {
+  height: 100%;
+  width: calc(100% - 20px);
+  max-width: calc(100% - 20px);
+  padding: 0 10px;
+  background: #ffffff;
+}
+
+.table-controls {
+  width: 100%;
+  background: white;
+  display: block;
+  overflow: hidden;
+  margin-bottom: -10px;
+}
+
+.table-paginator {
+  float: left;
+  margin-left: -10px;
+}
+
+.table-columns-btn {
+  float: right;
+  color: #7c7c7c;
+}
+
+table {
+  width: 100%;
+}
+
+td.mat-column-star {
+  width: 20px;
+  padding-right: 8px;
+}
+
+th.mat-column-position, td.mat-column-position {
+  padding-left: 8px;
+}
+
+.mat-mdc-table-sticky-border-elem-right {
+  border-left: 1px solid #e0e0e0;
+}
+
+.mat-mdc-table-sticky-border-elem-left {
+  border-right: 1px solid #e0e0e0;
+}
+
+.th-parent {
+  text-align: center;
+}
+
+.th-first {
+  padding-left: 0;
+}
+
+.th-last {
+  padding-right: 0;
+}
+
+.icon-center {
+  display: inline-block;
+  text-align: center;
+}
+
+.icon-xs {
+  color: #7c7c7c;
+  font-size: 12px;
+  padding: 0 1px;
+}
+
+.table-link {
+  cursor: pointer;
+}
+
+th.mat-header-cell:first-of-type, td.mat-cell:first-of-type, td.mat-footer-cell:first-of-type {
+  padding-left: 0;
+}
+
+th.mat-header-cell:last-of-type, td.mat-cell:last-of-type, td.mat-footer-cell:last-of-type {
+  padding-right: 0;
+}
+
+.mat-header-cell {
+  font-size: 14px;
+  font-weight: 600;
+  margin-left: 0;
+}
+
+.mat-row:hover {
+  background-color: #eaecfa;
+}
+
+.column-select-wrapper {
+  padding: 20px;
+}
+
+.column-select-option {
+  width: calc(50% - 10px);
+}
+.cohort-body {
+  width: 1400px;
+  margin: 20px auto;
+  background: #ffffff;
+  padding: 12px;
+}
+
+.cohort-header {
+  color: #3b6fb6;
+  width: 100%;
+  overflow: hidden;
+}
+
+.cohort-header-title {
+  width: calc(100% - 450px);
+  float: left;
+  font-size: 30px;
+  margin: 2px 0;
+}
+
+.cohort-header-summary {
+  //width: 443px;
+  float: right;
+  border: 1px solid #dedede;
+  border-radius: 5px;
+  font-size: 15px;
+  color: #949494;
+}
+
+.cohort-header-description {
+  color: #605f5f;
+  margin: 10px 0;
+  font-size: 17px;
+  width: 100%;
+  float: left;
+}
+
+.header-title {
+  width: 100%;
+  margin: 2px 0;
+  line-height: 1;
+}
+
+.cohort-header-subtitle {
+  font-size: 18px;
+  color: #949494;
+}
+
+.cohort-descriptor {
+  width: 100%;
+  font-size: 16px;
+  margin: 5px 0;
+}
+
+.header-summary-tile {
+  float: left;
+  margin-left: 3px;
+  padding: 9px;
+}
+
+.header-summary-export {
+  float: left;
+  font-size: 16px;
+  padding: 1px 25px;
+}
+
+.cohort-dictionary {
+  float: right;
+  width: 100%;
+  margin: 5px 0 15px;
+}
+
+.cohort-dictionary-header {
+  float: left;
+  width: 50%;
+  color: #3b6fb6;
+  font: 500 20px/32px Roboto, "Helvetica Neue", sans-serif
+}
+
+.cohort-fair-indicators {
+  margin: 10px 0;
+}
+
+.cohort-actions {
+  float: right;
+}
+
+.cohort-content-card {
+  width: calc(50% - 24px);
+  float: left;
+  margin: 4px;
+  padding: 5px;
+  border: 2px solid #f5f5f5;
+  border-radius: 5px;
+}
+
+.cohort-content-card-ex {
+  width: calc(100% - 24px);
+  height: calc(100% - 20px);
+  float: left;
+  margin: 4px;
+  padding: 5px;
+  border: 2px solid #f5f5f5;
+  border-radius: 5px;
+}
+
+.cohort-content-card-full {
+  width: calc(100% - 24px);
+}
+
+.card-header {
+  color: #3b6fb6;
+  font-size: 20px;
+  border-bottom: 1px solid #a4bde5;
+  margin: 5px 0;
+  padding-bottom: 5px;
+}
+
+.card-body {
+  font-size: 16px;
+  padding: 6px;
+  color: #545454;
+}
+
+:host ::ng-deep .mat-header-cell {
+  font-size: 14px;
+}
+
+.dialog-wrapper {
+  border-radius: 5px;
+  float: left;
+  //padding: 2px 6px;
+  cursor: pointer;
+  color: #497bfa;
+}
+
+.ontology-wrapper {
+  border: 1px solid #d5d5d5;
+  border-radius: 5px;
+  float: left;
+  padding: 2px 6px;
+  cursor: pointer;
+  color: #7c7c7c;
+}
+
+tr.mat-row, tr.mat-footer-row {
+  height: 28px;
+}
+
+table {
+  border: none;
+}
+
+.mat-header-cell {
+  text-align: left;
+}
+
+td.mat-cell {
+  border: none;
+}
+
+.mat-table {
+  background: none;
+}
+
+.mat-header-cell {
+  font-size: 15px;
+}
+
+.mat-cell {
+  font-size: 16px;
+}
+
+.table-icon {
+  color: #605f5f;
+  margin-right: 10px;
+}

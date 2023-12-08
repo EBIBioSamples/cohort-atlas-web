@@ -1,0 +1,16 @@
+<div class="cohort-body" >
+
+  <div class="cohort-header">
+    <div class="cohort-header-title">
+      <div class="header-title">{{detail.cohortName}}</div>
+      <a [routerLink]="['/cohort']" [queryParams]="{ accession: detail.accession}" target="_blank">{{detail.accession}}</a>
+      <div class="header-title cohort-header-subtitle">{{detail.accession}}</div>
+    </div>
+
+
+
+    <div class="cohort-header-description">{{detail.description}}</div>
+
+
+</div>
+</div>

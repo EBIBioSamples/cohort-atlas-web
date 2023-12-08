@@ -4,6 +4,7 @@ import {TableManagerService} from "../../service/table-manager.service";
 import {MatPaginator} from "@angular/material/paginator";
 import {Embedded} from "../../models/page-model";
 import {ColumnDefinition} from "../../models/column-definition";
+import {Cohort} from "../../models/cohort";
 
 @Component({
   selector: 'app-table',
@@ -15,6 +16,7 @@ export class TableComponent<T, S extends Embedded<any>> implements OnInit, After
   @Input() tableBuilder: TableBuilder<T, S>;
   @Output() pageChange = new EventEmitter<MatPaginator>();
 
+  @Output() detailEvent = new EventEmitter<Cohort>();
   totalRecords: number;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -46,5 +48,8 @@ export class TableComponent<T, S extends Embedded<any>> implements OnInit, After
 
   onClickTableRow(row) {
     console.log(row);
+    row.expanded = !row.expanded;
+    this.detailEvent.emit(row);
+    console.log("end expand");
   }
 }
