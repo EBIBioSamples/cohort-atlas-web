@@ -19,7 +19,7 @@
       </mat-expansion-panel-header>
       <div *ngFor="let facetValue of facet.values" [formGroup]="filterFormGroup.controls[facet.category]">
         <mat-checkbox (change)="applyFilters()" class="filter-facet-item" [formControlName]="facetValue.label"
-                      value="{{ facetValue.label }}" matBadge="{{facetValue.count}}" matBadgePosition="after"
+                      value="{{facetValue.label}}" matBadge="{{facetValue.count}}" matBadgePosition="after"
                       matBadgeColor="primary">
           {{ facetValue.label }}
         </mat-checkbox>

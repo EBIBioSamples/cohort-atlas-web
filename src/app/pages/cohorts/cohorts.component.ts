@@ -41,18 +41,24 @@ export class CohortsComponent implements OnInit {
     }
 
     this.cohortService.searchCohorts().subscribe(page => {
-      this.cohorts = page._embedded.cohorts;
-      this.cohortsTableBuilder = new CohortTableBuilder(page);
+      if (page._embedded) {
+        this.cohorts = page._embedded.cohorts;
+        this.cohortsTableBuilder = new CohortTableBuilder(page);
+      }
     });
 
     this.projectService.searchProjects().subscribe(page => {
-      this.projects = page._embedded.projects;
-      this.projectsTableBuilder = new ProjectTableBuilder(page);
+      if (page._embedded) {
+        this.projects = page._embedded?.projects;
+        this.projectsTableBuilder = new ProjectTableBuilder(page);
+      }
     });
 
     this.fieldService.getFields().subscribe(page => {
-      this.fields = page._embedded.dictionaryFields;
-      this.fieldTableBuilder = new FieldTableBuilder(page);
+      if (page._embedded) {
+        this.fields = page._embedded.dictionaryFields;
+        this.fieldTableBuilder = new FieldTableBuilder(page);
+      }
     });
 
     this.facetService.getOverallSummary().subscribe(data => {
@@ -64,13 +70,14 @@ export class CohortsComponent implements OnInit {
     this.filters = filters;
     let queryParam = "";
     for (let filter of filters) {
-      queryParam += "filter=" + filter.searchPath + ":" + filter.value + "&";
+      queryParam += "filter=" + filter.searchPath + ":" + encodeURIComponent(filter.value) + "&";
     }
 
     this.searchText = this.searchText ? this.searchText : "";
     this.cohortService.searchCohorts(this.searchText, queryParam, page).subscribe(data => {
       this.cohorts = data._embedded.cohorts;
       this.cohortsTableBuilder = new CohortTableBuilder(data);
+
     });
   }
 

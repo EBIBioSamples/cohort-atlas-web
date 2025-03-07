@@ -44,7 +44,7 @@ export class FacetPanelComponent implements OnInit {
     this.filters = [];
     for (let facet of this.facets) {
       for (let facetValue of facet.values) {
-        if (this.filterFormGroup.controls[facet.category].get(facetValue.label).value) {
+        if (this.filterFormGroup.controls[facet.category].controls[facetValue.label].value) {
           this.filters.push({"category": facet.category, "searchPath": facet.searchPath, "value": facetValue.label})
         }
       }
