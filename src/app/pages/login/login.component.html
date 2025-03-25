@@ -1,9 +1,31 @@
 <div class="login-wrapper">
-  <div class="login-title">Please select your login provider</div>
-  <a href="http://localhost:8080/oauth2/authorization/keycloak">
-    <div class="login-method">LOCAL LOGIN</div>
-  </a>
-  <div class="login-method">WEBIN <span style="color: #ee5353; font-size: 12px">(not implemented)</span></div>
-  <div class="login-method">GA4GH <span style="color: #ee5353; font-size: 12px">(not implemented)</span></div>
-  <div class="login-method">ELIXIR LIFE <span style="color: #ee5353; font-size: 12px">(not implemented)</span></div>
+  <div class="login-title">LOGIN</div>
+<!--  <a href="http://localhost:8080/oauth2/authorization/keycloak">-->
+<!--    <div class="login-method">LOCAL LOGIN</div>-->
+<!--  </a>-->
+
+  <div class="card">
+    <div class="card-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="login-input">
+              <mat-label>Username</mat-label>
+              <input matInput placeholder="webin username" formControlName="username">
+            </mat-form-field>
+          </div>
+          <div class="mb-3">
+            <mat-form-field appearance="outline" class="login-input">
+              <mat-label>Password</mat-label>
+              <input matInput placeholder="webin password" formControlName="password" type="password">
+            </mat-form-field>
+          </div>
+          <div>
+            <button type="submit" class="vf-button vf-button--secondary vf-button--sm login-btn">Login</button>
+          </div>
+      </form>
+    </div>
+  </div>
 </div>
+
+
+

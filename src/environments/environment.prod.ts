@@ -1,7 +1,8 @@
 export const environment = {
   production: true,
-  cohort_atlas_api: "https://www.ebi.ac.uk/biosamples/cohortatlas/api",
+  cohort_atlas_api: "https://wwwdev.ebi.ac.uk/biosamples/cohortatlas/api",
   harmonization_api: "http://45.88.81.24:5000",
+  webin_api: "https://wwwdev.ebi.ac.uk/ena/submit/webin/auth/token",
   oauth2: {
     keycloak: {
       client_id: "cohort-atlas-web-angular",

@@ -4,6 +4,7 @@ import {Router} from "@angular/router";
 import {RegisterBasicComponent} from "../../components/register-basic/register-basic.component";
 import {RegisterAdditionalComponent} from "../../components/register-additional/register-additional.component";
 import {RegisterDictionaryComponent} from "../../components/register-dictionary/register-dictionary.component";
+import {AuthService} from "../../service/auth.service";
 
 @Component({
   selector: 'app-register',
@@ -19,10 +20,11 @@ export class RegisterComponent implements OnInit {
   registerStudyForm: FormGroup;
   registerAdditionalStudyForm: FormGroup;
 
-  constructor(private router: Router, private _formBuilder: FormBuilder) {
+  constructor(private router: Router, private _formBuilder: FormBuilder, private authService: AuthService) {
   }
 
   ngOnInit(): void {
+    this.navigateToLoginPageIfNotLoggedIn();
     this.registerStudyForm = this.registerBasicComponent ? this.registerBasicComponent.registerStudyForm : null;
     this.registerAdditionalStudyForm = this.registerAdditionalComponent ? this.registerAdditionalComponent.registerAdditionalStudyForm : null;
   }
@@ -33,6 +35,12 @@ export class RegisterComponent implements OnInit {
 
   get registerDictionaryForm() {
     return this.registerAdditionalComponent ? this.registerAdditionalComponent.registerAdditionalStudyForm : null;
+  }
+
+  navigateToLoginPageIfNotLoggedIn() {
+    if (!this.authService.isLoggedIn()) {
+      this.router.navigateByUrl('/login');
+    }
   }
 
 }

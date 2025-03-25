@@ -25,23 +25,29 @@ export class AuthService {
       params.toString(), {headers: headers}).subscribe({
       next: data => {
         console.log("Logged in successfully");
-        this.setSession(data);
+        // this.setSession(data);
       }, error: err => console.log("Authentication code flow error: " + JSON.stringify(err))
     })
-
-
-    // this.http.post('http://localhost:8090/realms/cohort-atlas/protocol/openid-connect/token',
-    //   params.toString(), { headers: headers })
-    //   .subscribe(
-    //     data => console.log("Got the toekn: " + data),
-    //     err => alert('Invalid Credentials'));
   }
 
-  private setSession(authResponse: any) {
-    let expiresIn = new Date();
-    expiresIn.setSeconds(expiresIn.getSeconds() + authResponse['expires_in']);
-    let accessToken = authResponse['access_token'];
+  public getWebinToken(username: string, password: string, callback: Function) {
+    let body = {
+      "authRealms": ["ENA"],
+      "username": username,
+      "password": password
+    }
+    this.http.post(environment.webin_api, body, { responseType: 'text' }).subscribe({
+      next: data => {
+        console.log("Logged in successfully");
+        this.setSession(data);
+        callback();
+      }, error: err => console.log("Authentication error: " + JSON.stringify(err))
+    })
+  }
 
+  private setSession(accessToken: string) {
+    let expiresIn = new Date();
+    expiresIn.setTime(expiresIn.getTime() + 2*60*60*1000);
     localStorage.setItem('access_token', accessToken);
     localStorage.setItem('expires_in', expiresIn.toString());
   }
@@ -58,7 +64,6 @@ export class AuthService {
       if (expiresAt > now) {
         loggedIn = true;
       } else {
-        //todo refresh token?
         localStorage.removeItem('access_token');
         localStorage.removeItem('expires_in');
       }
