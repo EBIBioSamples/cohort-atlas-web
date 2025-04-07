@@ -7,7 +7,8 @@
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
-    "build-prod": "ng build --configuration production --base-href=/biosamples/cohortatlas/"
+    "build-prod": "ng build --configuration production --base-href=/biosamples/cohortatlas/",
+    "build-dev": "ng build --configuration wwwdev --base-href=/biosamples/cohortatlas/"
   },
   "private": true,
   "dependencies": {

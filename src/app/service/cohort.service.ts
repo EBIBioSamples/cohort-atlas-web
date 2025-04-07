@@ -10,7 +10,6 @@ import {PageModel} from "../models/page-model";
 })
 export class CohortService {
   cohortAtlasApi = environment.cohort_atlas_api;
-  harmonizationApi = environment.harmonization_api;
   dataDictionary: any[];
 
   constructor(private http: HttpClient) {
@@ -78,10 +77,10 @@ export class CohortService {
 
   public postFile(fileToUpload: File): Observable<any> {
     let uploadHeaders = new Headers();
-    const endpoint = this.harmonizationApi + '/harmonise';
+    const endpoint = this.cohortAtlasApi + '/dictionary/harmonise';
     const formData: FormData = new FormData();
     formData.append('file', fileToUpload, fileToUpload.name);
-    return this.http.post(endpoint, formData);
+    return this.http.put(endpoint, formData);
     // .post(endpoint, formData, { headers: uploadHeaders })
     // .map(() => { return true; })
     // .catch((e) => this.handleError(e));
@@ -99,7 +98,6 @@ export class CohortService {
   }
 
   public saveDictionary(accession: string, fields: any[]): Observable<any> {
-    accession = "BSC0000001";
     const endpoint = `${this.cohortAtlasApi}/cohorts/${accession}/fields`;
     return this.http.put(endpoint, fields);
   }

@@ -18,7 +18,8 @@ const routes: Routes = [
   {path: 'about', component: AboutComponent},
   {path: 'cohort', component: CohortComponent},
   {path: 'login', component: LoginComponent},
-  {path: 'test', component: RegisterAdditionalComponent}
+  {path: 'test', component: RegisterAdditionalComponent},
+  {path: '**', redirectTo: '', pathMatch: 'full' } // Handle unknown routes
 ];
 
 @NgModule({

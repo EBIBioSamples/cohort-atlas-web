@@ -3,7 +3,7 @@ import {MatPaginator} from '@angular/material/paginator';
 import {MatSort} from '@angular/material/sort';
 import {MatTableDataSource} from '@angular/material/table';
 import {CohortService} from "../../service/cohort.service";
-import {Router} from "@angular/router";
+import {ActivatedRoute, Router} from "@angular/router";
 import {MatDialog} from "@angular/material/dialog";
 import {DictionaryDialogComponent} from "../../components/dictionary-dialog/dictionary-dialog.component";
 import {Field} from "../../models/field";
@@ -59,13 +59,19 @@ export class HarmoniseComponent implements AfterViewInit, OnInit {
 
   dataDictionary: Field[];
 
-  constructor(private router: Router, public dialog: MatDialog, private cohortService: CohortService) {
+  constructor(private router: Router,
+              public dialog: MatDialog,
+              private cohortService: CohortService,
+              private activatedRoute: ActivatedRoute) {
     // const fields = getTestDictionaryFields();
     this.dataDictionary = this.cohortService.dataDictionary;
     this.dataSource = new MatTableDataSource(this.dataDictionary);
   }
 
   ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe(params => {
+      this.cohortAccession = params['cohort'];
+    });
   }
 
   ngAfterViewInit() {
@@ -104,7 +110,7 @@ export class HarmoniseComponent implements AfterViewInit, OnInit {
       })
     }
 
-    console.log("saving dictionary");
+    console.log("saving dictionary for: " + this.cohortAccession);
     this.cohortService.saveDictionary(this.cohortAccession, fields).subscribe(data => {
       console.log("Dictionary saved")
     });

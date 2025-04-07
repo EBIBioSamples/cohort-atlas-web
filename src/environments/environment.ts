@@ -5,7 +5,6 @@
 export const environment = {
   production: false,
   cohort_atlas_api: "http://localhost:8080/api",
-  harmonization_api: "http://localhost:5000",
   webin_api: "https://wwwdev.ebi.ac.uk/ena/submit/webin/auth/token",
   oauth2: {
     keycloak: {
